@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :timezone
       t.integer :fetch_cnt
       t.integer :interval
-      t.time :delivery_time
+      t.time :delivering_time
       t.boolean :is_active
 
       t.timestamps null: false
