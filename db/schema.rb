@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721024919) do
+ActiveRecord::Schema.define(version: 20150722064302) do
 
   create_table "artists", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "artists", ["name"], name: "index_artists_on_name", unique: true, using: :btree
 
   create_table "artists_users", id: false, force: :cascade do |t|
     t.integer "artist_id", limit: 4, null: false
@@ -39,20 +41,22 @@ ActiveRecord::Schema.define(version: 20150721024919) do
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
 
   create_table "facebooks", force: :cascade do |t|
-    t.integer  "user_id",          limit: 4
-    t.string   "facebook_user_id", limit: 255
+    t.integer  "user_id",          limit: 4,   null: false
+    t.string   "facebook_user_id", limit: 255, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
 
+  add_index "facebooks", ["facebook_user_id"], name: "index_facebooks_on_facebook_user_id", using: :btree
   add_index "facebooks", ["user_id"], name: "index_facebooks_on_user_id", using: :btree
 
   create_table "festivals", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "title",      limit: 255
+    t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "festivals", ["name"], name: "index_festivals_on_name", unique: true, using: :btree
 
   create_table "festivals_users", id: false, force: :cascade do |t|
     t.integer "festival_id", limit: 4, null: false
@@ -60,19 +64,19 @@ ActiveRecord::Schema.define(version: 20150721024919) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",         limit: 255
-    t.string   "name",          limit: 255
-    t.string   "first_name",    limit: 255
-    t.string   "last_name",     limit: 255
-    t.string   "gender",        limit: 255
-    t.string   "locale",        limit: 255
-    t.integer  "timezone",      limit: 4
-    t.integer  "fetch_cnt",     limit: 4
+    t.string   "email",             limit: 255
+    t.string   "name",              limit: 255
+    t.string   "first_name",        limit: 255
+    t.string   "last_name",         limit: 255
+    t.string   "gender",            limit: 255
+    t.string   "locale",            limit: 255
+    t.integer  "timezone",          limit: 4
+    t.integer  "fetch_cnt",         limit: 4
     t.time     "delivery_time"
-    t.integer  "interval",      limit: 4
+    t.time     "delivery_interval"
     t.boolean  "is_active"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "users_youtubes", id: false, force: :cascade do |t|
