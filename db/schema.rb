@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722064302) do
+ActiveRecord::Schema.define(version: 20150722064253) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -49,19 +49,6 @@ ActiveRecord::Schema.define(version: 20150722064302) do
 
   add_index "facebooks", ["facebook_user_id"], name: "index_facebooks_on_facebook_user_id", using: :btree
   add_index "facebooks", ["user_id"], name: "index_facebooks_on_user_id", using: :btree
-
-  create_table "festivals", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "festivals", ["name"], name: "index_festivals_on_name", unique: true, using: :btree
-
-  create_table "festivals_users", id: false, force: :cascade do |t|
-    t.integer "festival_id", limit: 4, null: false
-    t.integer "user_id",     limit: 4, null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",             limit: 255
