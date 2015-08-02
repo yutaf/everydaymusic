@@ -9,3 +9,4 @@ rails g model artist name:string
 rails g model youtube videoId:string title:string
 rails g model delivery user:references delivered_at:date
 rails g controller logins
+rails g controller lists
