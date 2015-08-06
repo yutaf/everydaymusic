@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150722064253) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
-    t.date     "delivered_at"
+    t.datetime "delivered_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

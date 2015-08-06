@@ -7,6 +7,6 @@ rails g scaffold user email:string name:string first_name:string last_name:strin
 rails g model facebook user:references facebook_user_id:string
 rails g model artist name:string
 rails g model youtube videoId:string title:string
-rails g model delivery user:references delivered_at:date
+rails g model delivery user:references delivered_at:datetime
 rails g controller logins
 rails g controller lists
