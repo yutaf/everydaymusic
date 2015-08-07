@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+fleetwood:
+  id: 1
+  name: Fleetwood Mac
+
+bombay:
+  id: 2
+  name: Bombay Bicycle club

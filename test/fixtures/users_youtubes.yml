@@ -1,0 +1,9 @@
+users_youtubes-1:
+  user_id: 1
+  youtube_id: 1
+  delivery_id: 1
+
+users_youtubes-2:
+  user_id: 1
+  youtube_id: 2
+  delivery_id: 2
