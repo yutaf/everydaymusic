@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722064253) do
+ActiveRecord::Schema.define(version: 20150811102836) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -32,13 +32,15 @@ ActiveRecord::Schema.define(version: 20150722064253) do
   end
 
   create_table "deliveries", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
-    t.datetime "delivered_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "date"
+    t.integer  "user_id",    limit: 4
+    t.integer  "youtube_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
+  add_index "deliveries", ["youtube_id"], name: "index_deliveries_on_youtube_id", using: :btree
 
   create_table "facebooks", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,   null: false
@@ -51,25 +53,13 @@ ActiveRecord::Schema.define(version: 20150722064253) do
   add_index "facebooks", ["user_id"], name: "index_facebooks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",             limit: 255
-    t.string   "name",              limit: 255
-    t.string   "first_name",        limit: 255
-    t.string   "last_name",         limit: 255
-    t.string   "gender",            limit: 255
-    t.string   "locale",            limit: 255
-    t.integer  "timezone",          limit: 4
-    t.integer  "fetch_cnt",         limit: 4
+    t.string   "email",         limit: 255
+    t.string   "locale",        limit: 255
+    t.integer  "timezone",      limit: 4
     t.time     "delivery_time"
-    t.time     "delivery_interval"
     t.boolean  "is_active"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-  end
-
-  create_table "users_youtubes", id: false, force: :cascade do |t|
-    t.integer "user_id",     limit: 4, null: false
-    t.integer "youtube_id",  limit: 4, null: false
-    t.integer "delivery_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "youtubes", force: :cascade do |t|
@@ -80,5 +70,6 @@ ActiveRecord::Schema.define(version: 20150722064253) do
   end
 
   add_foreign_key "deliveries", "users"
+  add_foreign_key "deliveries", "youtubes"
   add_foreign_key "facebooks", "users"
 end
