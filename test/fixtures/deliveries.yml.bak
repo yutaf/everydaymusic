@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+delivery-1:
   id: 1
-  date: 2015-08-11 10:29:03
   user_id: 1
-  youtube_id: 1
+  delivered_at: 2015-07-21 08:00:00
 
-two:
+delivery-2:
   id: 2
-  date: 2015-08-12 10:29:03
   user_id: 1
-  youtube_id: 2
+  delivered_at: 2015-07-22 08:00:00

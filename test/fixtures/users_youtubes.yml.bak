@@ -7,3 +7,8 @@ users_youtubes-2:
   user_id: 1
   youtube_id: 2
   delivery_id: 2
+
+users_youtubes-3:
+  user_id: 1
+  youtube_id: 3
+  delivery_id: 2

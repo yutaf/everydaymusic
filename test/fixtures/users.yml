@@ -3,13 +3,7 @@
 fujishiro:
   id: 1
   email: yutafuji2008@gmail.com
-  name: Yuta Fujishiro
-  first_name: Yuta
-  last_name: Fujishiro
-  gender: male
   locale: ja_JP
   timezone: 9
-  fetch_cnt: 1
   delivery_time: "08:00:00"
-  delivery_interval: "24:00:00"
   is_active: true
