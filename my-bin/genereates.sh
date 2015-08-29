@@ -10,3 +10,4 @@ rails g model delivery date:datetime user:references youtube:references
 
 rails g controller logins
 rails g controller lists
+rails g controller accounts
