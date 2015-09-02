@@ -4,6 +4,9 @@ class AccountsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
   private
     def set_user
       @user = User.find_by(@user_id)
