@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
+  before_action :set_user
+
   def show
-    @user = User.find_by(@user_id)
-    render json: @user
   end
 
   private
