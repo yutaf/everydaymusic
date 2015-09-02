@@ -1,4 +1,4 @@
-<p class="account"><a href="/account"><%= t 'account.account' %></a></p>
+<p class="account"><%= link_to (t 'account.account'), account_path %></p>
 <ul>
   <% @deliveries.each do |delivery| %>
       <li>
