@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(version: 20150811102836) do
   create_table "users", force: :cascade do |t|
     t.string   "email",         limit: 255
     t.string   "locale",        limit: 255
-    t.integer  "timezone",      limit: 4
+    t.integer  "timezone",      limit: 1
     t.time     "delivery_time"
-    t.boolean  "is_active"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "is_active",                 default: true, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "youtubes", force: :cascade do |t|
