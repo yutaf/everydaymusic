@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<div class="user">
+  <h2><%= t 'account.account' %></h2>
+  <p><%= link_to (t 'edit'), edit_account_path %></p>
+  <ul>
+    <li><%= t 'attributes.email' %>: <%= @user.email %></li>
+  </ul>
+</div>
+<div class="artists">
+  <h2><%= t 'artists' %></h2>
+  <ul>
+    <% @user.artists.each do |artist| %>
+        <li><%= artist.name %></li>
+    <% end %>
+  </ul>
+</div>

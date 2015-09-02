@@ -1,0 +1,10 @@
+<%= form_for(@user, url: account_path) do |f| %>
+    <!-- TODO print error message -->
+    <div>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+    <div>
+      <%= f.submit t 'save' %>
+    </div>
+<% end %>
