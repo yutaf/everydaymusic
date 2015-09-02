@@ -1,3 +1,10 @@
 ja:
+  attributes:
+    email: 'email'
+  back: '戻る'
+  edit: '編集する'
+  save: '保存する'
   account:
     account: 'アカウント'
+    edit_account: 'アカウント編集'
+  artists: 'アーティスト'

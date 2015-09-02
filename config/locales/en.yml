@@ -20,5 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  attributes:
+    email: 'email'
+  back: 'back'
+  edit: 'edit'
+  save: 'save'
   account:
     account: 'account'
+    edit_account: 'edit account'
+  artists: 'artists'
