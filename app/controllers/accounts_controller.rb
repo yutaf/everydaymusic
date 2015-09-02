@@ -1,6 +1,15 @@
 class AccountsController < ApplicationController
   before_action :set_user
 
+  def update
+    if @user.update(user_params)
+      # TODO notice が表示されない session problem??
+      redirect_to account_path, notice: 'User was successfully updated.'
+    else
+      render 'edit'
+    end
+  end
+
   def show
   end
 
