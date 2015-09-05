@@ -7,6 +7,7 @@ gem 'rails', '4.2.3'
 #gem 'sqlite3'
 gem 'mysql2'
 gem 'redis'
+gem 'google-api-client', '>0.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
