@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
 
   private
     def set_user
-      @user = User.find_by(@user_id)
+      @user = User.find(@user_id)
     end
 
     def user_params

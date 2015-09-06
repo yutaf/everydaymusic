@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
     # Set locale value to session
     if session[:locale].nil?
-      user = User.find_by(@user_id)
+      user = User.find(@user_id)
       session[:locale] = user[:locale][0,2]
     end
     case session[:locale]
