@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p><%= link_to 'logo', list_path %></p>
+<p><%= link_to image_tag(MY_APP['logo']['source']), list_path %></p>
 
 <%= yield %>
 
