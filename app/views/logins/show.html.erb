@@ -38,7 +38,7 @@
             appId      : '<%= ENV['FACEBOOK_APP_ID'] %>',
             cookie     : true,
             xfbml      : true,
-            version    : '<%= MY_APP['facebook_graph_version'] %>'
+            version    : '<%= ENV['FACEBOOK_GRAPH_VERSION'] %>'
         });
 
         // Now that we've initialized the JavaScript SDK, we call
