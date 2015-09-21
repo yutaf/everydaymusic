@@ -14,7 +14,7 @@ class InsertIntoDeliveries
     youtube = client.discovered_api('youtube', 'v3')
     random_words_for_search = %w(live)
 
-    artists_to_import = []
+    insert_artists = []
 
     # Begin transaction
     begin
@@ -48,7 +48,7 @@ class InsertIntoDeliveries
                   artist = a.name
                   # Add artist to import array
                   artist_model = Artist.new(name: artist)
-                  artists_to_import << artist_model
+                  insert_artists << artist_model
                   break
                 end
               end
@@ -85,10 +85,10 @@ class InsertIntoDeliveries
           end
         end
 
-        if artists_to_import.count > 0
+        if insert_artists.count > 0
           # Bulk insert into artists
           # TODO validation
-          Artist.import artists_to_import
+          Artist.import insert_artists
         end
       end
     rescue => e
