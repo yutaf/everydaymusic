@@ -19,7 +19,7 @@ class InsertIntoDeliveries
     # Begin transaction
     begin
       ActiveRecord::Base.transaction do
-        artist_records = Artist.pluck(:name)
+        artist_names = Artist.pluck(:name)
         users = User.includes(:artists).all.select(:id)
         users.each do |user|
 
@@ -41,7 +41,7 @@ class InsertIntoDeliveries
 
                 spotify_related_artists.each do |a|
                   # check duplication of artists
-                  if artist_records.include? a.name
+                  if artist_names.include? a.name
                     next
                   end
                   # Update artist
