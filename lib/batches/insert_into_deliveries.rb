@@ -46,10 +46,6 @@ class InsertIntoDeliveries
               # use activerecord-import
               artist_model = Artist.new(name: artist)
               artists_to_import << artist_model
-
-              # use upsert
-              # artists_to_import << artist
-
               break
             end
           end
@@ -92,8 +88,6 @@ class InsertIntoDeliveries
       end
     end
 
-    # date_now = Time.now.strftime('%F %T')
-
     if artists_to_import.count > 0
       # TODO insert into artists
 
@@ -101,17 +95,6 @@ class InsertIntoDeliveries
 
       # use activerecord-import
       Artist.import artists_to_import
-
-      # use upsert
-=begin
-      ActiveRecord::Base.connection_pool.with_connection do |c|
-        Upsert.batch(c, 'artists') do |upsert|
-          artists_to_import.each do |artist_to_import|
-            upsert.row({name: artist_to_import, created_at: date_now, updated_at: date_now})
-          end
-        end
-      end
-=end
     end
   end
 
