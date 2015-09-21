@@ -12,6 +12,7 @@ class InsertIntoDeliveries
         application_version: '1.0.0'
     )
     youtube = client.discovered_api('youtube', 'v3')
+    random_words_for_search = %w(live)
 
     artists_to_import = []
 
@@ -55,12 +56,11 @@ class InsertIntoDeliveries
         end
       end
 
-      query = artist
+      search_query = artist
 
       # Add random words at a rate of 1 / 5
       if 1 == rand(5)
-        random_words = %w(live)
-        query += ' '+random_words.sample(1)[0]
+        search_query += ' ' + random_words_for_search.sample(1)[0]
       end
 
       begin
@@ -70,7 +70,7 @@ class InsertIntoDeliveries
                 # part: 'snippet',
                 part: 'id',
                 type: 'video',
-                q: query,
+                q: search_query,
                 videoEmbeddable: 'true',
                 maxResults: 5
             }
