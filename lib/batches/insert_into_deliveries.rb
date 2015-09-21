@@ -16,6 +16,8 @@ class InsertIntoDeliveries
     artists_to_import = []
 
     #TODO transaction
+    
+    artist_records = Artist.pluck(:name)
 
     users = User.includes(:artists).all.select(:id)
     users.each do |user|
@@ -26,23 +28,32 @@ class InsertIntoDeliveries
       artist = user.artists.to_a.sample(1)[0][:name]
 
       # search related artists at a rate of 1 / 5
-      # if 1 == rand(5)
+      if 1 == rand(5)
         spotify_artists = RSpotify::Artist.search(artist)
         if spotify_artists.instance_of?(Array) && spotify_artists.count > 0
           spotify_related_artists = spotify_artists.first.related_artists
           if spotify_related_artists.instance_of?(Array) && spotify_related_artists.count > 0
-            artist = spotify_related_artists.sample(1)[0].name
-            #TODO check duplication of artists
+            # Sort array randomly
+            spotify_related_artists.shuffle!
 
-            # use activerecord-import
-            artist_model = Artist.new(name: artist)
-            artists_to_import << artist_model
+            spotify_related_artists.each do |a|
+              # check duplication of artists
+              if artist_records.include? a.name
+                next
+              end
+              artist = a.name
+              # use activerecord-import
+              artist_model = Artist.new(name: artist)
+              artists_to_import << artist_model
 
-            # use upsert
-            # artists_to_import << artist
+              # use upsert
+              # artists_to_import << artist
+
+              break
+            end
           end
         end
-      # end
+      end
 
       query = artist
 
@@ -81,9 +92,8 @@ class InsertIntoDeliveries
       end
     end
 
-    pp artists_to_import
-    date_now = Time.now.strftime('%F %T')
-    pp date_now
+    # date_now = Time.now.strftime('%F %T')
+
     if artists_to_import.count > 0
       # TODO insert into artists
 
