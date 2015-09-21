@@ -14,7 +14,10 @@ class InsertIntoDeliveries
     youtube = client.discovered_api('youtube', 'v3')
     random_words_for_search = %w(live)
 
+    # insert values
     insert_artists = []
+    insert_deliveries = []
+    insert_youtubes = []
 
     # Begin transaction
     begin
