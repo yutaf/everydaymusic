@@ -26,6 +26,8 @@ class InsertIntoDeliveries
       if user.artists.count == 0
         next
       end
+
+      # Define artist being used as a search keyword
       artist = user.artists.to_a.sample(1)[0][:name]
 
       # search related artists at a rate of 1 / 5
@@ -42,8 +44,9 @@ class InsertIntoDeliveries
               if artist_records.include? a.name
                 next
               end
+              # Update artist
               artist = a.name
-              # use activerecord-import
+              # Add artist to import array
               artist_model = Artist.new(name: artist)
               artists_to_import << artist_model
               break
@@ -53,7 +56,6 @@ class InsertIntoDeliveries
       end
 
       search_query = artist
-
       # Add random words at a rate of 1 / 5
       if 1 == rand(5)
         search_query += ' ' + random_words_for_search.sample(1)[0]
@@ -89,11 +91,8 @@ class InsertIntoDeliveries
     end
 
     if artists_to_import.count > 0
-      # TODO insert into artists
-
+      # Bulk insert into artists
       # TODO validation
-
-      # use activerecord-import
       Artist.import artists_to_import
     end
   end
