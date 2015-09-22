@@ -65,7 +65,6 @@ class InsertIntoDeliveries
             search_response = client.execute!(
                 :api_method => youtube.search.list,
                 :parameters => {
-                    # part: 'snippet',
                     part: 'id',
                     type: 'video',
                     q: search_query,
