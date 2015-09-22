@@ -48,7 +48,7 @@ class InsertIntoDeliveries
                   if artist_names.include? a.name
                     next
                   end
-                  # Update artist
+                  # Update artist_name
                   artist_name = a.name
                   # Add artist_name to inserting values
                   artists_model = Artist.new(name: artist_name)
