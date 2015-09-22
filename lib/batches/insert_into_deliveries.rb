@@ -72,7 +72,7 @@ class InsertIntoDeliveries
                     maxResults: 5
                 }
             )
-            if ! search_response.data.items.instance_of?(Array) && search_response.data.items.size == 0
+            if ! search_response.data.items.instance_of?(Array) || search_response.data.items.size == 0
               # TODO log
               next
             end
