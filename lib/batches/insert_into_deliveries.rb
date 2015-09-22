@@ -17,7 +17,7 @@ class InsertIntoDeliveries
     random_words_for_search = %w(live)
 
     # insert values
-    insert_artists = []
+    artists_models = []
     insert_deliveries = []
     insert_youtubes = []
 
@@ -89,10 +89,10 @@ class InsertIntoDeliveries
           end
         end
 
-        if insert_artists.count > 0
+        if artists_models.count > 0
           # Bulk insert into artists
           # TODO validation
-          Artist.import insert_artists
+          Artist.import artists_models
         end
       end
     rescue => e
