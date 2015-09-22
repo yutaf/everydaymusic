@@ -82,7 +82,12 @@ class InsertIntoDeliveries
               logger.error message
               next
             end
-            #TODO existence check search_response.data.items.sample(1)[0].id.videoId
+            video_id = search_response.data.items.sample(1)[0].id.videoId
+            unless video_id.is_a? String
+              message = "Couldn't get youtube videoId from expected object's attribute of api response."
+              raise  message
+            end
+
             # pp search_response.data.items.sample(1)[0].id.videoId
           rescue Google::APIClient::TransmissionError => e
             logger.error e.result.body
