@@ -1,5 +1,9 @@
 class InsertIntoDeliveries
   def self.execute
+    # log setting
+    file = File.open('log/app.log', File::WRONLY | File::APPEND | File::CREAT)
+    logger = Logger.new(file, 'daily')
+
     require 'google/api_client'
     require 'rspotify'
 
@@ -74,13 +78,14 @@ class InsertIntoDeliveries
                 }
             )
             if ! search_response.data.items.instance_of?(Array) || search_response.data.items.size == 0
-              # TODO log
+              message = "No item returned from youtube search. The search query is: '#{search_query}'"
+              logger.error message
               next
             end
             #TODO existence check search_response.data.items.sample(1)[0].id.videoId
             # pp search_response.data.items.sample(1)[0].id.videoId
           rescue Google::APIClient::TransmissionError => e
-            puts e.result.body
+            logger.error e.result.body
           end
         end
 
@@ -91,8 +96,7 @@ class InsertIntoDeliveries
         end
       end
     rescue => e
-      #TODO log
-      pp e
+      logger.error e.message
     end
   end
 
