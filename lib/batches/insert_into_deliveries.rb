@@ -25,8 +25,7 @@ class InsertIntoDeliveries
         artist_names = Artist.pluck(:name)
         users = User.includes(:artists).all.select(:id)
         users.each do |user|
-
-          if user.artists.count == 0
+          if user.artists.size == 0
             next
           end
 
