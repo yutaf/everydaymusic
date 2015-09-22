@@ -3,8 +3,6 @@ class InsertIntoDeliveries
     require 'google/api_client'
     require 'rspotify'
 
-    # TODO try catch
-
     client = Google::APIClient.new(
         key: 'AIzaSyB8WbAOkKfPqY5peLhcdsXrPLeUzcskoMU', #TODO
         authorization: nil,
