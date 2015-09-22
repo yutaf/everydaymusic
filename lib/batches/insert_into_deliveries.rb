@@ -31,8 +31,8 @@ class InsertIntoDeliveries
             next
           end
 
-          # Define artist being used as a search keyword
-          artist = user.artists.to_a.sample(1)[0][:name]
+          # Define artist_name being used as a search keyword
+          artist_name = user.artists.to_a.sample(1)[0][:name]
 
           # search related artists at a rate of 1 / 5
           if 1 == rand(5)
@@ -49,17 +49,17 @@ class InsertIntoDeliveries
                     next
                   end
                   # Update artist
-                  artist = a.name
-                  # Add artist to import array
-                  artist_model = Artist.new(name: artist)
-                  insert_artists << artist_model
+                  artist_name = a.name
+                  # Add artist_name to inserting values
+                  artists_model = Artist.new(name: artist_name)
+                  artists_models << artists_model
                   break
                 end
               end
             end
           end
 
-          search_query = artist
+          search_query = artist_name
           # Add random words at a rate of 1 / 5
           if 1 == rand(5)
             search_query += ' ' + random_words_for_search.sample(1)[0]
