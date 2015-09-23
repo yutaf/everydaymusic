@@ -8,7 +8,7 @@ class InsertIntoDeliveries
     require 'rspotify'
 
     client = Google::APIClient.new(
-        key: 'AIzaSyB8WbAOkKfPqY5peLhcdsXrPLeUzcskoMU', #TODO
+        key: ENV['GOOGLE_API_KEY'],
         authorization: nil,
         application_name: 'everydaymusic',
         application_version: '1.0.0'
