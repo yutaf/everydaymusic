@@ -84,7 +84,7 @@ class InsertIntoDeliveries
             end
             video_id = search_response.data.items.sample(1)[0].id.videoId
             unless video_id.is_a? String
-              message = "Couldn't get youtube videoId from expected object's attribute of api response."
+              message = "Couldn't get youtube videoId from expected attribute."
               raise  message
             end
 
