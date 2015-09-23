@@ -17,9 +17,9 @@ class InsertIntoDeliveries
     random_words_for_search = %w(live)
 
     # insert values
-    artists_models = []
-    insert_deliveries = []
-    insert_youtubes = []
+    artists_inserts = []
+    deliveries_inserts = []
+    youtubes_inserts = []
 
     # Begin transaction
     begin
@@ -50,9 +50,9 @@ class InsertIntoDeliveries
                   end
                   # Update artist_name
                   artist_name = a.name
-                  # Add artist_name to inserting values
-                  artists_model = Artist.new(name: artist_name)
-                  artists_models << artists_model
+                  # Add the artist to inserting values
+                  artist = Artist.new(name: artist_name)
+                  artists_inserts << artist
                   break
                 end
               end
@@ -94,10 +94,10 @@ class InsertIntoDeliveries
           end
         end
 
-        if artists_models.count > 0
+        if artists_inserts.count > 0
           # Bulk insert into artists
           # TODO validation
-          Artist.import artists_models
+          Artist.import artists_inserts
         end
       end
     rescue => e
