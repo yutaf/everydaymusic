@@ -26,21 +26,16 @@ ActiveRecord::Schema.define(version: 20150811102836) do
     t.integer "user_id",   limit: 4, null: false
   end
 
-  create_table "artists_youtubes", id: false, force: :cascade do |t|
-    t.integer "artist_id",  limit: 4, null: false
-    t.integer "youtube_id", limit: 4, null: false
-  end
-
   create_table "deliveries", force: :cascade do |t|
     t.datetime "date"
     t.integer  "user_id",    limit: 4
-    t.integer  "youtube_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.string   "video_id",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
-  add_index "deliveries", ["youtube_id"], name: "index_deliveries_on_youtube_id", using: :btree
+  add_index "deliveries", ["video_id"], name: "index_deliveries_on_video_id", using: :btree
 
   create_table "facebooks", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,   null: false
@@ -62,14 +57,6 @@ ActiveRecord::Schema.define(version: 20150811102836) do
     t.datetime "updated_at",                               null: false
   end
 
-  create_table "youtubes", force: :cascade do |t|
-    t.string   "videoId",    limit: 255
-    t.string   "title",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
   add_foreign_key "deliveries", "users"
-  add_foreign_key "deliveries", "youtubes"
   add_foreign_key "facebooks", "users"
 end
