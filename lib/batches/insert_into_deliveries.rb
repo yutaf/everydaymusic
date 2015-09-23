@@ -19,7 +19,6 @@ class InsertIntoDeliveries
     # insert values
     artists_inserts = []
     deliveries_inserts = []
-    youtubes_inserts = []
 
     # Begin transaction
     begin
