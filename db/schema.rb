@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(version: 20150811102836) do
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "facebooks", ["facebook_user_id"], name: "index_facebooks_on_facebook_user_id", using: :btree
-  add_index "facebooks", ["user_id"], name: "index_facebooks_on_user_id", using: :btree
+  add_index "facebooks", ["user_id", "facebook_user_id"], name: "index_facebooks_on_user_id_and_facebook_user_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",         limit: 255
@@ -56,6 +55,8 @@ ActiveRecord::Schema.define(version: 20150811102836) do
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "deliveries", "users"
   add_foreign_key "facebooks", "users"
