@@ -95,13 +95,17 @@ class InsertIntoDeliveries
               logger.error message
               next
             end
-            video_id = search_response.data.items.sample(1)[0].id.videoId
-            unless video_id.is_a? String
-              message = "Couldn't get youtube videoId from expected attribute."
-              raise  message
+
+            video_id = ''
+            search_response.data.items.shuffle!.each do |item|
+              if delivered_video_ids_by_user_id[user.id].include? item.id.videoId
+                # Exclude already delivered videoId
+                next
+              end
+              video_id = item.id.videoId
             end
 
-            # pp search_response.data.items.sample(1)[0].id.videoId
+
           rescue Google::APIClient::TransmissionError => e
             logger.error e.result.body
           end
