@@ -4,8 +4,10 @@
       <li>
         <p class="date_delivered"><%= delivery.date.strftime('%F %T') %></p>
         <div>
-          <p class="title"><%= delivery.youtube.title %></p>
-          <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/<%= delivery.youtube.videoId %>' frameborder='0' allowfullscreen></iframe></div>
+          <!-- TODO -->
+          <p class="title">タイトル</p>
+          <!-- /TODO -->
+          <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/<%= delivery.video_id %>' frameborder='0' allowfullscreen></iframe></div>
         </div>
       </li>
   <% end %>
