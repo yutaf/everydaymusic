@@ -24,6 +24,20 @@ class InsertIntoDeliveries
     begin
       ActiveRecord::Base.transaction do
         artist_names = Artist.pluck(:name)
+        # fetch delivered video_ids by user_id (from only active user)
+        delivered_video_ids_by_user_id = {}
+        deliveries = Delivery.joins(:user).where(users: {is_active: true}).select(:user_id, :video_id)
+
+        if deliveries.to_a.count > 0
+          deliveries.each do |delivery|
+            unless delivered_video_ids_by_user_id.key?(delivery.user_id)
+              # initialize array
+              delivered_video_ids_by_user_id[delivery.user_id] = []
+            end
+            delivered_video_ids_by_user_id[delivery.user_id].push delivery.video_id
+          end
+        end
+
         users = User.includes(:artists).all.select(:id)
         users.each do |user|
           if user.artists.size == 0
