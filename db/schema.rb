@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003051215) do
+ActiveRecord::Schema.define(version: 20151004074113) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -27,9 +27,8 @@ ActiveRecord::Schema.define(version: 20151003051215) do
   end
 
   create_table "deliveries", force: :cascade do |t|
-    t.datetime "date"
-    t.integer  "user_id",      limit: 4
-    t.string   "video_id",     limit: 255
+    t.integer  "user_id",      limit: 4,                   null: false
+    t.string   "video_id",     limit: 255,                 null: false
     t.boolean  "is_delivered",             default: false, null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -37,6 +36,15 @@ ActiveRecord::Schema.define(version: 20151003051215) do
 
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
   add_index "deliveries", ["video_id"], name: "index_deliveries_on_video_id", using: :btree
+
+  create_table "delivery_dates", force: :cascade do |t|
+    t.integer  "delivery_id", limit: 4, null: false
+    t.datetime "date",                  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "delivery_dates", ["delivery_id"], name: "index_delivery_dates_on_delivery_id", using: :btree
 
   create_table "facebooks", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,   null: false
@@ -48,17 +56,18 @@ ActiveRecord::Schema.define(version: 20151003051215) do
   add_index "facebooks", ["user_id", "facebook_user_id"], name: "index_facebooks_on_user_id_and_facebook_user_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",         limit: 255
-    t.string   "locale",        limit: 255
-    t.integer  "timezone",      limit: 1
-    t.time     "delivery_time"
-    t.boolean  "is_active",                 default: true, null: false
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.string   "email",         limit: 255, default: "",                    null: false
+    t.string   "locale",        limit: 255, default: "en_US",               null: false
+    t.integer  "timezone",      limit: 1,   default: 0,                     null: false
+    t.time     "delivery_time",             default: '2000-01-01 08:00:00', null: false
+    t.boolean  "is_active",                 default: true,                  null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "deliveries", "users"
+  add_foreign_key "delivery_dates", "deliveries"
   add_foreign_key "facebooks", "users"
 end
