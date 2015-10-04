@@ -104,6 +104,12 @@ class InsertIntoDeliveries
               video_id = item.id.videoId
             end
 
+            if video_id.length == 0
+              next
+            end
+
+            # Add video_id to inserting values
+            deliveries_inserts << Delivery.new(user_id: user.id, video_id: video_id)
 
           rescue Google::APIClient::TransmissionError => e
             logger.error e.result.body
