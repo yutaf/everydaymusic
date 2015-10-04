@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   def show
     # TODO reduce database access count
-    @deliveries = Delivery.where(user: @user_id).order(date: :desc)
+    @deliveries = Delivery.joins(:delivery_date).where(user: @user_id, is_delivered: true).order(id: :desc)
 
 =begin
     deliveries.each_with_index do |deliver, i_deliveries|
