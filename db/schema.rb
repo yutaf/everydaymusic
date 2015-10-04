@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811102836) do
+ActiveRecord::Schema.define(version: 20151003051215) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 20150811102836) do
 
   create_table "deliveries", force: :cascade do |t|
     t.datetime "date"
-    t.integer  "user_id",    limit: 4
-    t.string   "video_id",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",      limit: 4
+    t.string   "video_id",     limit: 255
+    t.boolean  "is_delivered",             default: false, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
