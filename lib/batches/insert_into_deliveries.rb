@@ -38,7 +38,15 @@ class InsertIntoDeliveries
           end
         end
 
-        users = User.includes(:artists).all.select(:id)
+        # Fetch users who don't have a record which is deliveries.is_delivered = 0
+        user_ids = User.where(is_active: true).pluck(:id)
+        if user_ids.count == 0
+          logger.error 'No active user exists'
+        end
+
+        delivery_scheduled_user_ids = Delivery.joins(:user).where('deliveries.is_delivered=? AND users.is_active=?', false, true).group(:user_id).pluck(:user_id)
+        target_user_ids = user_ids - delivery_scheduled_user_ids
+        users = User.select(:id).includes(:artists).where(is_active: true).find(target_user_ids)
         users.each do |user|
           if user.artists.size == 0
             next
@@ -108,12 +116,22 @@ class InsertIntoDeliveries
               next
             end
 
+            #
             # Add video_id to inserting values
-            deliveries_inserts << Delivery.new(user_id: user.id, video_id: video_id)
+            #
+
+            # Do not set value to deliveries.date here, it is to be set When the mail is being sent
+            deliveries_inserts << Delivery.new(user_id: user.id, video_id: video_id, is_delivered: false)
 
           rescue Google::APIClient::TransmissionError => e
             logger.error e.result.body
           end
+        end
+
+        if deliveries_inserts.count > 0
+          # Bulk insert into deliveries
+          # TODO validation
+          Delivery.import deliveries_inserts
         end
 
         if artists_inserts.count > 0
