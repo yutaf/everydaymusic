@@ -63,9 +63,8 @@ class InsertIntoDeliveries
                   end
                   # Update artist_name
                   artist_name = a.name
-                  # Add the artist to inserting values
-                  artist = Artist.new(name: artist_name)
-                  artists_inserts << artist
+                  # Add new artist to inserting values
+                  artists_inserts << Artist.new(name: artist_name)
                   break
                 end
               end
