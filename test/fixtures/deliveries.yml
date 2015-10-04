@@ -2,28 +2,24 @@
 
 one:
   id: 1
-  date: 2015-08-11 10:29:03
   user_id: 1
   video_id: R5-W1znnqOs
   is_delivered: 1
 
 two:
   id: 2
-  date: 2015-08-12 10:29:03
   user_id: 1
   video_id: wgmRb3MlpHQ
   is_delivered: 1
 
 three:
   id: 3
-  date: 2015-08-13 18:05:00
   user_id: 2
   video_id: 3OOyrYXuUNU
   is_delivered: 1
 
 four:
   id: 4
-  date: 2015-08-14 06:21:00
   user_id: 3
   video_id: BapCX1RcIHI
   is_delivered: 1
