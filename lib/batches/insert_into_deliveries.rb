@@ -49,7 +49,7 @@ class InsertIntoDeliveries
 
           # search related artists at a rate of 1 / 5
           if 1 == rand(5)
-            spotify_artists = RSpotify::Artist.search(artist)
+            spotify_artists = RSpotify::Artist.search(artist_name)
             if spotify_artists.instance_of?(Array) && spotify_artists.count > 0
               spotify_related_artists = spotify_artists.first.related_artists
               if spotify_related_artists.instance_of?(Array) && spotify_related_artists.count > 0
