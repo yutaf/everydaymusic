@@ -129,12 +129,12 @@ class InsertIntoDeliveries
         end
 
         if deliveries_inserts.count > 0
-          # Bulk insert into deliveries
+          # Bulk insert
           Delivery.import deliveries_inserts
         end
 
         if artists_inserts.count > 0
-          # Bulk insert into artists
+          # Bulk insert
           Artist.import artists_inserts
         end
       end
