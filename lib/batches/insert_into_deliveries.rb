@@ -46,6 +46,7 @@ class InsertIntoDeliveries
         user_ids = User.where(is_active: true).pluck(:id)
         if user_ids.count == 0
           logger.error 'No active user exists'
+          return
         end
 
         delivery_scheduled_user_ids = Delivery.joins(:user).where('deliveries.is_delivered=? AND users.is_active=?', false, true).group(:user_id).pluck(:user_id)
