@@ -130,13 +130,11 @@ class InsertIntoDeliveries
 
         if deliveries_inserts.count > 0
           # Bulk insert into deliveries
-          # TODO validation
           Delivery.import deliveries_inserts
         end
 
         if artists_inserts.count > 0
           # Bulk insert into artists
-          # TODO validation
           Artist.import artists_inserts
         end
       end
