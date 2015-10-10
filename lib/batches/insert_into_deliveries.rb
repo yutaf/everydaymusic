@@ -14,7 +14,7 @@ class InsertIntoDeliveries
         application_version: '1.0.0'
     )
     youtube = client.discovered_api('youtube', 'v3')
-    random_words_for_search = %w(live)
+    search_random_words = %w(live)
 
     # insert values
     artists_inserts = []
@@ -82,7 +82,7 @@ class InsertIntoDeliveries
           search_query = artist_name
           # Add random words at a rate of 1 / 5
           if 1 == rand(5)
-            search_query += ' ' + random_words_for_search.sample(1)[0]
+            search_query += ' ' + search_random_words.sample(1)[0]
           end
 
           begin
