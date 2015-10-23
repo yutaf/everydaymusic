@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
       redirect_to '/login'
       return
     end
-    redis = Redis.new(host: ENV['REDIS_HOST'])
-    @user_id = redis.hget('auths', authcookie)
+    @redis = Redis.new(host: ENV['REDIS_HOST'])
+    @user_id = @redis.hget('auths', authcookie)
     if @user_id.blank?
       redirect_to '/login'
       return
     end
-    authsecret = redis.hget("user:#{@user_id}", 'auth')
+    authsecret = @redis.hget("user:#{@user_id}", 'auth')
     if authcookie != authsecret
       redirect_to '/login'
       return
