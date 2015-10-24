@@ -11,17 +11,7 @@ class ApplicationController < ActionController::Base
       return
     end
 
-    # Set locale value to session
-    if session[:locale].nil?
-      user = User.find(@user_id)
-      session[:locale] = user[:locale][0,2]
-    end
-    case session[:locale]
-      when 'ja', 'en'
-        I18n.locale = session[:locale]
-      else
-        ;
-    end
+    set_locale
   end
 
   def is_logged_in?
@@ -39,5 +29,19 @@ class ApplicationController < ActionController::Base
       return false
     end
     return true
+  end
+
+  def set_locale
+    #TODO Share user information among rails and php with redis
+    if session[:locale].nil?
+      user = User.find(@user_id)
+      session[:locale] = user[:locale][0,2]
+    end
+    case session[:locale]
+      when 'ja', 'en'
+        I18n.locale = session[:locale]
+      else
+        ;
+    end
   end
 end
