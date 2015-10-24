@@ -7,6 +7,5 @@ class LogoutsController < ApplicationController
     @redis.hdel('auths', oldauthsecret)
 
     redirect_to '/'
-    return
   end
 end
