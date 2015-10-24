@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   # resources :users
   # resource :account, format: false
   resource :account, format: false, only: [:edit, :show, :update, :destroy]
-
-  resource :logout, format: false, only: [:show]
   resource :list, format: false, only: [:show]
+  resource :logout, format: false, only: [:show]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
