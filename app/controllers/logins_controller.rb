@@ -1,5 +1,5 @@
 class LoginsController < ApplicationController
-  skip_before_action :before_action_login
+  skip_before_action :initialize
   def show
   end
 end
