@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   private
   def initialize
-    # Check logged in
     if ! is_logged_in?
       redirect_to '/login'
       return
