@@ -7,6 +7,6 @@ rails g model artist name:string
 rails g model delivery user:references video_id:references is_delivered:boolean
 rails g model delivery_date delivery:references date:datetime
 
-rails g controller logouts
-rails g controller lists
 rails g controller accounts
+rails g controller lists
+rails g controller logouts
