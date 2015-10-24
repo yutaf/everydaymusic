@@ -1,5 +1,4 @@
-<p class="account"><%= link_to (t 'account.account'), account_path %></p>
-<p class="logout"><%= link_to (t 'logout'), logout_path %></p>
+<%= render 'header' %>
 <ul>
   <% @deliveries.each do |delivery| %>
       <li>
