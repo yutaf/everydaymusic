@@ -6,7 +6,7 @@ class LogoutsController < ApplicationController
     @redis.hset('auths', newauthsecret, @user_id)
     @redis.hdel('auths', oldauthsecret)
 
-    redirect_to '/login'
+    redirect_to '/'
     return
   end
 end
