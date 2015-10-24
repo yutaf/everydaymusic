@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :account, format: false, only: [:edit, :show, :update, :destroy]
   resource :list, format: false, only: [:show]
   resource :logout, format: false, only: [:show]
+  get 'welcome' => 'welcome#index', format: false
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -59,4 +60,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  root 'welcome#index'
 end
