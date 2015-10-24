@@ -10,3 +10,4 @@ rails g model delivery_date delivery:references date:datetime
 rails g controller accounts
 rails g controller lists
 rails g controller logouts
+rails g controller welcome
