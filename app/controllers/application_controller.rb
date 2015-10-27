@@ -28,18 +28,17 @@ class ApplicationController < ActionController::Base
     if authcookie != authsecret
       return false
     end
+
     return true
   end
 
   def set_locale
-    #TODO Share user information among rails and php with redis
-    if session[:locale].nil?
-      user = User.find(@user_id)
-      session[:locale] = user[:locale][0,2]
-    end
-    case session[:locale]
+    @user_redis = @redis.hgetall("user:#{@user_id}")
+    locale = @user_redis['locale'][0,2]
+
+    case locale
       when 'ja', 'en'
-        I18n.locale = session[:locale]
+        I18n.locale = locale
       else
         ;
     end
