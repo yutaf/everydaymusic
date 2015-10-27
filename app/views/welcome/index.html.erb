@@ -1,44 +1,41 @@
-<%= render @header %>
-<% if ! @is_logged_in %>
-    <%= render 'login' %>
-    <div id="status">
-    </div>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '<%= ENV['FACEBOOK_APP_ID'] %>',
-                cookie     : true,
-                xfbml      : true,
-                version    : '<%= ENV['FACEBOOK_GRAPH_VERSION'] %>'
-            });
-        };
+<%= render 'login' %>
+<div id="status">
+</div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '<%= ENV['FACEBOOK_APP_ID'] %>',
+            cookie     : true,
+            xfbml      : true,
+            version    : '<%= ENV['FACEBOOK_GRAPH_VERSION'] %>'
+        });
+    };
 
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
-        //add event listener to login button
-        document.getElementById('loginBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            //do the login
-            FB.login(function(response) {
-                if (response.status === 'connected') {
-                    // Logged into your app and Facebook.
-                    var redirect_url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/fb-login-callback.php';
-                    window.location.replace(redirect_url);
-                } else if (response.status === 'not_authorized') {
-                    // The person is logged into Facebook, but not your app.
-                    document.getElementById('status').innerHTML = 'Please log into this app.';
-                } else {
-                    // The person is not logged into Facebook, so we're not sure if
-                    // they are logged into this app or not.
-                    document.getElementById('status').innerHTML = 'Please log into Facebook.';
-                }
-            }, {scope: 'public_profile,email,user_likes', return_scopes: true});
-        }, false);
-    </script>
-<% end %>
+    //add event listener to login button
+    document.getElementById('loginBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        //do the login
+        FB.login(function(response) {
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                var redirect_url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/fb-login-callback.php';
+                window.location.replace(redirect_url);
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log into Facebook.';
+            }
+        }, {scope: 'public_profile,email,user_likes', return_scopes: true});
+    }, false);
+</script>
