@@ -3,6 +3,8 @@ class AccountsController < ApplicationController
 
   def update
     if @user.update(user_params)
+      # Update redis user values
+      @redis.mapped_hmset("user:#{@user_id}", user_params)
       # TODO notice が表示されない session problem??
       redirect_to account_path, notice: 'User was successfully updated.'
     else
