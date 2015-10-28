@@ -2,7 +2,7 @@
 <ul>
   <% @deliveries.each do |delivery| %>
       <li>
-        <p class="date_delivered"><%= delivery.delivery_date.date.strftime('%F %T') %></p>
+        <p class="delivery_date"><%= delivery.delivery_date.date.strftime('%F %T') %></p>
         <div>
           <!-- TODO -->
           <p class="title">タイトル</p>
