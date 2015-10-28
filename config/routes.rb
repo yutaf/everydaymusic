@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # resources :users
   # resource :account, format: false
   resource :account, format: false, only: [:edit, :show, :update, :destroy]
-  resource :list, format: false, only: [:show]
-  resource :logout, format: false, only: [:show]
+  get 'list' => 'list#index', format: false
+  get 'logout' => 'logout#index', format: false
   get 'welcome' => 'welcome#index', format: false
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,5 +1,5 @@
-class LogoutsController < ApplicationController
-  def show
+class LogoutController < ApplicationController
+  def index
     newauthsecret = ('a'..'z').to_a.shuffle[0,8].join
     oldauthsecret = @redis.hget("user:#{@user_id}", 'auth')
     @redis.hset("user:#{@user_id}", 'auth', newauthsecret)
