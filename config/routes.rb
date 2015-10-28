@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resource :account, format: false, only: [:edit, :show, :update, :destroy]
   get 'list' => 'list#index', format: false
   get 'logout' => 'logout#index', format: false
-  get 'welcome' => 'welcome#index', format: false
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
