@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20151004074113) do
     t.string   "email",         limit: 255, default: "",                    null: false
     t.string   "locale",        limit: 255, default: "en_US",               null: false
     t.integer  "timezone",      limit: 1,   default: 0,                     null: false
-    t.time     "delivery_time",             default: '2000-01-01 08:00:00', null: false
+    t.time     "delivery_time",             default: '2000-01-01 21:00:00', null: false
     t.boolean  "is_active",                 default: true,                  null: false
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
