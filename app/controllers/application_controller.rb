@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    @user_redis = @redis.hgetall("user:#{@user_id}")
-    locale = @user_redis['locale'][0,2]
+    user_redis = @redis.hgetall("user:#{@user_id}")
+    locale = user_redis['locale'][0,2]
 
     case locale
       when 'ja', 'en'
