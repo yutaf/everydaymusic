@@ -18,6 +18,3 @@
 
 
 *.mwb.bak
-
-#TODO Ignore temporarily
-Gemfile.lock
