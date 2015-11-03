@@ -4,6 +4,7 @@ gem 'redis'
 gem 'google-api-client', '>0.7'
 gem 'rspotify'
 gem 'activerecord-import'
+gem 'sidekiq'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
