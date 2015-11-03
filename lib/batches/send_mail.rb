@@ -11,8 +11,6 @@ end
 
 class SendMail
   def self.execute
-    pp config.action_mailer.smtp_settings
-    return
     DeliveryMailer.first_example.deliver_now
   end
 
