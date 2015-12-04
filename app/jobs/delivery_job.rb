@@ -1,7 +1,7 @@
 class DeliveryJob < ActiveJob::Base
   queue_as :default
 
-  def perform()
+  def perform
     # log setting
     file = File.open('log/app.log', File::WRONLY | File::APPEND | File::CREAT)
     logger = Logger.new(file, 'daily')
@@ -158,6 +158,6 @@ class DeliveryJob < ActiveJob::Base
       logger.error e.message
     end
 
-    self.class.set(wait: 1.hour).perform_later('Hi, scheduled.')
+    self.class.set(wait: 1.hour).perform_later
   end
 end
