@@ -158,6 +158,7 @@ class DeliveryJob < ActiveJob::Base
       logger.error e.message
     end
 
+    # Set next schedule
     self.class.set(wait: 1.hour).perform_later
   end
 end
