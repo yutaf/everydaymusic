@@ -58,7 +58,7 @@ class DeliveryJob < ActiveJob::Base
 
         target_user_ids = user_ids - delivery_scheduled_user_ids
 
-        users = User.select(:id).includes(:artists).where(is_active: true).find(target_user_ids)
+        users = User.select(:id, :delivery_time).includes(:artists).where(is_active: true).find(target_user_ids)
         users.each do |user|
           if user.artists.size == 0
             next
