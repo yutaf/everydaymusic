@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004074113) do
+ActiveRecord::Schema.define(version: 20150811102836) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20151004074113) do
   create_table "deliveries", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,                   null: false
     t.string   "video_id",     limit: 255,                 null: false
+    t.datetime "date",                                     null: false
     t.boolean  "is_delivered",             default: false, null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -36,15 +37,6 @@ ActiveRecord::Schema.define(version: 20151004074113) do
 
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
   add_index "deliveries", ["video_id"], name: "index_deliveries_on_video_id", using: :btree
-
-  create_table "delivery_dates", force: :cascade do |t|
-    t.integer  "delivery_id", limit: 4, null: false
-    t.datetime "date",                  null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "delivery_dates", ["delivery_id"], name: "index_delivery_dates_on_delivery_id", using: :btree
 
   create_table "facebooks", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,   null: false
@@ -68,6 +60,5 @@ ActiveRecord::Schema.define(version: 20151004074113) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "deliveries", "users"
-  add_foreign_key "delivery_dates", "deliveries"
   add_foreign_key "facebooks", "users"
 end
