@@ -45,12 +45,25 @@ class DeliveryJob < ActiveJob::Base
         end
 
         # Fetch users who don't have a record which has deliveries.is_delivered = 0 and whose delivery_time comes within 3 hours
-        time_now = Time.now.strftime("%T")
-        t_plus_three_hours = Time.now + 3*60*60
-        time_plus_three_hours = t_plus_three_hours.strftime("%T")
-        user_ids = User.where('is_active=? AND delivery_time<=? AND delivery_time>=?', true, time_plus_three_hours, time_now).pluck(:id)
+        active_users = User.where('is_active=?', true).select(:id, :delivery_time)
+        if active_users.to_a.count == 0
+          logger.info 'No active user exists'
+          return
+        end
+        user_ids = []
+        dt_now_plus_3_hours = DateTime.now + 3.hours
+        active_users.each do |active_user|
+          dt_delivery_date = DateTime.now.change({ hour: active_user.delivery_time.hour, min: active_user.delivery_time.min, sec: active_user.delivery_time.sec })
+          if dt_delivery_date.utc < DateTime.now.utc
+            dt_delivery_date = dt_delivery_date + 1.day
+          end
+          if dt_delivery_date.utc > dt_now_plus_3_hours.utc
+            next
+          end
+          user_ids.push(active_user.id)
+        end
         if user_ids.count == 0
-          logger.error 'No active user exists'
+          logger.info 'No user needs to be cued'
           return
         end
 
