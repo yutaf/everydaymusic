@@ -51,6 +51,7 @@ class DeliveryJob < ActiveJob::Base
           return
         end
         user_ids = []
+        delivery_dates_by_user_id = {}
         dt_now_plus_3_hours = DateTime.now + 3.hours
         active_users.each do |active_user|
           dt_delivery_date = DateTime.now.change({ hour: active_user.delivery_time.hour, min: active_user.delivery_time.min, sec: active_user.delivery_time.sec })
@@ -61,6 +62,7 @@ class DeliveryJob < ActiveJob::Base
             next
           end
           user_ids.push(active_user.id)
+          delivery_dates_by_user_id[active_user.id] = dt_delivery_date.strftime("%F %T")
         end
         if user_ids.count == 0
           logger.info 'No user needs to be cued'
@@ -143,12 +145,9 @@ class DeliveryJob < ActiveJob::Base
               next
             end
 
-            #
-            # Add video_id to inserting values
-            #
-
-            # Do not set value to deliveries.date here, it is to be set When the mail is being sent
-            deliveries_inserts << Delivery.new(user_id: user.id, video_id: video_id, is_delivered: false)
+            # Add delivery model to inserting values
+            date = delivery_dates_by_user_id[user.id]
+            deliveries_inserts << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
 
           rescue Google::APIClient::TransmissionError => e
             puts e.result.body
