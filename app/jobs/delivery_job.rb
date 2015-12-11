@@ -1,5 +1,5 @@
 class DeliveryJob < ActiveJob::Base
-  queue_as :default
+  queue_as :delivery
 
   def perform
     # log setting
