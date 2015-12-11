@@ -5,6 +5,7 @@ gem 'google-api-client', '>0.7'
 gem 'rspotify'
 gem 'activerecord-import'
 gem 'sidekiq'
+gem 'sinatra', :require => nil # for sidekiq Web UI
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
