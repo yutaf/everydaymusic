@@ -149,7 +149,6 @@ class DeliveryJob < ActiveJob::Base
             date = delivery_dates_by_user_id[user.id]
             deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
           rescue Google::APIClient::TransmissionError => e
-            puts e.result.body
             logger.error e.result.body
           end
         end
@@ -165,7 +164,6 @@ class DeliveryJob < ActiveJob::Base
         end
       end
     rescue => e
-      pp e
       logger.error e.message
     end
 
