@@ -23,8 +23,8 @@ class DeliveryJob < ActiveJob::Base
     search_random_words = %w(live)
 
     # insert values
-    artists_inserts = []
-    deliveries_inserts = []
+    artists_models = []
+    deliveries_models = []
 
     # Begin transaction
     begin
@@ -100,7 +100,7 @@ class DeliveryJob < ActiveJob::Base
                   # Update artist_name
                   artist_name = a.name
                   # Add new artist to inserting values
-                  artists_inserts << Artist.new(name: artist_name)
+                  artists_models << Artist.new(name: artist_name)
                   break
                 end
               end
@@ -147,22 +147,21 @@ class DeliveryJob < ActiveJob::Base
 
             # Add delivery model to inserting values
             date = delivery_dates_by_user_id[user.id]
-            deliveries_inserts << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
-
+            deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
           rescue Google::APIClient::TransmissionError => e
             puts e.result.body
             logger.error e.result.body
           end
         end
 
-        if deliveries_inserts.count > 0
+        if deliveries_models.count > 0
           # Bulk insert
-          Delivery.import deliveries_inserts
+          Delivery.import deliveries_models
         end
 
-        if artists_inserts.count > 0
+        if artists_models.count > 0
           # Bulk insert
-          Artist.import artists_inserts
+          Artist.import artists_models
         end
       end
     rescue => e
