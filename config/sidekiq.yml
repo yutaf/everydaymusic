@@ -4,4 +4,5 @@
 :queues:
   - default
   - mailers
+  - delivery
 #:daemon: true
