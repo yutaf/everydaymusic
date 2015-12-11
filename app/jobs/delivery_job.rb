@@ -156,6 +156,16 @@ class DeliveryJob < ActiveJob::Base
         if deliveries_models.count > 0
           # Bulk insert
           Delivery.import deliveries_models
+
+          #
+          # Que jobs
+          #
+
+          # Update deliveries.is_delivered
+          deliveries_models.each do |deliveries_model|
+            delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
+            UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)
+          end
         end
 
         if artists_models.count > 0
