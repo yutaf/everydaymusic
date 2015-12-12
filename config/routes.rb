@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'logout' => 'logout#index', format: false
   # sidekiq/web
   require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/kiqside'
 
   root 'welcome#index'
 end
