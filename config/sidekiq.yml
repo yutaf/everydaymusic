@@ -5,4 +5,5 @@
   - default
   - mailers
   - delivery
+  - update_is_delivered
 #:daemon: true
