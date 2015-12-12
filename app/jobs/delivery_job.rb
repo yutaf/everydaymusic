@@ -81,6 +81,7 @@ class DeliveryJob < ActiveJob::Base
         end
 
         users = User.select(:id, :delivery_time, :email).includes(:artists).where(is_active: true).find(target_user_ids)
+        emails_by_user_id = {}
         users.each do |user|
           if user.artists.size == 0
             next
@@ -155,6 +156,9 @@ class DeliveryJob < ActiveJob::Base
             # Add delivery model to inserting values
             date = delivery_dates_by_user_id[user.id]
             deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
+            # push email by user_id
+            emails_by_user_id[user.id] = user.email
+
           rescue Google::APIClient::TransmissionError => e
             logger.error e.result.body
           end
