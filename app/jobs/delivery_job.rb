@@ -171,9 +171,10 @@ class DeliveryJob < ActiveJob::Base
           #
           # Queue jobs
           #
-
-          # Update deliveries.is_delivered
           deliveries_models.each do |deliveries_model|
+            # Send mail
+            DeliveryMailer.sendmail(emails_by_user_id[deliveries_model.user_id], deliveries_model.video_id).deliver_later(wait_until: deliveries_model.date)
+            # Update deliveries.is_delivered
             delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
             UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)
           end
