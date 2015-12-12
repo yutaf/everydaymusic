@@ -161,7 +161,7 @@ class DeliveryJob < ActiveJob::Base
           Delivery.import deliveries_models
 
           #
-          # Que jobs
+          # Queue jobs
           #
 
           # Update deliveries.is_delivered
