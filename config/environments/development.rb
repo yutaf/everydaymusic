@@ -20,8 +20,8 @@ Rails.application.configure do
       user_name: ENV['SMTP_USER_NAME'],
       password: ENV['SMTP_PASSWORD'],
       domain: '192.168.11.92.xip.io',
-      address: 'smtp.sendgrid.net',
-      port: 587,
+      address: ENV['SMTP_HOST'],
+      port: ENV['SMTP_PORT'],
       authentication: :plain,
       enable_starttls_auto: true
   }
