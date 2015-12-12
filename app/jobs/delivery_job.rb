@@ -75,6 +75,10 @@ class DeliveryJob < ActiveJob::Base
         delivery_scheduled_user_ids = Delivery.joins(:user).where('deliveries.is_delivered=? AND users.is_active=?', false, true).group(:user_id).pluck(:user_id)
 
         target_user_ids = user_ids - delivery_scheduled_user_ids
+        if target_user_ids.count == 0
+          logger.info 'No user needs to be cued'
+          return
+        end
 
         users = User.select(:id, :delivery_time).includes(:artists).where(is_active: true).find(target_user_ids)
         users.each do |user|
