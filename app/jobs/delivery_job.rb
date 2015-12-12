@@ -80,7 +80,7 @@ class DeliveryJob < ActiveJob::Base
           return
         end
 
-        users = User.select(:id, :delivery_time).includes(:artists).where(is_active: true).find(target_user_ids)
+        users = User.select(:id, :delivery_time, :email).includes(:artists).where(is_active: true).find(target_user_ids)
         users.each do |user|
           if user.artists.size == 0
             next
