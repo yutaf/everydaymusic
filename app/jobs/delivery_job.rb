@@ -2,6 +2,9 @@ class DeliveryJob < ActiveJob::Base
   queue_as :delivery
 
   def perform
+    # Set next schedule
+    self.class.set(wait: 1.hour).perform_later
+
     # log setting
     file = File.open('log/app.log', File::WRONLY | File::APPEND | File::CREAT)
     logger = Logger.new(file, 'daily')
@@ -176,8 +179,5 @@ class DeliveryJob < ActiveJob::Base
     rescue => e
       logger.error e.message
     end
-
-    # Set next schedule
-    self.class.set(wait: 1.hour).perform_later
   end
 end
