@@ -9,4 +9,5 @@ rails g model delivery user:references video_id:references date:datetime is_deli
 rails g controller accounts
 rails g controller list index
 rails g controller logout index
+rails g controller policies privacy
 rails g controller welcome index
