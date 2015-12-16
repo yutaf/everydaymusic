@@ -19,7 +19,6 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
       user_name: ENV['SMTP_USER_NAME'],
       password: ENV['SMTP_PASSWORD'],
-      domain: '192.168.11.92.xip.io',
       address: ENV['SMTP_HOST'],
       port: ENV['SMTP_PORT'],
       authentication: :plain,
