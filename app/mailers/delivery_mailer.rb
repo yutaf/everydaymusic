@@ -9,7 +9,9 @@ class DeliveryMailer < ApplicationMailer
   #   en.delivery_mailer.sendmail.subject
   #
   def sendmail(email, video_id)
-    mail to: email,
-         body: "https://www.youtube.com/watch?v=#{video_id}"
+    @video_id = video_id
+    mail to: email
+    # mail to: email,
+    #      body: "https://www.youtube.com/watch?v=#{video_id}"
   end
 end
