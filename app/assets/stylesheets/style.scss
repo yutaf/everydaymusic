@@ -1,5 +1,29 @@
+body{
+  font-family:Avenir, Helvetica, sans-serif;
+}
+a:hover {
+  opacity: 0.8;
+}
+
 .container {
+  margin: 0 auto;
+  padding: 10px;
+  width: 800px;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
   * {
     text-align: center;
   }
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: bold;
+}
+.logo:link, .logo:visited, .logo:active { color: #666666; }
+
+.item {
+  margin-bottom: 5px;
 }
