@@ -181,12 +181,6 @@ class DeliveryJob < ActiveJob::Base
           # Queue jobs
           #
           deliveries_models.each do |deliveries_model|
-            # Send mail
-            DeliveryMailer.sendmail(emails_by_user_id[deliveries_model.user_id], deliveries_model.video_id).deliver_later(wait_until: deliveries_model.date)
-            # Update deliveries.is_delivered
-            delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
-            UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)
-
             # Insert key for unsubscribing
             old_unsubscribe_key = redis.hget("user:#{deliveries_model.user_id}", 'unsubscribe_key')
             new_unsubscribe_key = MyStringer.create_random_uniq_str
@@ -197,7 +191,11 @@ class DeliveryJob < ActiveJob::Base
             if old_unsubscribe_key.is_a?(String) && old_unsubscribe_key.length > 0
               redis.hdel('unsubscribe_keys', old_unsubscribe_key)
             end
-
+            # Send mail
+            DeliveryMailer.sendmail(emails_by_user_id[deliveries_model.user_id], deliveries_model.video_id).deliver_later(wait_until: deliveries_model.date)
+            # Update deliveries.is_delivered
+            delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
+            UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)
           end
         end
 
