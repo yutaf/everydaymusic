@@ -32,6 +32,8 @@ class DeliveryJob < ActiveJob::Base
     youtube = client.discovered_api('youtube', 'v3')
     search_random_words = %w(live)
 
+    redis = Redis.new(host: ENV['REDIS_HOST'])
+
     # insert values
     artists_models = []
     deliveries_models = []
@@ -184,6 +186,18 @@ class DeliveryJob < ActiveJob::Base
             # Update deliveries.is_delivered
             delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
             UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)
+
+            # Insert key for unsubscribing
+            old_unsubscribe_key = redis.hget("user:#{deliveries_model.user_id}", 'unsubscribe_key')
+            new_unsubscribe_key = MyStringer.create_random_uniq_str
+            redis.multi do |multi|
+              multi.hset("user:#{deliveries_model.user_id}", 'unsubscribe_key', new_unsubscribe_key)
+              multi.hset('unsubscribe_keys', new_unsubscribe_key, deliveries_model.user_id)
+            end
+            if old_unsubscribe_key.is_a?(String) && old_unsubscribe_key.length > 0
+              redis.hdel('unsubscribe_keys', old_unsubscribe_key)
+            end
+
           end
         end
 
