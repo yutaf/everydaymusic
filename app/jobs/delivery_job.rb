@@ -32,8 +32,6 @@ class DeliveryJob < ActiveJob::Base
     youtube = client.discovered_api('youtube', 'v3')
     search_random_words = %w(live)
 
-    redis = Redis.new(host: ENV['REDIS_HOST'])
-
     # insert values
     artists_models = []
     deliveries_models = []
@@ -180,6 +178,7 @@ class DeliveryJob < ActiveJob::Base
           #
           # Queue jobs
           #
+          redis = Redis.new(host: ENV['REDIS_HOST'])
           deliveries_models.each do |deliveries_model|
             # Insert key for unsubscribing
             old_unsubscribe_key = redis.hget("user:#{deliveries_model.user_id}", 'unsubscribe_key')
