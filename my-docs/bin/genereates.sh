@@ -10,4 +10,5 @@ rails g controller accounts
 rails g controller list index
 rails g controller logout index
 rails g controller policies privacy
+rails g controller unsubscribe index
 rails g controller welcome index
