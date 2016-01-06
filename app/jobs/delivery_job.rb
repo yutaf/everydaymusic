@@ -180,7 +180,7 @@ class DeliveryJob < ActiveJob::Base
           #
           redis = Redis.new(host: ENV['REDIS_HOST'])
           deliveries_models.each do |deliveries_model|
-            # Insert key for unsubscribing
+            # Insert key for unsubscribe
             old_unsubscribe_key = redis.hget("user:#{deliveries_model.user_id}", 'unsubscribe_key')
             new_unsubscribe_key = MyStringer.create_random_uniq_str
             redis.multi do |multi|
