@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'list' => 'list#index', format: false
   get 'logout' => 'logout#index', format: false
   get 'policies/privacy', format: false
+  get 'unsubscribe/index', format: false
+  get 'unsubscribe' => 'unsubscribe#index', format: false
+
   # sidekiq/web
   require 'sidekiq/web'
   mount Sidekiq::Web => '/kiqside'
