@@ -9,3 +9,5 @@ ja:
     edit_account: 'アカウント編集'
   artists: 'アーティスト'
   logout: 'ログアウト'
+  unsubscribe:
+    succeeded: 'メール配信を解除しました。'
