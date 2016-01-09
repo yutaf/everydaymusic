@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :init
+  before_action :init, :set_locale
 
   private
   def init
@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
       redirect_to '/'
       return
     end
-
-    set_locale
   end
 
   def is_logged_in?
@@ -33,8 +31,17 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    user_redis = @redis.hgetall("user:#{@user_id}")
-    locale = user_redis['locale'][0,2]
+    locale_params = params[:locale]
+    if locale_params.present?
+      locale = locale_params
+    elsif @redis.present? && @redis.instance_of?(Redis)
+      user_redis = @redis.hgetall("user:#{@user_id}")
+      locale = user_redis['locale']
+    else
+      locale = ENV['DEFAULT_LOCALE']
+    end
+
+    locale = locale[0,2]
 
     case locale
       when 'ja', 'en'
