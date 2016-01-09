@@ -87,8 +87,8 @@ class DeliveryJob < ActiveJob::Base
           return
         end
 
-        users = User.select(:id, :delivery_time, :email).includes(:artists).where(is_active: true).find(target_user_ids)
-        emails_by_user_id = {}
+        users = User.select(:id, :delivery_time, :email, :locale).includes(:artists).where(is_active: true).find(target_user_ids)
+        users_by_user_id = {}
         users.each do |user|
           if user.artists.size == 0
             next
@@ -164,7 +164,7 @@ class DeliveryJob < ActiveJob::Base
             date = delivery_dates_by_user_id[user.id]
             deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
             # push email by user_id
-            emails_by_user_id[user.id] = user.email
+            users_by_user_id[user.id] = user
 
           rescue Google::APIClient::TransmissionError => e
             logger.error e.result.body
@@ -191,7 +191,8 @@ class DeliveryJob < ActiveJob::Base
               redis.hdel('unsubscribe_keys', old_unsubscribe_key)
             end
             # Send mail
-            DeliveryMailer.sendmail(emails_by_user_id[deliveries_model.user_id], deliveries_model.video_id, new_unsubscribe_key).deliver_later(wait_until: deliveries_model.date)
+            user = users_by_user_id[deliveries_model.user_id]
+            DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale]).deliver_later(wait_until: deliveries_model.date)
             # Update deliveries.is_delivered
             delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
             UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)

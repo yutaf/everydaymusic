@@ -31,4 +31,5 @@ en:
   artists: 'artists'
   logout: 'logout'
   unsubscribe:
+    nav_message: 'Click below link for unsubscribe.'
     succeeded: 'Unsubscribed from mail delivery.'

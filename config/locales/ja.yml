@@ -10,4 +10,5 @@ ja:
   artists: 'アーティスト'
   logout: 'ログアウト'
   unsubscribe:
+    nav_message: 'メール配信を解除するには以下をクリックしてください。'
     succeeded: 'メール配信を解除しました。'
