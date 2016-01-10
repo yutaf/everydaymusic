@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
     end
 
     @facebook_app_id = ENV['FACEBOOK_APP_ID']
-    if request.env['HTTP_HOST'].end_with?('xip.io')
+    if request.env['HTTP_HOST'].end_with?('xip.io') || request.env['HTTP_HOST'].end_with?('vagrantshare.com')
       @facebook_app_id = ENV['FACEBOOK_APP_ID_DEVELOPMENT']
     end
   end
