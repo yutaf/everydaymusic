@@ -4,6 +4,13 @@ body{
 ul{
   list-style-type: none;
 }
+input[type="text"] {
+  border: 1px solid #b8b8b8;
+}
+.email{
+  width: 70%;
+  padding: 1px 12px 0 12px;
+}
 
 a:link, a:visited, a:active { color: #444; }
 a:hover {
