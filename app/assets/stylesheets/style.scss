@@ -17,16 +17,16 @@ a:hover {
   opacity: 0.8;
 }
 
+.align-center{
+  text-align: center;
+}
+
 .container {
   margin: 0 auto;
   padding: 10px;
   width: 800px;
   @media (max-width: 800px) {
     width: 100%;
-  }
-
-  * {
-    text-align: center;
   }
 }
 
