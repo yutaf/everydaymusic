@@ -1,10 +1,11 @@
 <%= form_for(@user, url: account_path) do |f| %>
     <!-- TODO print error message -->
-    <div>
+    <div class="item columns">
       <%= f.label :email %>
       <%= f.text_field :email, class: :email %>
     </div>
-    <div>
-      <%= f.submit t 'save' %>
+    <div class="item buttons">
+      <%= f.submit (t 'save'), class: :btn %>
+      <%= link_to (t 'back'), account_path, class: :btn %>
     </div>
 <% end %>
