@@ -1,2 +1,4 @@
-<p class="align-right"><%= link_to (t 'account.account'), account_path %></p>
-<p class="align-right"><%= link_to (t 'logout'), logout_path %></p>
+<div class="item buttons">
+  <%= link_to (t 'account.account'), account_path, class: :btn %>
+  <%= link_to (t 'logout'), logout_path, class: :btn %>
+</div>
