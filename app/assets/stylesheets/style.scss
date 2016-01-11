@@ -8,10 +8,6 @@ ul{
 input[type="text"] {
   border: 1px solid #b8b8b8;
 }
-.email{
-  width: 100%;
-  padding: 3px 12px 3px 12px;
-}
 
 a {color: #444;}
 
@@ -51,7 +47,6 @@ a {color: #444;}
   color: #111;
   width: 100px;
   padding: 5px;
-  //padding: 5px 0;
   text-align: center;
   margin-right: 10px;
 }
@@ -67,11 +62,39 @@ input.btn {
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 
-  margin-top: 20px;
+  margin-top: 10px;
 }
+.rows {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
 .columns {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+}
+
+/////////////////////////
+// account
+/////////////////////////
+
+ul.artists li {
+  margin: 0 10px 10px 0;
+
+  background: #00CC33;
+  border: 1px solid #DDD;
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  color: #111;
+  padding: 4px;
+}
+
+.email{
+  width: 100%;
+  padding: 3px 12px 3px 12px;
 }

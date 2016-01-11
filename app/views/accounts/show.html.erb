@@ -1,17 +1,21 @@
 <p id="notice"><%= notice %></p>
-<div class="user">
+<div>
   <h2><%= t 'account.account' %></h2>
-  <p><%= link_to (t 'edit'), edit_account_path %></p>
   <ul>
     <li><%= t 'attributes.email' %>: <%= @user.email %></li>
   </ul>
+  <div class="item buttons">
+    <%= link_to (t 'edit'), edit_account_path, class: :btn %>
+  </div>
 </div>
-<div class="artists">
+<div>
   <h2><%= t 'artists' %></h2>
-  <ul>
+  <ul class="rows artists">
     <% @user.artists.each do |artist| %>
         <li><%= artist.name %></li>
     <% end %>
   </ul>
 </div>
-<p><%= link_to (t 'back'), list_path %></p>
+<div class="item buttons">
+  <%= link_to (t 'back'), list_path, class: :btn %>
+</div>
