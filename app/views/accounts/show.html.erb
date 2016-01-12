@@ -1,6 +1,8 @@
-<p id="notice"><%= notice %></p>
 <div>
   <h2><%= t 'account.account' %></h2>
+  <% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+  <% end %>
   <ul>
     <li><%= t 'attributes.email' %>: <%= @user.email %></li>
   </ul>

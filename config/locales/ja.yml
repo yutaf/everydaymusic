@@ -7,6 +7,7 @@ ja:
   account:
     account: 'アカウント'
     edit_account: 'アカウント編集'
+    update_succeeded: 'アカウント情報を更新しました。'
   artists: 'アーティスト'
   logout: 'ログアウト'
   unsubscribe:

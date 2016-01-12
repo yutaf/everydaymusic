@@ -28,6 +28,7 @@ en:
   account:
     account: 'account'
     edit_account: 'edit account'
+    update_succeeded: 'Account was successfully updated.'
   artists: 'artists'
   logout: 'logout'
   unsubscribe:
