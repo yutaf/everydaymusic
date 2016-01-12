@@ -18,9 +18,9 @@ class AccountsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(@user_id)
-    end
+  def set_user
+    @user = User.find(@user_id)
+  end
 
     def user_params
       params.require(:user).permit(:email)
