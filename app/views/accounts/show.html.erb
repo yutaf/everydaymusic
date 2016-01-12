@@ -5,6 +5,7 @@
   <% end %>
   <ul>
     <li><%= t 'attributes.email' %>: <%= @user.email %></li>
+    <li><%= t 'account.status' %>: <%= @user_status %></li>
   </ul>
   <div class="item buttons">
     <%= link_to (t 'edit'), edit_account_path, class: :btn %>

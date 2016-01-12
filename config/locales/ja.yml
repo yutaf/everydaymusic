@@ -8,6 +8,10 @@ ja:
     account: 'アカウント'
     edit_account: 'アカウント編集'
     update_succeeded: 'アカウント情報を更新しました。'
+    status: 'ステータス'
+    status_active: '利用中'
+    status_inactive: '停止中'
+    stop_service: 'サービスの利用を停止する'
   artists: 'アーティスト'
   logout: 'ログアウト'
   unsubscribe:

@@ -12,9 +12,14 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @user_status = (t 'account.status_inactive')
+    if @user.is_active
+      @user_status = (t 'account.status_active')
+    end
   end
 
   def edit
+    @is_active_checked = ! @user.is_active
   end
 
   private
@@ -22,7 +27,7 @@ class AccountsController < ApplicationController
     @user = User.find(@user_id)
   end
 
-    def user_params
-      params.require(:user).permit(:email)
-    end
+  def user_params
+    params.require(:user).permit(:email, :is_active)
+  end
 end

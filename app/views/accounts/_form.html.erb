@@ -4,6 +4,10 @@
       <%= f.label :email %>
       <%= f.text_field :email, class: :email %>
     </div>
+    <div class="item columns">
+      <%= f.label :is_active, (t 'account.stop_service') %>
+      <%= f.check_box :is_active, {checked: @is_active_checked}, 0, 1 %>
+    </div>
     <div class="item buttons">
       <%= f.submit (t 'save'), class: :btn %>
       <%= link_to (t 'back'), account_path, class: :btn %>

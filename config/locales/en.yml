@@ -29,6 +29,10 @@ en:
     account: 'account'
     edit_account: 'edit account'
     update_succeeded: 'Account was successfully updated.'
+    status: 'status'
+    status_active: 'active'
+    status_inactive: 'inactive'
+    stop_service: 'stop using this service'
   artists: 'artists'
   logout: 'logout'
   unsubscribe:
