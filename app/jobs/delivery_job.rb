@@ -132,7 +132,7 @@ class DeliveryJob < ActiveJob::Base
             search_response = client.execute!(
                 :api_method => youtube.search.list,
                 :parameters => {
-                    part: 'id',
+                    part: 'snippet',
                     type: 'video',
                     q: search_query,
                     videoEmbeddable: 'true',
@@ -147,12 +147,14 @@ class DeliveryJob < ActiveJob::Base
             end
 
             video_id = ''
+            title = ''
             search_response.data.items.shuffle!.each do |item|
               if delivered_video_ids_by_user_id[user.id].present? && delivered_video_ids_by_user_id[user.id].include?(item.id.videoId)
                 # Exclude already delivered videoId
                 next
               end
               video_id = item.id.videoId
+              title = item.snippet.title
             end
 
             # TODO video_id が決定されなかった場合の処理
@@ -162,7 +164,7 @@ class DeliveryJob < ActiveJob::Base
 
             # Add delivery model to inserting values
             date = delivery_dates_by_user_id[user.id]
-            deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, date: date, is_delivered: false)
+            deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, title: title, date: date, is_delivered: false)
             # push email by user_id
             users_by_user_id[user.id] = user
 
