@@ -29,12 +29,14 @@ ActiveRecord::Schema.define(version: 20150811102836) do
   create_table "deliveries", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,                   null: false
     t.string   "video_id",     limit: 255,                 null: false
+    t.string   "title",        limit: 255,                 null: false
     t.datetime "date",                                     null: false
     t.boolean  "is_delivered",             default: false, null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
 
+  add_index "deliveries", ["title"], name: "index_deliveries_on_title", using: :btree
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
   add_index "deliveries", ["video_id"], name: "index_deliveries_on_video_id", using: :btree
 
