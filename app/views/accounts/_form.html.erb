@@ -4,9 +4,9 @@
       <%= f.label :email %>
       <%= f.text_field :email, class: :email %>
     </div>
-    <div class="item columns">
-      <%= f.label :is_active, (t 'account.stop_service') %>
+    <div class="item rows">
       <%= f.check_box :is_active, {checked: @is_active_checked}, 0, 1 %>
+      <%= f.label :is_active, (t 'account.stop_service'), {class: :checkbox} %>
     </div>
     <div class="item buttons">
       <%= f.submit (t 'save'), class: :btn %>

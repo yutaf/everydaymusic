@@ -9,6 +9,92 @@ input[type="text"] {
   border: 1px solid #b8b8b8;
 }
 
+$iconColor: #00CC33;
+
+input[type=radio], input[type=checkbox] {
+  display: none;
+}
+
+.radio, .checkbox {
+  box-sizing: border-box;
+  -webkit-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  position: relative;
+  display: inline-block;
+  margin: 0 20px 8px 0;
+  padding: 12px 12px 12px 42px;
+  border-radius: 8px;
+  background-color: #f6f7f8;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e2edd7;
+    &:after {
+      border-color: $iconColor;
+    }
+  }
+
+  &:after {
+    -webkit-transition: border-color 0.2s linear;
+    transition: border-color 0.2s linear;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    display: block;
+    margin-top: -10px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #bbb;
+    border-radius: 6px;
+    content: '';
+  }
+}
+.radio {
+  &:before {
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    display: block;
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $iconColor;
+    content: '';
+    opacity: 0;
+    input[type=radio]:checked + & {
+      opacity: 1;
+    }
+  }
+}
+
+.checkbox {
+  &:before {
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+    position: absolute;
+    top: 50%;
+    left: 21px;
+    display: block;
+    margin-top: -7px;
+    width: 5px;
+    height: 9px;
+    border-right: 3px solid $iconColor;
+    border-bottom: 3px solid $iconColor;
+    content: '';
+    opacity: 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    input[type=checkbox]:checked + & {
+      opacity: 1;
+    }
+  }
+}
+
 a {color: #444;}
 
 .align-center{
@@ -31,7 +117,7 @@ a {color: #444;}
 .logo:link, .logo:visited, .logo:active { color: #666666; }
 
 .item {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .btn {
@@ -85,7 +171,7 @@ input.btn {
 ul.artists li {
   margin: 0 10px 10px 0;
 
-  background: #00CC33;
+  background: $iconColor;
   border: 1px solid #DDD;
   border-radius: 20px;
   -moz-border-radius: 20px;
