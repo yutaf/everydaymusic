@@ -6,6 +6,7 @@ gem 'rspotify'
 gem 'activerecord-import'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq Web UI
+gem 'unicorn'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
