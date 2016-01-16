@@ -149,7 +149,7 @@ class DeliveryJob < ActiveJob::Base
             video_id = ''
             title = ''
             search_response.data.items.shuffle!.each do |item|
-              if delivered_video_ids_by_user_id[user.id].present? && delivered_video_ids_by_user_id[user.id].include?(item.id.videoId)
+              if ! delivered_video_ids_by_user_id[user.id].blank? && delivered_video_ids_by_user_id[user.id].include?(item.id.videoId)
                 # Exclude already delivered videoId
                 next
               end
