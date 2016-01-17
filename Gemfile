@@ -7,6 +7,7 @@ gem 'activerecord-import'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq Web UI
 gem 'unicorn'
+gem 'foreman'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
