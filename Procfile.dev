@@ -1,1 +1,3 @@
 web: bundle exec unicorn_rails -c config/unicorn.rb -E development
+sidekiq: sidekiq
+delivery_job: rails runner lib/batches/kick_delivery_job.rb && tail -f log/sidekiq.log
