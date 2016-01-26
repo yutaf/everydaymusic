@@ -13,12 +13,7 @@ default: &default
 
 development:
   <<: *default
-#TODO
-#  host: localhost
-  database: everydaymusic
-#  username: root
-#  password: ai3Yut4x
-
+  database: <%= ENV['MYSQL_DATABASE'] %>
   url: <%= ENV['DATABASE_URL'] %>
 
 # Warning: The database defined as "test" will be erased and
@@ -31,5 +26,5 @@ development:
 
 production:
   <<: *default
-  database: everydaymusic
+  database: <%= ENV['MYSQL_DATABASE'] %>
   url: <%= ENV['DATABASE_URL'] %>
