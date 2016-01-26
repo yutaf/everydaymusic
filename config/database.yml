@@ -9,13 +9,13 @@ default: &default
   encoding: utf8
   pool: 5
   timeout: 5000
-
-development:
-  <<: *default
   host: <%= ENV['MYSQL_HOST'] %>
   database: <%= ENV['MYSQL_DATABASE'] %>
   username: <%= ENV['MYSQL_USER'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
+
+development:
+  <<: *default
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,7 +27,3 @@ development:
 
 production:
   <<: *default
-  host: <%= ENV['MYSQL_HOST'] %>
-  database: <%= ENV['MYSQL_DATABASE'] %>
-  username: <%= ENV['MYSQL_USER'] %>
-  password: <%= ENV['MYSQL_PASSWORD'] %>
