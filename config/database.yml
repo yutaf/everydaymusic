@@ -9,12 +9,13 @@ default: &default
   encoding: utf8
   pool: 5
   timeout: 5000
-#  socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
+  host: <%= ENV['MYSQL_HOST'] %>
   database: <%= ENV['MYSQL_DATABASE'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -26,5 +27,7 @@ development:
 
 production:
   <<: *default
+  host: <%= ENV['MYSQL_HOST'] %>
   database: <%= ENV['MYSQL_DATABASE'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
