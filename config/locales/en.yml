@@ -38,3 +38,6 @@ en:
   unsubscribe:
     nav_message: 'Click below link for unsubscribe.'
     succeeded: 'Unsubscribed from mail delivery.'
+  list:
+    welcome_message: "Hello. You gonna have a mail with music you might like everyday."
+    inform_next_delivery_time: 'Next mail is gonna be delivered at'

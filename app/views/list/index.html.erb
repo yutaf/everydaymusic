@@ -1,10 +1,18 @@
 <%= render 'account_link' %>
 <ul class="delivery-list">
-  <% @deliveries.each do |delivery| %>
+  <% if @deliveries.size == 0 %>
       <li>
-        <p><%= delivery.date.strftime('%F') %></p>
-        <p><%= delivery.title %></p>
-        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/<%= delivery.video_id %>' frameborder='0' allowfullscreen></iframe></div>
+        <p><%= t 'list.welcome_message' %></p>
+        <p><%= t 'list.inform_next_delivery_time' %> <%= @delivery_time_local %></p>
       </li>
+  <% else %>
+      <% @deliveries.each do |delivery| %>
+          <li>
+            <p><%= delivery.date.strftime('%F') %></p>
+            <p><%= delivery.title %></p>
+            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/<%= delivery.video_id %>' frameborder='0' allowfullscreen></iframe></div>
+          </li>
+      <% end %>
   <% end %>
+
 </ul>

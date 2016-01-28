@@ -17,3 +17,6 @@ ja:
   unsubscribe:
     nav_message: 'メール配信を解除するには以下をクリックしてください。'
     succeeded: 'メール配信を解除しました。'
+  list:
+    welcome_message: 'こんにちは。このサービスは一日一回おすすめ音楽のメールを送ります。'
+    inform_next_delivery_time: '次のメールの配信時間'
