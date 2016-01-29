@@ -1,4 +1,7 @@
 ja:
+  time:
+    formats:
+      short: ! '%-m月%d日'
   attributes:
     email: 'email'
   back: '戻る'
@@ -14,8 +17,12 @@ ja:
     stop_service: 'サービスの利用を停止する'
   artists: 'アーティスト'
   logout: 'ログアウト'
+  delivery_mail:
+    update: '更新'
+    greeting: 'こんにちは。本日の更新です。'
+    unsubscribe_nav: 'メール配信を解除する'
   unsubscribe:
-    nav_message: 'メール配信を解除するには以下をクリックしてください。'
+    nav_message: 'メール配信を解除する'
     succeeded: 'メール配信を解除しました。'
   list:
     welcome_message: 'こんにちは。このサービスは一日一回おすすめ音楽のメールを送ります。'

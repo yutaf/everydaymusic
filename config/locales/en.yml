@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  time:
+    formats:
+      short: ! '%b %{day}'
   attributes:
     email: 'email'
   back: 'back'
@@ -35,6 +38,10 @@ en:
     stop_service: 'stop using this service'
   artists: 'artists'
   logout: 'logout'
+  delivery_mail:
+    update: 'update'
+    greeting: "Hello. Your Daily Update."
+    unsubscribe_nav: 'unsubscribe'
   unsubscribe:
     nav_message: 'Click below link for unsubscribe.'
     succeeded: 'Unsubscribed from mail delivery.'

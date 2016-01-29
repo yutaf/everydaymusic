@@ -89,6 +89,7 @@ class DeliveryJob < ActiveJob::Base
 
         users = User.select(:id, :delivery_time, :email, :locale).includes(:artists).where(is_active: true).find(target_user_ids)
         users_by_user_id = {}
+        titles_by_user_id = {}
         users.each do |user|
           if user.artists.size == 0
             next
@@ -167,8 +168,10 @@ class DeliveryJob < ActiveJob::Base
             deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, title: title, date: date, is_delivered: false)
             # push email by user_id
             users_by_user_id[user.id] = user
+            titles_by_user_id[user.id] = title
 
           rescue Google::APIClient::TransmissionError => e
+            Rails.logger.info e.inspect
             logger.error e.result.body
           end
         end
@@ -194,10 +197,12 @@ class DeliveryJob < ActiveJob::Base
             end
             # Send mail
             user = users_by_user_id[deliveries_model.user_id]
-            DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale]).deliver_later(wait_until: deliveries_model.date)
+            title = titles_by_user_id[deliveries_model.user_id]
+            date = deliveries_model.date
+            DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale], title, date.to_i).deliver_later(wait_until: date)
             # Update deliveries.is_delivered
             delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
-            UpdateIsDeliveredJob.set(wait_until: deliveries_model.date).perform_later(delivery_id)
+            UpdateIsDeliveredJob.set(wait_until: date).perform_later(delivery_id)
           end
         end
 
@@ -207,6 +212,7 @@ class DeliveryJob < ActiveJob::Base
         end
       end
     rescue => e
+      Rails.logger.info e.inspect
       logger.error e.message
     end
   end
