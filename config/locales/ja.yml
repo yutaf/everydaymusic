@@ -19,7 +19,7 @@ ja:
   logout: 'ログアウト'
   delivery_mail:
     update: '更新'
-    greeting: 'こんにちは。本日の更新です。'
+    greeting: ''
     unsubscribe_nav: 'メール配信を解除する'
   unsubscribe:
     nav_message: 'メール配信を解除する'
