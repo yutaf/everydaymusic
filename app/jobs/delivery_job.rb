@@ -87,7 +87,7 @@ class DeliveryJob < ActiveJob::Base
           return
         end
 
-        users = User.select(:id, :delivery_time, :email, :locale).includes(:artists).where(is_active: true).find(target_user_ids)
+        users = User.select(:id, :delivery_time, :email, :locale, :timezone).includes(:artists).where(is_active: true).find(target_user_ids)
         users_by_user_id = {}
         titles_by_user_id = {}
         users.each do |user|
@@ -199,7 +199,19 @@ class DeliveryJob < ActiveJob::Base
             user = users_by_user_id[deliveries_model.user_id]
             title = titles_by_user_id[deliveries_model.user_id]
             date = deliveries_model.date
-            DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale], title, date.to_i).deliver_later(wait_until: date)
+
+            # Get local date
+            timezone = user['timezone'].to_i
+            timezone_abs = timezone.abs
+            operator = '-'
+            if timezone < 0
+              operator = '+'
+            end
+            hour = "%02d"%[timezone_abs]
+            utc_date = date.strftime("%F %T")
+            date_local = Time.zone.parse("#{utc_date} #{operator}#{hour}00")
+
+            DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale], title, date_local.to_i).deliver_later(wait_until: date)
             # Update deliveries.is_delivered
             delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
             UpdateIsDeliveredJob.set(wait_until: date).perform_later(delivery_id)
