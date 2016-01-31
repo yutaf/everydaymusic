@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811102836) do
+ActiveRecord::Schema.define(version: 20160131041756) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150811102836) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,                   null: false
+    t.integer  "artist_id",    limit: 4,                   null: false
     t.string   "video_id",     limit: 255,                 null: false
     t.string   "title",        limit: 255,                 null: false
     t.datetime "date",                                     null: false
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150811102836) do
     t.datetime "updated_at",                               null: false
   end
 
+  add_index "deliveries", ["artist_id"], name: "index_deliveries_on_artist_id", using: :btree
   add_index "deliveries", ["title"], name: "index_deliveries_on_title", using: :btree
   add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id", using: :btree
   add_index "deliveries", ["video_id"], name: "index_deliveries_on_video_id", using: :btree
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(version: 20150811102836) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "deliveries", "artists"
   add_foreign_key "deliveries", "users"
   add_foreign_key "facebooks", "users"
 end
