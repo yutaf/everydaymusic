@@ -1,25 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  user_id: 1
-  video_id: R5-W1znnqOs
-  is_delivered: 1
+  user_id: 
+  artist_id: 
+  video_id: MyString
+  title: MyString
+  date: 2016-01-31 04:17:56
+  is_delivered: false
 
 two:
-  id: 2
-  user_id: 1
-  video_id: wgmRb3MlpHQ
-  is_delivered: 1
-
-three:
-  id: 3
-  user_id: 2
-  video_id: 3OOyrYXuUNU
-  is_delivered: 1
-
-four:
-  id: 4
-  user_id: 3
-  video_id: BapCX1RcIHI
-  is_delivered: 1
+  user_id: 
+  artist_id: 
+  video_id: MyString
+  title: MyString
+  date: 2016-01-31 04:17:56
+  is_delivered: false
