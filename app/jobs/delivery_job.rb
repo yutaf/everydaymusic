@@ -188,11 +188,11 @@ class DeliveryJob < ActiveJob::Base
         if deliveries_model_values.count > 0
           # Add artist_id to deliveries
           artists = Artist.select(:id, :name).where('name IN (?)', selected_artist_names)
-          artist_ids_with_name_keys = artists.map {|artist| [artist.name, artist.id]}.to_h
+          artist_ids_with_name_key = artists.map {|artist| [artist.name, artist.id]}.to_h
           deliveries_models = []
           deliveries_model_values.each do |deliveries_model_value|
             artist_name_by_user_id = artist_names_by_user_id[deliveries_model_value[:user_id]]
-            artist_id = artist_ids_with_name_keys[artist_name_by_user_id]
+            artist_id = artist_ids_with_name_key[artist_name_by_user_id]
             deliveries_models << Delivery.new(user_id: deliveries_model_value[:user_id], artist_id: artist_id, video_id: deliveries_model_value[:video_id], title: deliveries_model_value[:title], date: deliveries_model_value[:date], is_delivered: deliveries_model_value[:is_delivered])
           end
 
