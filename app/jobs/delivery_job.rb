@@ -34,7 +34,7 @@ class DeliveryJob < ActiveJob::Base
 
     # insert values
     artists_models = []
-    deliveries_models = []
+    deliveries_model_values = []
 
     # Begin transaction
     begin
@@ -90,6 +90,8 @@ class DeliveryJob < ActiveJob::Base
         users = User.select(:id, :delivery_time, :email, :locale, :timezone).includes(:artists).where(is_active: true).find(target_user_ids)
         users_by_user_id = {}
         titles_by_user_id = {}
+        artist_names_by_user_id = {}
+        selected_artist_names = []
         users.each do |user|
           if user.artists.size == 0
             next
@@ -165,10 +167,12 @@ class DeliveryJob < ActiveJob::Base
 
             # Add delivery model to inserting values
             date = delivery_dates_by_user_id[user.id]
-            deliveries_models << Delivery.new(user_id: user.id, video_id: video_id, title: title, date: date, is_delivered: false)
+            deliveries_model_values << {user_id: user.id, video_id: video_id, title: title, date: date, is_delivered: false}
             # push email by user_id
             users_by_user_id[user.id] = user
             titles_by_user_id[user.id] = title
+            artist_names_by_user_id[user.id] = artist_name
+            selected_artist_names.push(artist_name)
 
           rescue Google::APIClient::TransmissionError => e
             Rails.logger.info e.inspect
@@ -181,7 +185,17 @@ class DeliveryJob < ActiveJob::Base
           Artist.import artists_models
         end
 
-        if deliveries_models.count > 0
+        if deliveries_model_values.count > 0
+          # Add artist_id to deliveries
+          artists = Artist.select(:id, :name).where('name IN (?)', selected_artist_names)
+          artist_ids_with_name_keys = artists.map {|artist| [artist.name, artist.id]}.to_h
+          deliveries_models = []
+          deliveries_model_values.each do |deliveries_model_value|
+            artist_name_by_user_id = artist_names_by_user_id[deliveries_model_value[:user_id]]
+            artist_id = artist_ids_with_name_keys[artist_name_by_user_id]
+            deliveries_models << Delivery.new(user_id: deliveries_model_value[:user_id], artist_id: artist_id, video_id: deliveries_model_value[:video_id], title: deliveries_model_value[:title], date: deliveries_model_value[:date], is_delivered: deliveries_model_value[:is_delivered])
+          end
+
           # Bulk insert
           Delivery.import deliveries_models
 
