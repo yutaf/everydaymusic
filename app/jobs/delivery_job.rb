@@ -199,6 +199,10 @@ class DeliveryJob < ActiveJob::Base
           # Bulk insert
           Delivery.import deliveries_models
 
+          # delivery_ids_with_user_id_key
+          not_delivered_deliveries = Delivery.select(:id, :user_id).where(is_delivered: false)
+          delivery_ids_with_user_id_key = not_delivered_deliveries.map {|delivery| [delivery.user_id, delivery.id]}.to_h
+
           #
           # Queue jobs
           #
@@ -232,7 +236,7 @@ class DeliveryJob < ActiveJob::Base
 
             DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale], title, date_local.to_i).deliver_later(wait_until: date)
             # Update deliveries.is_delivered
-            delivery_id = Delivery.where(user_id: deliveries_model.user_id, is_delivered: false).pluck(:id)[0]
+            delivery_id = delivery_ids_with_user_id_key[deliveries_model.user_id]
             UpdateIsDeliveredJob.set(wait_until: date).perform_later(delivery_id)
           end
         end
