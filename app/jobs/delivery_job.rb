@@ -176,6 +176,11 @@ class DeliveryJob < ActiveJob::Base
           end
         end
 
+        if artists_models.count > 0
+          # Bulk insert
+          Artist.import artists_models
+        end
+
         if deliveries_models.count > 0
           # Bulk insert
           Delivery.import deliveries_models
@@ -218,10 +223,6 @@ class DeliveryJob < ActiveJob::Base
           end
         end
 
-        if artists_models.count > 0
-          # Bulk insert
-          Artist.import artists_models
-        end
       end
     rescue => e
       Rails.logger.info e.inspect
