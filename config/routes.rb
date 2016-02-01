@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :account, format: false, only: [:edit, :show, :update, :destroy]
+  resource :account, format: false, only: [:edit, :show, :update]
   get 'list' => 'list#index', format: false
   get 'logout' => 'logout#index', format: false
   get 'policies/privacy', format: false
