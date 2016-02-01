@@ -28,6 +28,8 @@ en:
   back: 'back'
   edit: 'edit'
   save: 'save'
+  welcome:
+    description: 'Sends you recommended music once a day.'
   account:
     account: 'account'
     edit_account: 'edit account'

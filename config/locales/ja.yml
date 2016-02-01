@@ -7,6 +7,8 @@ ja:
   back: '戻る'
   edit: '編集する'
   save: '保存する'
+  welcome:
+    description: '一日一回おすすめの音楽を送ります。'
   account:
     account: 'アカウント'
     edit_account: 'アカウント編集'
