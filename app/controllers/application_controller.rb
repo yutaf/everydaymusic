@@ -31,14 +31,14 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    locale_params = params[:locale]
-    if locale_params.present?
-      locale = locale_params
+    locale = ENV['DEFAULT_LOCALE']
+    if params[:locale].present?
+      locale = params[:locale]
     elsif @redis.present? && @redis.instance_of?(Redis)
       user_redis = @redis.hgetall("user:#{@user_id}")
       locale = user_redis['locale']
-    else
-      locale = ENV['DEFAULT_LOCALE']
+    elsif request.headers['HTTP_ACCEPT_LANGUAGE'].scan(/\A[a-z]{2}/).first.present?
+      locale = request.headers['HTTP_ACCEPT_LANGUAGE'].scan(/\A[a-z]{2}/).first
     end
 
     locale = locale[0,2]
