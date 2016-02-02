@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'policies/privacy', format: false
   get 'unsubscribe/index', format: false
   get 'unsubscribe' => 'unsubscribe#index', format: false
-  get 'deliveries/:id' => 'delivery#show', format: false
+  get 'deliveries/:id' => 'deliveries#show', format: false
 
   # sidekiq/web
   require 'sidekiq/web'
