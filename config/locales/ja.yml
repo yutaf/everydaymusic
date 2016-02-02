@@ -1,7 +1,7 @@
 ja:
   time:
     formats:
-      short: ! '%-m月%d日'
+      short: ! '%-m月%-d日'
   attributes:
     email: 'email'
   back: '戻る'
