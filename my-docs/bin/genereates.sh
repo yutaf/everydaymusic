@@ -12,4 +12,4 @@ rails g controller logout index
 rails g controller policies privacy
 rails g controller unsubscribe index
 rails g controller welcome index
-rails g controller delivery show
+rails g controller deliveries show
