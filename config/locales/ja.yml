@@ -1,14 +1,17 @@
 ja:
+  description: &description '一日一回おすすめの音楽を届けます'
   time:
     formats:
       short: ! '%-m月%-d日'
+  meta:
+    description: *description
   attributes:
     email: 'email'
   back: '戻る'
   edit: '編集する'
   save: '保存する'
   welcome:
-    description: '一日一回おすすめの音楽を届けます'
+    description: *description
   account:
     account: 'アカウント'
     edit_account: 'アカウント編集'
