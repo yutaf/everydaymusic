@@ -6,7 +6,9 @@
       description: (t 'meta.description'),
       viewport: 'width=device-width, initial-scale=1.0',
       og: {
-          title: :title
+          title: :title,
+          description: :description,
+          image: (image_path 'og-image.jpg')
       }
   }) %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
