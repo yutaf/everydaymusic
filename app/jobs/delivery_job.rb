@@ -234,9 +234,10 @@ class DeliveryJob < ActiveJob::Base
             utc_date = date.strftime("%F %T")
             date_local = Time.zone.parse("#{utc_date} #{operator}#{hour}00")
 
-            DeliveryMailer.sendmail(user[:email], deliveries_model.video_id, new_unsubscribe_key, user[:locale], title, date_local.to_i).deliver_later(wait_until: date)
-            # Update deliveries.is_delivered
             delivery_id = delivery_ids_with_user_id_key[deliveries_model.user_id]
+
+            DeliveryMailer.sendmail(user[:email], delivery_id, new_unsubscribe_key, user[:locale], title, date_local.to_i).deliver_later(wait_until: date)
+            # Update deliveries.is_delivered
             UpdateIsDeliveredJob.set(wait_until: date).perform_later(delivery_id)
           end
         end

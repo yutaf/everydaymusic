@@ -7,8 +7,8 @@ class DeliveryMailer < ApplicationMailer
   #
   #   en.delivery_mailer.sendmail.subject
   #
-  def sendmail(email, video_id, unsubscribe_key, locale, title, timestamp)
-    @video_id = video_id
+  def sendmail(email, delivery_id, unsubscribe_key, locale, title, timestamp)
+    @delivery_url = url_for(controller: :deliveries, action: :show, id: delivery_id, only_path: false)
     @title = title
     date = Time.at(timestamp)
 
