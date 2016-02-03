@@ -6,9 +6,11 @@
       description: (t 'meta.description'),
       viewport: 'width=device-width, initial-scale=1.0',
       og: {
+          type: :website,
           title: :title,
-          description: :description,
-          image: (image_path 'og-image.jpg')
+          image: (image_path 'og-image.jpg'),
+          url: (request.original_url),
+          description: :description
       }
   }) %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
