@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     elsif @redis.present? && @redis.instance_of?(Redis)
       user_redis = @redis.hgetall("user:#{@user_id}")
       locale = user_redis['locale']
-    elsif request.headers['HTTP_ACCEPT_LANGUAGE'].scan(/\A[a-z]{2}/).first.present?
+    elsif request.headers['HTTP_ACCEPT_LANGUAGE'].present?
       locale = request.headers['HTTP_ACCEPT_LANGUAGE'].scan(/\A[a-z]{2}/).first
     end
 
