@@ -48,7 +48,7 @@ en:
     nav_message: 'Click below link for unsubscribe.'
     succeeded: 'Unsubscribed from mail delivery.'
   list:
-    welcome_message: "Hello. You gonna have a mail with music you might like everyday."
+    welcome_message: "Hello. We send recommended music by email once a day."
     inform_next_delivery_time: 'Next mail is gonna be delivered at'
     no_artist_registered: 'No artist is registered.'
     please_wait: "We're gonna add registering artist page. Please wait a moment."
