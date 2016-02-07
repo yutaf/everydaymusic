@@ -16,10 +16,16 @@ class DeliveryMailer < ApplicationMailer
       locale = ENV['DEFAULT_LOCALE']
     end
     locale = locale[0,2]
+    case locale
+      when 'ja', 'en'
+        ;
+      else
+        locale = 'en'
+    end
+    I18n.locale = locale
+
     query = "?key=#{unsubscribe_key}&locale=#{locale}"
     @unsubscribe_url = url_for(controller: :unsubscribe, action: :index, only_path: false) + query
-
-    I18n.locale = locale
 
     subject = "#{l date, format: :short, day: date.day.ordinalize} #{t 'delivery_mail.update'}"
     mail to: email, subject: subject

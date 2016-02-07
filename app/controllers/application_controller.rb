@@ -47,12 +47,12 @@ class ApplicationController < ActionController::Base
     end
 
     locale = locale[0,2]
-
     case locale
       when 'ja', 'en'
-        I18n.locale = locale
-      else
         ;
+      else
+        locale = 'en'
     end
+    I18n.locale = locale
   end
 end
