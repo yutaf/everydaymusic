@@ -1,4 +1,7 @@
 <%= render 'account_link' %>
+<% @messages.each do |msg| %>
+    <p class="notice"><%= msg %></p>
+<% end %>
 <ul class="delivery-list">
   <% @deliveries.each do |delivery| %>
       <li>
