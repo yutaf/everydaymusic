@@ -20,19 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  description: &description 'Sends you recommended music once a day.'
   time:
     formats:
       short: ! '%b %{day}'
-  meta:
-    description: *description
   attributes:
     email: 'email'
   back: 'back'
   edit: 'edit'
   save: 'save'
   welcome:
-    description: *description
+    description: 'Sends you recommended music once a day.'
   account:
     account: 'account'
     edit_account: 'edit account'
