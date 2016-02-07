@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= display_meta_tags ({
-      site: 'everyday music',
-      description: MY_APP['meta']['description'],
-      viewport: 'width=device-width, initial-scale=1.0',
-      og: {
-          type: :website,
-          title: :title,
-          image: image_url('og-image.jpg'),
-          url: (request.original_url),
-          description: :description
-      }
-  }) %>
+  <title>everyday music</title>
+  <meta name="description" content="<%= MY_APP['meta']['description'] %>">
+  <meta property="og:title" content="everyday music">
+  <meta property="og:image" content="<%= image_url('og-image.jpg') %>">
+  <meta property="og:url" content="<%= request.original_url %>">
+  <meta property="og:description" content="<%= MY_APP['meta']['description'] %>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
