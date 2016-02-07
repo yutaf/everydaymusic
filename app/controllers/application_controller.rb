@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
 
   def set_meta_vars
     @meta_title = MY_APP['meta']['site_name']
+    @og_image = view_context.image_url('og-image.jpg')
   end
 
   def set_locale
