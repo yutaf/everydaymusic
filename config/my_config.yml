@@ -1,3 +1,4 @@
 description: &description 'Sends you recommended music once a day.'
 meta:
   description: *description
+  site_name: 'everyday music'

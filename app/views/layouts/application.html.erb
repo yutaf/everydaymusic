@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>everyday music</title>
+  <title><%= @meta_title %></title>
   <meta name="description" content="<%= MY_APP['meta']['description'] %>">
-  <meta property="og:title" content="everyday music">
+  <meta property="og:title" content="<%= @meta_title %>">
   <meta property="og:image" content="<%= image_url('og-image.jpg') %>">
   <meta property="og:url" content="<%= request.original_url %>">
   <meta property="og:description" content="<%= MY_APP['meta']['description'] %>">

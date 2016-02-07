@@ -12,5 +12,6 @@ class DeliveriesController < ApplicationController
       return
     end
     @is_logged_in = is_logged_in?
+    @meta_title = "#{@delivery.title} | #{MY_APP['meta']['site_name']}"
   end
 end
