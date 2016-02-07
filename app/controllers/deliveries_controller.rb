@@ -1,5 +1,5 @@
 class DeliveriesController < ApplicationController
-  skip_before_action :init
+  skip_before_action :check_logged_in
   def show
     @delivery = Delivery.find_by(id: params[:id])
     if @delivery.blank?

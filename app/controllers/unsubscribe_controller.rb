@@ -1,5 +1,5 @@
 class UnsubscribeController < ApplicationController
-  skip_before_action :init
+  skip_before_action :check_logged_in
   def index
     unsubscribe_key = params[:key]
     if unsubscribe_key.blank?

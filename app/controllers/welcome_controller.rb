@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  skip_before_action :init
+  skip_before_action :check_logged_in
   def index
     if is_logged_in?
       redirect_to '/list'
