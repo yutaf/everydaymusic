@@ -1,5 +1,10 @@
 <%= form_for(@user, url: account_path) do |f| %>
-    <!-- TODO print error message -->
+    <!--TODO Internationalize error messages -->
+    <% if @user.errors.any? %>
+        <% @user.errors.full_messages.each do |msg| %>
+            <p class="notice"><%= msg %></p>
+        <% end %>
+    <% end %>
     <div class="item columns">
       <%= f.label :email %>
       <%= f.text_field :email, class: :email %>
