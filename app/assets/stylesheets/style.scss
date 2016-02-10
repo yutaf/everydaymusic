@@ -167,9 +167,38 @@ input.btn {
 // welcome
 /////////////////////////
 
-.description {
-  font-size: 1.125rem;
+.header_welcome{
+  background: image-url("poly-blue-01.jpg") no-repeat 0 center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 300px;
+  padding-top: 80px;
+  margin-bottom: 30px;
+  .logo_welcome {
+    font-size: 3.6rem;
+  }
+  .description {
+    font-size: 1.625rem;
+  }
+
+  @media (max-width: 920px) {
+    min-height: 200px;
+    padding-top: 50px;
+    margin-bottom: 10px;
+    .logo_welcome {
+      font-size: 2.4rem;
+    }
+    .description {
+      font-size: 1.125rem;
+    }
+  }
+
+  color: #FFFFFF;
 }
+
+
 
 /////////////////////////
 // list
