@@ -109,6 +109,10 @@ a {color: #444;}
   }
 }
 
+.header {
+  margin-top: 10px;
+}
+
 .logo {
   font-size: 2.4rem;
   font-weight: bold;
@@ -175,7 +179,7 @@ input.btn {
   background-size: cover;
   min-height: 300px;
   padding-top: 80px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   .logo_welcome {
     font-size: 3.6rem;
   }
