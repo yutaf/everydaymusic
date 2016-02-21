@@ -9,7 +9,9 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq Web UI
 gem 'unicorn'
 gem 'foreman'
-gem 'rspec', '~> 3.0'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
