@@ -49,6 +49,7 @@ input[type=radio], input[type=checkbox] {
     content: '';
   }
 }
+
 .radio {
   &:before {
     -webkit-transition: opacity 0.2s linear;
@@ -231,4 +232,11 @@ ul.artists li {
 .email{
   width: 100%;
   padding: 3px 12px 3px 12px;
+}
+
+/////////////////////////
+// deliveries
+/////////////////////////
+.like_artist{
+  margin: 15px 0;
 }

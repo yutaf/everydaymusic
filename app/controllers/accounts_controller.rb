@@ -1,6 +1,30 @@
 class AccountsController < ApplicationController
   before_action :set_user
 
+  def add_artist
+    set_artist
+    if @artist.blank?
+      render json: {msg: 'invalid artist'}
+      return
+    end
+
+    @user.artists << Artist.find(params[:artist_id])
+    @user.save
+
+    render json: {msg: 'Added artist'}
+  end
+  def delete_artist
+    set_artist
+    if @artist.blank?
+      render json: {msg: 'invalid artist'}
+      return
+    end
+
+    @user.artists.destroy(params[:artist_id])
+
+    render json: {msg: 'Removed artist'}
+  end
+
   def update
     if @user.update(user_params)
       # Update redis user values
@@ -23,6 +47,13 @@ class AccountsController < ApplicationController
   end
 
   private
+  def set_artist
+    if params[:artist_id].blank?
+      @artist = nil
+    end
+    @artist = Artist.find_by(id: params[:artist_id])
+  end
+
   def set_user
     @user = User.find(@user_id)
   end
