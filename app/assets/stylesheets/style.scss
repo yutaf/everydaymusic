@@ -49,9 +49,7 @@ input[type=radio], input[type=checkbox] {
     content: '';
   }
 }
-.like_artist{
-  margin: 5px 0;
-}
+
 .radio {
   &:before {
     -webkit-transition: opacity 0.2s linear;
@@ -152,14 +150,6 @@ input.btn {
 
   margin-top: 10px;
 }
-.right {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-
-  margin-top: 10px;
-}
 .rows {
   display: -webkit-flex;
   display: flex;
@@ -242,4 +232,11 @@ ul.artists li {
 .email{
   width: 100%;
   padding: 3px 12px 3px 12px;
+}
+
+/////////////////////////
+// deliveries
+/////////////////////////
+.like_artist{
+  margin: 15px 0;
 }
