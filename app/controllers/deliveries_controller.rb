@@ -16,7 +16,9 @@ class DeliveriesController < ApplicationController
     @meta_title = "#{@delivery.title} | #{MY_APP['meta']['site_name']}"
     @og_image = "https://i.ytimg.com/vi/#{@delivery.video_id}/hqdefault.jpg"
 
-    user = User.find(@user_id)
-    @checked = user.artists.exists?(@delivery.artist_id)
+    if is_logged_in?
+      user = User.find(@user_id)
+      @checked = user.artists.exists?(@delivery.artist_id)
+    end
   end
 end
