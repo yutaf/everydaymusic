@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131041756) do
+ActiveRecord::Schema.define(version: 20160304065312) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 20160131041756) do
 
   add_index "facebooks", ["user_id", "facebook_user_id"], name: "index_facebooks_on_user_id_and_facebook_user_id", unique: true, using: :btree
 
+  create_table "passwords", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4,   null: false
+    t.string   "password_digest", limit: 255, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "passwords", ["user_id"], name: "index_passwords_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",         limit: 255, default: "",                    null: false
     t.string   "locale",        limit: 255, default: "en_US",               null: false
@@ -66,4 +75,5 @@ ActiveRecord::Schema.define(version: 20160131041756) do
   add_foreign_key "deliveries", "artists"
   add_foreign_key "deliveries", "users"
   add_foreign_key "facebooks", "users"
+  add_foreign_key "passwords", "users"
 end
