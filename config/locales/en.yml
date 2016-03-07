@@ -25,9 +25,12 @@ en:
       short: ! '%b %{day}'
   attributes:
     email: 'email'
+    password: 'password'
+    password_confirmation: 'password confirmation'
   back: 'back'
   edit: 'edit'
   save: 'save'
+  login: 'login'
   welcome:
     description: 'Sends you recommended music once a day.'
   account:

@@ -4,6 +4,8 @@ ja:
       short: ! '%-m月%-d日'
   attributes:
     email: 'email'
+    password: 'パスワード'
+    password_confirmation: '確認パスワード'
   errors:
     messages:
       accepted: を受諾してください
@@ -33,6 +35,7 @@ ja:
   back: '戻る'
   edit: '編集する'
   save: '保存する'
+  login: 'ログイン'
   welcome:
     description: '登録すると、一日一回おすすめの音楽を探してお知らせします'
   account:
