@@ -1,5 +1,20 @@
 <div class="item align-center"><a href="" id="loginBtn"><%= image_tag 'facebook-login.png' %></a></div>
 <div class="item align-center" id="status"></div>
+<% if @user.errors.any? %>
+    <div class="item align-center">
+    <% @user.errors.full_messages.each do |msg| %>
+        <p class="notice"><%= msg %></p>
+    <% end %>
+    </div>
+<% end %>
+<div class="item align-center">
+  <ul>
+    <%= form_for(@user, url: {controller: :welcome, action: :create_user}) do |f| %>
+        <li><%= f.label :email %><%= f.text_field :email %></li>
+        <li><%= f.submit 'login' %></li>
+    <% end %>
+  </ul>
+</div>
 <script>
     window.fbAsyncInit = function() {
         FB.init({
