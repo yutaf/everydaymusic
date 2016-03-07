@@ -11,11 +11,11 @@
   <ul>
     <%= form_for(@user, url: {controller: :welcome, action: :create_user}) do |f| %>
         <li><%= f.label :email %><%= f.text_field :email %></li>
-        <%= fields_for @password do |pf| %>
+        <%= fields_for @user.password do |pf| %>
             <li><%= pf.label :password %><%= pf.password_field :password %></li>
             <li><%= pf.label :password_confirmation %><%= pf.password_field :password_confirmation %></li>
         <% end %>
-        <li><%= f.submit(t 'login') %></li>
+        <li><%= f.submit(t 'signup') %></li>
     <% end %>
   </ul>
 </div>

@@ -8,21 +8,22 @@ class WelcomeController < ApplicationController
     end
 
     @user = User.new
-    @password = Password.new
+    @user.build_password
   end
 
   def create_user
     @user = User.new(user_params)
-    @password = Password.new(password_params)
+    @user.build_password(password_params)
 
-    @user.valid?
-    @password.valid?
-
-    @error_messages = @user.errors.full_messages.concat(@password.errors.full_messages)
-
-    if @error_messages.count == 0
+    if @user.save
       #TODO sign up
+      # @user.password << @password
+      # @user.save
     else
+      # Remove "is invalid" message by validates_associated
+      @user.errors.delete :password
+
+      @error_messages = @user.errors.full_messages.concat(@user.password.errors.full_messages)
       render 'index'
     end
   end
