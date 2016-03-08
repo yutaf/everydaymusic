@@ -230,9 +230,9 @@ class DeliveryJob < ActiveJob::Base
             if timezone < 0
               operator = '+'
             end
-            hour = "%02d"%[timezone_abs]
+            diff_hour = "%02d"%[timezone_abs]
             utc_date = date.strftime("%F %T")
-            date_local = Time.zone.parse("#{utc_date} #{operator}#{hour}00")
+            date_local = Time.zone.parse("#{utc_date} #{operator}#{diff_hour}00")
 
             delivery_id = delivery_ids_with_user_id_key[deliveries_model.user_id]
 
