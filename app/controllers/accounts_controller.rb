@@ -48,10 +48,10 @@ class AccountsController < ApplicationController
 
   private
   def set_artist
-    if params[:artist_id].blank?
-      @artist = nil
+    @artist = nil
+    if params[:artist_id].present?
+      @artist = Artist.find_by(id: params[:artist_id])
     end
-    @artist = Artist.find_by(id: params[:artist_id])
   end
 
   def set_user
