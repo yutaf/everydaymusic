@@ -32,6 +32,8 @@ en:
   save: 'save'
   login: 'login'
   signup: 'sign up'
+  add: '追加'
+  artist_name: 'artist name'
   welcome:
     description: 'Sends you recommended music once a day.'
   account:
@@ -42,6 +44,7 @@ en:
     status_active: 'active'
     status_inactive: 'inactive'
     stop_service: 'stop using this service'
+    enter_artist_name: 'Please enter artist you like'
   artists: 'artists'
   logout: 'logout'
   delivery_mail:

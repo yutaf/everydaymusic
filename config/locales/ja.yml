@@ -37,6 +37,8 @@ ja:
   save: '保存する'
   login: 'ログイン'
   signup: '新規登録'
+  add: '追加する'
+  artist_name: 'アーティスト名'
   welcome:
     description: '登録すると、一日一回おすすめの音楽を探してお知らせします'
   account:
@@ -47,6 +49,7 @@ ja:
     status_active: '利用中'
     status_inactive: '停止中'
     stop_service: 'サービスの利用を停止する'
+    enter_artist_name: 'お気に入りのアーティストを入力してください'
   artists: 'アーティスト'
   logout: 'ログアウト'
   delivery_mail:

@@ -10,7 +10,7 @@
 <div class="item">
   <ul>
     <%= form_for(@user, url: {controller: :welcome, action: :signup}) do |f| %>
-        <li><%= f.label :email %><%= f.text_field :email %></li>
+        <li><%= f.label :email %><%= f.email_field :email %></li>
         <%= fields_for @user.password do |pf| %>
             <li><%= pf.label :password %><%= pf.password_field :password %></li>
             <li><%= pf.label :password_confirmation %><%= pf.password_field :password_confirmation %></li>

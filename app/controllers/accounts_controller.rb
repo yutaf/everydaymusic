@@ -1,6 +1,24 @@
 class AccountsController < ApplicationController
   before_action :set_user
 
+  def edit_artists
+    @registered_artist_names = Artist.pluck(:name)
+    # debug for 0 artist
+    # @registered_artist_names = Artist.where('id>99999').pluck(:name)
+
+    @registered_artist_names_starting_with_the = []
+    @registered_artist_names_starting_with_the_removed_the_lc = []
+    @registered_artist_names.each do |registered_artist_name|
+      registered_artist_name_lc = registered_artist_name.downcase
+      res = registered_artist_name_lc.scan(/^the (.*)/)
+      if res.count == 0
+        next
+      end
+      @registered_artist_names_starting_with_the.push(registered_artist_name)
+      @registered_artist_names_starting_with_the_removed_the_lc.push(res[0][0])
+    end
+  end
+
   def add_artist
     set_artist
     if @artist.blank?
