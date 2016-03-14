@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # sidekiq/web
   require 'sidekiq/web'
-  mount Sidekiq::Web => '/kiqside'
+  mount Sidekiq::Web => ENV['SIDEKIQ_PATH']
 
   root 'welcome#index'
 end
