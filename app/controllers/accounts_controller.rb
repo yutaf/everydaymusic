@@ -1,22 +1,44 @@
 class AccountsController < ApplicationController
   before_action :set_user
 
-  def edit_artists
-    @registered_artist_names = Artist.pluck(:name)
-    # debug for 0 artist
-    # @registered_artist_names = Artist.where('id>99999').pluck(:name)
-
-    @registered_artist_names_starting_with_the = []
-    @registered_artist_names_starting_with_the_removed_the_lc = []
-    @registered_artist_names.each do |registered_artist_name|
-      registered_artist_name_lc = registered_artist_name.downcase
-      res = registered_artist_name_lc.scan(/^the (.*)/)
-      if res.count == 0
-        next
-      end
-      @registered_artist_names_starting_with_the.push(registered_artist_name)
-      @registered_artist_names_starting_with_the_removed_the_lc.push(res[0][0])
+  def update_artists
+    @errors = []
+    if params[:artist_names].nil?
+      @errors.push(t 'account.errors.messages.blank_artist')
+      set_registered_artist_names
+      render :edit_artists
     end
+
+    not_registered_artist_names = {}
+    params[:artist_names].each do |artist_name|
+      not_registered_artist_names[artist_name.downcase] = artist_name
+    end
+
+    artist_names = Artist.where(name: params[:artist_names]).pluck(:name)
+
+    artist_names.each do |artist_name|
+      if not_registered_artist_names[artist_name.downcase].present?
+        not_registered_artist_names.delete(artist_name.downcase)
+      end
+    end
+
+    artists_models = []
+    not_registered_artist_names.each_value do |not_registered_artist_name|
+      artists_models << Artist.new(name: not_registered_artist_name)
+    end
+
+    render json: artists_models
+    return
+
+    # Bulk insert
+    Artist.import artists_models
+
+    #TODO Fetch artist ids
+    #TODO Insert into artists_users table
+  end
+
+  def edit_artists
+    set_registered_artist_names
   end
 
   def add_artist
@@ -65,6 +87,24 @@ class AccountsController < ApplicationController
   end
 
   private
+  def set_registered_artist_names
+    @registered_artist_names = Artist.pluck(:name)
+    # debug for 0 artist
+    # @registered_artist_names = Artist.where('id>99999').pluck(:name)
+
+    @registered_artist_names_starting_with_the = []
+    @registered_artist_names_starting_with_the_removed_the_lc = []
+    @registered_artist_names.each do |registered_artist_name|
+      registered_artist_name_lc = registered_artist_name.downcase
+      res = registered_artist_name_lc.scan(/^the (.*)/)
+      if res.count == 0
+        next
+      end
+      @registered_artist_names_starting_with_the.push(registered_artist_name)
+      @registered_artist_names_starting_with_the_removed_the_lc.push(res[0][0])
+    end
+  end
+  
   def set_artist
     @artist = nil
     if params[:artist_id].present?

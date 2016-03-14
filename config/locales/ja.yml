@@ -50,6 +50,9 @@ ja:
     status_inactive: '停止中'
     stop_service: 'サービスの利用を停止する'
     enter_artist_name: 'お気に入りのアーティストを入力してください'
+    errors:
+      messages:
+        blank_artist: アーティストを追加して下さい
   artists: 'アーティスト'
   logout: 'ログアウト'
   delivery_mail:

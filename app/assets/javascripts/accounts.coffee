@@ -8,9 +8,7 @@ ready = ->
 
   $(document).on 'click', '.candidates li', (e) ->
     artist_name = $(this).text()
-    $('.artists').append('<li>'+artist_name+'<input type="hidden" name="artist_names[]" value="'+artist_name+'"></li>')
-    $(':input[name="artist_name"]').val('')
-    $('.candidates').hide()
+    appendArtistName(artist_name)
 
   #$(document).on 'blur', ':input[name="artist_name"]', (e) ->
   #  $('.candidates').hide()
@@ -52,8 +50,19 @@ ready = ->
     input_text = $input_form.val()
     if input_text.length == 0
       return false
-    $('.artists').append('<li>'+input_text+'<input type="hidden" name="artist_names[]" value="'+input_text+'"></li>')
-    $input_form.val('')
+    appendArtistName(input_text)
+
+  appendArtistName = (artist_name) ->
+    $(':input[name="artist_name"]').val('')
+    $('.candidates').hide()
+    is_already_added = false
+    $(':hidden[name="artist_names[]"]').each (index, element) =>
+      if $(element).val() == artist_name
+        is_already_added = true
+        return false
+    if(is_already_added)
+      return false
+    $('.artists').append('<li>'+artist_name+'<input type="hidden" name="artist_names[]" value="'+artist_name+'"></li>')
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

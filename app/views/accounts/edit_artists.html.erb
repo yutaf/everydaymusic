@@ -1,5 +1,10 @@
 <%= form_tag({controller: :accounts, action: :edit_artists}, id: :form_artist_name, class: :form_artist_name) do %>
     <div class="item columns">
+      <% if @errors.present? && @errors.count > 0 %>
+          <% @errors.each do |msg| %>
+              <p class="notice"><%= msg %></p>
+          <% end %>
+      <% end %>
       <%= label_tag :artist_name, (t 'account.enter_artist_name') %>
       <%= text_field_tag :artist_name, '', autocomplete: :off %>
       <div class="candidates_parent">
@@ -12,11 +17,7 @@
     </div>
     <div>
       <h2><%= t 'artists' %></h2>
-      <ul class="rows artists">
-        <li>Bon Jovi</li>
-        <li>Aerosmith</li>
-        <li>Deep Purple</li>
-      </ul>
+      <ul class="rows artists"></ul>
     </div>
     <div class="item buttons">
       <%= submit_tag (t 'save'), class: :btn %>
