@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
       @errors.push(t 'account.errors.messages.blank_artist')
       set_registered_artist_names
       render :edit_artists
+      return
     end
 
     not_registered_artist_names = {}
