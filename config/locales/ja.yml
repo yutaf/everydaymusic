@@ -49,7 +49,7 @@ ja:
     status_active: '利用中'
     status_inactive: '停止中'
     stop_service: 'サービスの利用を停止する'
-    enter_artist_name: 'お気に入りのアーティストを入力してください'
+    enter_artist_name: 'お気に入りのアーティスト名を入力してください'
     errors:
       messages:
         blank_artist: アーティストを追加して下さい
