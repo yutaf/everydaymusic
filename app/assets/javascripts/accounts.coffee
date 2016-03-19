@@ -35,6 +35,8 @@ ready = ->
 
       if _html.length > 0
         $('.candidates') .html(_html).show()
+      else
+        $('.candidates').hide()
     else
       $('.candidates').hide()
 
