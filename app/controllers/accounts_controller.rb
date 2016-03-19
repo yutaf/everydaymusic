@@ -10,32 +10,50 @@ class AccountsController < ApplicationController
       return
     end
 
-    not_registered_artist_names = {}
+    not_registered_artist_names_with_downcase_key = {}
     params[:artist_names].each do |artist_name|
-      not_registered_artist_names[artist_name.downcase] = artist_name
+      not_registered_artist_names_with_downcase_key[artist_name.downcase] = artist_name
     end
 
     artist_names = Artist.where(name: params[:artist_names]).pluck(:name)
 
     artist_names.each do |artist_name|
-      if not_registered_artist_names[artist_name.downcase].present?
-        not_registered_artist_names.delete(artist_name.downcase)
+      if not_registered_artist_names_with_downcase_key[artist_name.downcase].present?
+        not_registered_artist_names_with_downcase_key.delete(artist_name.downcase)
       end
     end
 
     artists_models = []
-    not_registered_artist_names.each do |k, not_registered_artist_name|
+    not_registered_artist_names_with_downcase_key.each do |downcase, not_registered_artist_name|
       artists_models << Artist.new(name: not_registered_artist_name)
     end
 
-    render json: artists_models
-    return
+    begin
+      ActiveRecord::Base.transaction do
+        if artists_models.count > 0
+          # Bulk insert
+          Artist.import artists_models
+        end
 
-    # Bulk insert
-    Artist.import artists_models
+        # Fetch artists
+        artists = Artist.where(name: params[:artist_names])
 
-    #TODO Fetch artist ids
-    #TODO Insert into artists_users table
+        # Insert into artists_users table
+        @user.artists << artists
+
+        # @user.update!
+        redirect_to '/list'
+        return
+      end
+    rescue => e
+      logger.debug e.inspect
+      #TODO log to the file separated by date
+
+      @errors.push(t 'account.errors.messages.db_error')
+      set_registered_artist_names
+      render :edit_artists
+      return
+    end
   end
 
   def edit_artists
