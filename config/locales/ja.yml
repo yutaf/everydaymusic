@@ -6,6 +6,13 @@ ja:
     email: 'email'
     password: 'パスワード'
     password_confirmation: '確認パスワード'
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
   errors:
     messages:
       accepted: を受諾してください
@@ -53,6 +60,7 @@ ja:
     errors:
       messages:
         blank_artist: アーティストを追加して下さい
+        db_error: データベースエラーが発生しました。
   artists: 'アーティスト'
   logout: 'ログアウト'
   delivery_mail:
