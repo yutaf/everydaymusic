@@ -41,6 +41,9 @@ class AccountsController < ApplicationController
         # Insert into artists_users table
         @user.artists << artists
 
+        # Error debug
+        # @user.artists << artists_models
+
         redirect_to '/list'
         return
       end
