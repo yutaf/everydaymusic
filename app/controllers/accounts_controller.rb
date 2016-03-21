@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
     end
 
     artists_models = []
-    not_registered_artist_names_with_downcase_key.each do |downcase, not_registered_artist_name|
+    not_registered_artist_names_with_downcase_key.each do |k, not_registered_artist_name|
       artists_models << Artist.new(name: not_registered_artist_name)
     end
 
@@ -41,7 +41,6 @@ class AccountsController < ApplicationController
         # Insert into artists_users table
         @user.artists << artists
 
-        # @user.update!
         redirect_to '/list'
         return
       end
