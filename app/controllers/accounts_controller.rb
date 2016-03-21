@@ -45,7 +45,7 @@ class AccountsController < ApplicationController
         return
       end
     rescue => e
-      logger.debug e.inspect
+      logger.error e.inspect
       #TODO log to the file separated by date
 
       @errors.push(t 'account.errors.messages.db_error')
