@@ -48,6 +48,7 @@ ja:
   artist_name: 'アーティスト名'
   welcome:
     description: '登録すると、一日一回おすすめの音楽を探してお知らせします'
+    or: 'または'
   account:
     account: 'アカウント'
     edit_account: 'アカウント編集'

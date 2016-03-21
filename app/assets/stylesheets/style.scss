@@ -4,8 +4,9 @@ body{
 ul{
   list-style-type: none;
 }
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
   border: 1px solid #b8b8b8;
+  padding: 3px 12px 3px 12px;
 }
 
 $iconColor: #00CC33;
@@ -148,7 +149,7 @@ input.btn {
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .rows {
   display: -webkit-flex;
@@ -201,6 +202,21 @@ input.btn {
   }
 
   color: #FFFFFF;
+}
+
+.or-parent{
+  margin: 30px 0;
+}
+.or {
+  color: #666;
+  width: auto;
+  height: auto;
+  padding: 5px 20px;
+  font-size: 1.275rem;
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
 }
 
 
@@ -268,7 +284,6 @@ ul.artists li {
 
 .email{
   width: 100%;
-  padding: 3px 12px 3px 12px;
 }
 
 /////////////////////////

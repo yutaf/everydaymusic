@@ -1,5 +1,6 @@
 <div class="item align-center"><a href="" id="loginBtn"><%= image_tag 'facebook-login.png' %></a></div>
 <div class="item align-center" id="status"></div>
+<div class="item align-center or-parent"><span class="or"><%= t 'welcome.or' %></span></div>
 <% if @error_messages.present? && @error_messages.count > 0 %>
     <div class="item">
     <% @error_messages.each do |msg| %>
@@ -7,18 +8,18 @@
     <% end %>
     </div>
 <% end %>
-<div class="item">
-  <ul>
-    <%= form_for(@user, url: {controller: :welcome, action: :signup}) do |f| %>
-        <li><%= f.label :email %><%= f.email_field :email %></li>
-        <%= fields_for @user.password do |pf| %>
-            <li><%= pf.label :password %><%= pf.password_field :password %></li>
-            <li><%= pf.label :password_confirmation %><%= pf.password_field :password_confirmation %></li>
-        <% end %>
-        <li><%= f.submit(t 'signup') %></li>
-    <% end %>
-  </ul>
-</div>
+<%= form_for(@user, url: {controller: :welcome, action: :signup}) do |f| %>
+    <ul class="item">
+      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
+      <%= fields_for @user.password do |pf| %>
+          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
+          <li class="columns"><%= pf.label :password_confirmation %><%= pf.password_field :password_confirmation %></li>
+      <% end %>
+    </ul>
+    <div class="item buttons">
+      <%= f.submit (t 'signup'), class: :btn %>
+    </div>
+<% end %>
 <script>
     window.fbAsyncInit = function() {
         FB.init({
