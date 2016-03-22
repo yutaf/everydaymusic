@@ -1,6 +1,11 @@
 <div class="item align-center"><a href="" id="loginBtn"><%= image_tag 'facebook-login.png' %></a></div>
 <div class="item align-center" id="status"></div>
 <div class="item align-center or-parent"><span class="or"><%= t 'welcome.or' %></span></div>
+<ul class="item rows-center switch-form-parent">
+  <li class="switch-form <%= @login_switch_form_selected %>"><%= t 'login' %></li>
+  <li class="switch-form-separator">|</li>
+  <li class="switch-form <%= @signup_switch_form_selected %>"><%= t 'signup' %></li>
+</ul>
 <% if @error_messages.present? && @error_messages.count > 0 %>
     <div class="item">
     <% @error_messages.each do |msg| %>
@@ -8,29 +13,34 @@
     <% end %>
     </div>
 <% end %>
-<%= form_for(@user, url: welcome_login_path) do |f| %>
-    <ul class="item">
-      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
-      <%= fields_for @user.password do |pf| %>
-          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
-      <% end %>
-    </ul>
-    <div class="item buttons">
-      <%= f.submit (t 'login'), class: :btn %>
-    </div>
-<% end %>
-<%= form_for(@user, url: welcome_signup_path) do |f| %>
-    <ul class="item">
-      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
-      <%= fields_for @user.password do |pf| %>
-          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
-          <li class="columns"><%= pf.label :password_confirmation %><%= pf.password_field :password_confirmation %></li>
-      <% end %>
-    </ul>
-    <div class="item buttons">
-      <%= f.submit (t 'signup'), class: :btn %>
-    </div>
-<% end %>
+<div class="item <%= @hide_login %>">
+  <%= form_for(@user, url: welcome_login_path, html: {name: :login}) do |f| %>
+      <ul>
+        <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
+        <%= fields_for @user.password do |pf| %>
+            <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
+        <% end %>
+      </ul>
+      <div class="item buttons">
+        <%= f.submit (t 'login'), class: :btn %>
+      </div>
+  <% end %>
+</div>
+<div class="item <%= @hide_signup %>">
+  <%= form_for(@user, url: welcome_signup_path, html: {name: :signup}) do |f| %>
+      <ul>
+        <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
+        <%= fields_for @user.password do |pf| %>
+            <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
+            <li class="columns"><%= pf.label :password_confirmation %><%= pf.password_field :password_confirmation %></li>
+        <% end %>
+      </ul>
+      <div class="item buttons">
+        <%= f.submit (t 'signup'), class: :btn %>
+      </div>
+  <% end %>
+</div>
+
 <script>
     window.fbAsyncInit = function() {
         FB.init({

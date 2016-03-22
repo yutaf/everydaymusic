@@ -157,6 +157,14 @@ input.btn {
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
 }
+.rows-center {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
 
 .columns {
   display: -webkit-flex;
@@ -167,6 +175,10 @@ input.btn {
 
 .notice {
   color: #FF0000;
+}
+
+.hide {
+  display: none;
 }
 
 /////////////////////////
@@ -218,7 +230,20 @@ input.btn {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
-
+.switch-form-parent {
+  margin-bottom: 20px;
+  font-size: 1.175rem;
+}
+.switch-form-separator {
+  margin: 0 20px;
+}
+.switch-form{
+  cursor: pointer;
+}
+.switch-form-selected {
+  cursor: default;
+  color: #999;
+}
 
 
 /////////////////////////
