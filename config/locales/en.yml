@@ -50,6 +50,7 @@ en:
       messages:
         blank_artist: Please add at lease one artist
         db_error: A database error occured
+        login_failed: Invalid email or password
   artists: 'artists'
   logout: 'logout'
   delivery_mail:

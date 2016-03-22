@@ -8,7 +8,18 @@
     <% end %>
     </div>
 <% end %>
-<%= form_for(@user, url: {controller: :welcome, action: :signup}) do |f| %>
+<%= form_for(@user, url: welcome_login_path) do |f| %>
+    <ul class="item">
+      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
+      <%= fields_for @user.password do |pf| %>
+          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
+      <% end %>
+    </ul>
+    <div class="item buttons">
+      <%= f.submit (t 'login'), class: :btn %>
+    </div>
+<% end %>
+<%= form_for(@user, url: welcome_signup_path) do |f| %>
     <ul class="item">
       <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
       <%= fields_for @user.password do |pf| %>

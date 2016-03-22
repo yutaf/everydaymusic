@@ -62,6 +62,7 @@ ja:
       messages:
         blank_artist: アーティストを追加して下さい
         db_error: データベースエラーが発生しました。
+        login_failed: email または パスワードが正しくありません
   artists: 'アーティスト'
   logout: 'ログアウト'
   delivery_mail:

@@ -12,6 +12,26 @@ class WelcomeController < ApplicationController
     @user.build_password
   end
 
+  def login
+    user_params_requested = user_params
+    @user = User.find_by(email: user_params_requested[:email])
+    password_params_requested = password_params
+
+    if @user.nil? || @user.password.authenticate(password_params_requested[:password]) == false
+      @error_messages = [(t 'account.errors.messages.login_failed')]
+      @user = User.new(user_params_requested)
+      @user.build_password
+      render :index
+      return
+    end
+
+    # login
+    log_user_in(@user)
+
+    redirect_to '/list'
+    return
+  end
+
   def signup
     user_params_requested = user_params
 
@@ -38,16 +58,7 @@ class WelcomeController < ApplicationController
 
     if @user.save
       # login
-      authsecret = MyStringer.create_random_uniq_str
-      user = user_params_new.merge({id: @user.id, auth: authsecret})
-
-      redis = Redis.new(host: ENV['REDIS_HOST'])
-
-      redis.multi do |multi|
-        multi.mapped_hmset("user:#{@user.id}", user)
-        multi.hset('auths', authsecret, @user.id)
-      end
-      cookies[:auth] = {value: authsecret, expires: 1.year.from_now}
+      log_user_in(@user)
 
       redirect_to '/signup/artists'
     else
@@ -56,10 +67,25 @@ class WelcomeController < ApplicationController
 
       @error_messages = @user.errors.full_messages.concat(@user.password.errors.full_messages)
       render 'index'
+      return
     end
   end
 
   private
+  def log_user_in(user_object)
+    authsecret = MyStringer.create_random_uniq_str
+    user_hash = user_object.attributes
+    user = user_hash.merge({auth: authsecret})
+
+    redis = Redis.new(host: ENV['REDIS_HOST'])
+
+    redis.multi do |multi|
+      multi.mapped_hmset("user:#{user_object.id}", user)
+      multi.hset('auths', authsecret, user_object.id)
+    end
+    cookies[:auth] = {value: authsecret, expires: 1.year.from_now}
+  end
+
   def set_facebook_app_id
     @facebook_app_id = ENV['FACEBOOK_APP_ID']
   end
