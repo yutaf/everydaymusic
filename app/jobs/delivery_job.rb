@@ -97,12 +97,17 @@ class DeliveryJob < ActiveJob::Base
             next
           end
 
+          artist_names_by_user = []
+          user.artists.each do |aritist|
+            artist_names_by_user.push(aritist.name)
+          end
+
           # Define artist_name being used as a search keyword
           artist_name = user.artists.to_a.sample(1)[0][:name]
 
           #TODO It is time consuming to fetch related artists by api requests everytime, so fetch all related artists before this and save them in a table.
-          # search related artists at a rate of 1 / 5
           if 1 == rand(5)
+            # Search new artist instead of the artist already related to the user
             spotify_artists = RSpotify::Artist.search(artist_name)
             if spotify_artists.instance_of?(Array) && spotify_artists.count > 0
               spotify_related_artists = spotify_artists.first.related_artists
@@ -111,14 +116,18 @@ class DeliveryJob < ActiveJob::Base
                 spotify_related_artists.shuffle!
 
                 spotify_related_artists.each do |a|
-                  # check duplication of artists
-                  if artist_names.include? a.name
+                  # Check whether selected artist is new to the user
+                  if artist_names_by_user.include? a.name
                     next
                   end
                   # Update artist_name
                   artist_name = a.name
-                  # Add new artist to inserting values
-                  artists_models << Artist.new(name: artist_name)
+
+                  if ! artist_names.include? a.name
+                    # Add new artist to inserting values
+                    artists_models << Artist.new(name: artist_name)
+                  end
+
                   break
                 end
               end
@@ -230,9 +239,9 @@ class DeliveryJob < ActiveJob::Base
             if timezone < 0
               operator = '+'
             end
-            hour = "%02d"%[timezone_abs]
+            diff_hour = "%02d"%[timezone_abs]
             utc_date = date.strftime("%F %T")
-            date_local = Time.zone.parse("#{utc_date} #{operator}#{hour}00")
+            date_local = Time.zone.parse("#{utc_date} #{operator}#{diff_hour}00")
 
             delivery_id = delivery_ids_with_user_id_key[deliveries_model.user_id]
 

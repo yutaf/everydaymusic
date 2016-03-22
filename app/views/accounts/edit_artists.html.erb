@@ -1,0 +1,32 @@
+<%= form_tag({controller: :accounts, action: :edit_artists}, id: :form_artist_name, class: :form_artist_name) do %>
+    <div class="item columns">
+      <% if @errors.present? && @errors.count > 0 %>
+          <% @errors.each do |msg| %>
+              <p class="notice"><%= msg %></p>
+          <% end %>
+      <% end %>
+      <%= label_tag :artist_name, (t 'account.enter_artist_name') %>
+      <%= text_field_tag :artist_name, '', autocomplete: :off %>
+      <div class="candidates_parent">
+        <ul class="candidates">
+        </ul>
+      </div>
+    </div>
+    <div class="item buttons">
+      <a href="" class="add_artist"><%= t 'add' %></a>
+    </div>
+    <div>
+      <h2><%= t 'artists' %></h2>
+      <ul class="rows artists"></ul>
+    </div>
+    <div class="item buttons">
+      <%= submit_tag (t 'save'), class: :btn %>
+    </div>
+<% end %>
+<% if @registered_artist_names.count > 0 %>
+<%= javascript_tag do %>
+    window.registered_artist_names = <%== @registered_artist_names %>;
+    window.registered_artist_names_starting_with_the = <%== @registered_artist_names_starting_with_the %>;
+    window.registered_artist_names_starting_with_the_removed_the_lc = <%== @registered_artist_names_starting_with_the_removed_the_lc %>;
+<% end %>
+<% end %>

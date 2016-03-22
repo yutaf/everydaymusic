@@ -4,8 +4,9 @@ body{
 ul{
   list-style-type: none;
 }
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
   border: 1px solid #b8b8b8;
+  padding: 3px 12px 3px 12px;
 }
 
 $iconColor: #00CC33;
@@ -148,13 +149,21 @@ input.btn {
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .rows {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
+}
+.rows-center {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .columns {
@@ -166,6 +175,10 @@ input.btn {
 
 .notice {
   color: #FF0000;
+}
+
+.hide {
+  display: none;
 }
 
 /////////////////////////
@@ -203,6 +216,34 @@ input.btn {
   color: #FFFFFF;
 }
 
+.or-parent{
+  margin: 30px 0;
+}
+.or {
+  color: #666;
+  width: auto;
+  height: auto;
+  padding: 5px 20px;
+  font-size: 1.275rem;
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.switch-form-parent {
+  margin-bottom: 20px;
+  font-size: 1.175rem;
+}
+.switch-form-separator {
+  margin: 0 20px;
+}
+.switch-form{
+  cursor: pointer;
+}
+.switch-form-selected {
+  cursor: default;
+  color: #999;
+}
 
 
 /////////////////////////
@@ -216,6 +257,43 @@ ul.delivery-list li {
 /////////////////////////
 // account
 /////////////////////////
+
+input#artist_name {
+  padding: 3px;
+  font-size: 18px;
+}
+
+.candidates_parent {
+  position: relative;
+}
+ul.candidates {
+  display: none;
+  width: 60%;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
+  top: -1px;
+  //top: 49px;
+  position: absolute;
+  text-align: left;
+  left: 0;
+  border: 1px solid #b8b8b8;
+
+  background: #fff;
+  //border: 1px solid #ccc;
+  //border-top-color: #d9d9d9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+  font-size: 16px;
+
+  li {
+    border: 1px solid #b8b8b8;
+    padding: 10px 3px 11px 8px;
+    cursor: pointer;
+  }
+}
 
 ul.artists li {
   margin: 0 10px 10px 0;
@@ -231,7 +309,6 @@ ul.artists li {
 
 .email{
   width: 100%;
-  padding: 3px 12px 3px 12px;
 }
 
 /////////////////////////

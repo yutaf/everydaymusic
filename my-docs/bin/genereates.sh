@@ -5,6 +5,7 @@ rails g model user email:string locale:string timezone:integer delivery_time:tim
 rails g model facebook user:references facebook_user_id:string
 rails g model artist name:string
 rails g model delivery user:references artist:references video_id:string title:string date:datetime is_delivered:boolean
+rails g model password user:references password_digest:string
 
 rails g controller accounts
 rails g controller list index

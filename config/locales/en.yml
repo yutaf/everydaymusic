@@ -25,11 +25,18 @@ en:
       short: ! '%b %{day}'
   attributes:
     email: 'email'
+    password: 'password'
+    password_confirmation: 'password confirmation'
   back: 'back'
   edit: 'edit'
   save: 'save'
+  login: 'login'
+  signup: 'sign up'
+  add: '追加'
+  artist_name: 'artist name'
   welcome:
     description: 'Sends you recommended music once a day.'
+    or: 'または'
   account:
     account: 'account'
     edit_account: 'edit account'
@@ -38,6 +45,12 @@ en:
     status_active: 'active'
     status_inactive: 'inactive'
     stop_service: 'stop using this service'
+    enter_artist_name: 'Please enter artist name you like'
+    errors:
+      messages:
+        blank_artist: Please add at lease one artist
+        db_error: A database error occured
+        login_failed: Invalid email or password
   artists: 'artists'
   logout: 'logout'
   delivery_mail:

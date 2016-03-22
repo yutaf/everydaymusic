@@ -28,5 +28,7 @@ module Everydaymusic
     config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class='field_with_errors'>#{html_tag}</span>".html_safe }
   end
 end
