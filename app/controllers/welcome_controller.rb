@@ -14,28 +14,26 @@ class WelcomeController < ApplicationController
     # css class
     @hide_login = ''
     @hide_signup = 'hide'
-    @login_switch_form_selected = 'switch-form-selected'
-    @signup_switch_form_selected = ''
+    @switch_form_login_selected = 'switch-form-selected'
+    @switch_form_signup_selected = ''
   end
 
   def login
     user_params_requested = user_params
-    render json: user_params_requested
-    return
 
     @user = User.find_by(email: user_params_requested[:email])
     password_params_requested = password_params
 
     if @user.nil? || @user.password.authenticate(password_params_requested[:password]) == false
-      @error_messages = [(t 'account.errors.messages.login_failed')]
+      @login_error_messages = [(t 'account.errors.messages.login_failed')]
       @user = User.new(user_params_requested)
       @user.build_password
 
       # css class
       @hide_login = ''
       @hide_signup = 'hide'
-      @login_switch_form_selected = 'switch-form-selected'
-      @signup_switch_form_selected = ''
+      @switch_form_login_selected = 'switch-form-selected'
+      @switch_form_signup_selected = ''
       render :index
       return
     end
@@ -49,8 +47,6 @@ class WelcomeController < ApplicationController
 
   def signup
     user_params_requested = user_params
-    render json: user_params_requested
-    return
 
     locale = ENV['DEFAULT_LOCALE']
     if request.headers['HTTP_ACCEPT_LANGUAGE'].present?
@@ -82,15 +78,15 @@ class WelcomeController < ApplicationController
       # Remove "is invalid" message by validates_associated of User model
       @user.errors.delete :password
 
-      @error_messages = @user.errors.full_messages.concat(@user.password.errors.full_messages)
+      @signup_error_messages = @user.errors.full_messages.concat(@user.password.errors.full_messages)
 
       # css class
       @hide_login = 'hide'
       @hide_signup = ''
-      @login_switch_form_selected = ''
-      @signup_switch_form_selected = 'switch-form-selected'
+      @switch_form_login_selected = ''
+      @switch_form_signup_selected = 'switch-form-selected'
 
-      render 'index'
+      render :index
       return
     end
   end
