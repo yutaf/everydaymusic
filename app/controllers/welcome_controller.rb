@@ -24,7 +24,7 @@ class WelcomeController < ApplicationController
     @user = User.find_by(email: user_params_requested[:email])
     password_params_requested = password_params
 
-    if @user.nil? || @user.password.authenticate(password_params_requested[:password]) == false
+    if @user.nil? || @user.password.nil? || @user.password.authenticate(password_params_requested[:password]) == false
       @login_error_messages = [(t 'account.errors.messages.login_failed')]
       @user = User.new(user_params_requested)
       @user.build_password
