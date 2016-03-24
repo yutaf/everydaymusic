@@ -7,6 +7,7 @@ ul{
 input[type="text"], input[type="email"], input[type="password"] {
   border: 1px solid #b8b8b8;
   padding: 3px 12px 3px 12px;
+  width: 100%;
 }
 
 $iconColor: #00CC33;
@@ -305,10 +306,6 @@ ul.artists li {
   -webkit-border-radius: 5px;
   color: #111;
   padding: 2px 3px;
-}
-
-.email{
-  width: 100%;
 }
 
 /////////////////////////
