@@ -12,10 +12,17 @@ class WelcomeController < ApplicationController
     @user.build_password
 
     # css class
-    @hide_login = ''
-    @hide_signup = 'hide'
-    @switch_form_login_selected = 'switch-form-selected'
-    @switch_form_signup_selected = ''
+    @hide_login = 'hide'
+    @hide_signup = ''
+    @switch_form_login_selected = ''
+    @switch_form_signup_selected = 'switch-form-selected'
+
+    if request.env['PATH_INFO'].scan(/\/login/).count > 0
+      @hide_login = ''
+      @hide_signup = 'hide'
+      @switch_form_login_selected = 'switch-form-selected'
+      @switch_form_signup_selected = ''
+    end
   end
 
   def login

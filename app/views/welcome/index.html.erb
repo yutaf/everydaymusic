@@ -2,9 +2,9 @@
 <div class="item align-center" id="status"></div>
 <div class="item align-center or-parent"><span class="or"><%= t 'welcome.or' %></span></div>
 <ul class="item rows-center switch-form-parent">
-  <li class="switch-form switch-form-login <%= @switch_form_login_selected %>"><%= t 'login' %></li>
-  <li class="switch-form-separator">|</li>
   <li class="switch-form switch-form-signup <%= @switch_form_signup_selected %>"><%= t 'signup' %></li>
+  <li class="switch-form-separator">|</li>
+  <li class="switch-form switch-form-login <%= @switch_form_login_selected %>"><%= t 'login' %></li>
 </ul>
 <%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login}"}) do |f| %>
     <% if @login_error_messages.present? && @login_error_messages.count > 0 %>

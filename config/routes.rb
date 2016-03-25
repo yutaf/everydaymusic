@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get 'unsubscribe' => 'unsubscribe#index', format: false
   get 'deliveries/:id' => 'deliveries#show', format: false
   post 'welcome/signup', format: false
+  get 'welcome/signup' => 'welcome#index', format: false
   post 'welcome/login', format: false
+  get 'welcome/login' => 'welcome#index', format: false
 
   # sidekiq/web
   require 'sidekiq/web'
