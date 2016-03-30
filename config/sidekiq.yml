@@ -6,4 +6,5 @@
   - mailers
   - delivery
   - update_is_delivered
+  - fetch_artists_from_spotify
 #:daemon: true
