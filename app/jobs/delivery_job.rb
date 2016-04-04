@@ -219,7 +219,7 @@ class DeliveryJob < ActiveJob::Base
           deliveries_models.each do |deliveries_model|
             # Insert key for unsubscribe
             old_unsubscribe_key = redis.hget("user:#{deliveries_model.user_id}", 'unsubscribe_key')
-            new_unsubscribe_key = MyStringer.create_random_uniq_str
+            new_unsubscribe_key = MyString.create_random_uniq_str
             redis.multi do |multi|
               multi.hset("user:#{deliveries_model.user_id}", 'unsubscribe_key', new_unsubscribe_key)
               multi.hset('unsubscribe_keys', new_unsubscribe_key, deliveries_model.user_id)
