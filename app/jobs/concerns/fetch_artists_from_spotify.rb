@@ -13,10 +13,9 @@ class FetchArtistsFromSpotify
       ActiveRecord::Base.transaction do
         spotify_artist_names = []
 
-        #TODO restore
-        # elements = [*('a'..'z'), *('0'..'9')]
+        elements = [*('a'..'z'), *('0'..'9')]
         # Debug
-        elements = %w(a b 1)
+        # elements = %w(a b 1)
         elements.each do |first_letter|
           elements.each do |second_letter|
             q = "#{first_letter}#{second_letter}"
