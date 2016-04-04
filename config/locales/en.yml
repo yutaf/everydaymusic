@@ -32,7 +32,7 @@ en:
   save: 'save'
   login: 'login'
   signup: 'sign up'
-  add: '追加'
+  add: 'add'
   artist_name: 'artist name'
   welcome:
     description: 'Sends you recommended music once a day.'
