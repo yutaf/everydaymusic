@@ -9,5 +9,5 @@ class KickFetchArtistsFromSpotifyJob
     # Set job
     FetchArtistsFromSpotifyJob.set(wait: 1.week).perform_later
   end
-  KickFetchArtistsFromSpotifyJob.execute
+  self.execute
 end
