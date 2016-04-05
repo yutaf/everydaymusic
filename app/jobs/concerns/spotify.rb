@@ -1,5 +1,5 @@
-class FetchArtistsFromSpotify
-  def self.execute
+class Spotify
+  def self.fetch(q)
     # log setting
     file = File.open('log/app.log', File::WRONLY | File::APPEND | File::CREAT)
     logger = Logger.new(file, 'daily')
@@ -8,50 +8,34 @@ class FetchArtistsFromSpotify
       "#{datetime} #{severity} #{caller_location} : #{msg}\n"
     end
 
+    # Set log level
+    Rails.logger.level = Logger::INFO
+
     # Begin transaction
     begin
       ActiveRecord::Base.transaction do
-        spotify_artist_names = []
-
-        elements = [*('a'..'z'), *('0'..'9')]
-        # Debug
-        # elements = %w(a b 1)
-        elements.each do |first_letter|
-          elements.each do |second_letter|
-            q = "#{first_letter}#{second_letter}"
-
-            Rails.logger.info "q: #{q}"
-            # q = "The%20Str"
-            # q = "The%20Strasdfasdfasfewtawewatwatsadfsdagsasageratkdjgaljgfagjapgjijdaspgjfpsaf"
-
-            #
-            # Error Debug
-            #
-
-            # throw exception
-            # url = "https://api.foo.bar.com/v1/search?q=#{q}&type=artist&limit=5"
-
-            # 404
-            # url = "https://api.spotify.com/v1/searchss?q=#{q}&type=artist&limit=5"
-
-            # 401
-            # url = "https://api.spotify.com/v1/nonexistence?q=#{q}&type=artist&limit=5"
-
-
-            # url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=5"
-            url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=50"
-
-            res = fetch_artists_from_spotify(url)
-            spotify_artist_names = spotify_artist_names.concat(res)
-          end
-        end
-
+        # q = "The%20Str"
+        # q = "The%20Strasdfasdfasfewtawewatwatsadfsdagsasageratkdjgaljgfagjapgjijdaspgjfpsaf"
         # q = 'Muse'
-        # url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=50"
-        # res = fetch_artists_from_spotify(url)
-        # spotify_artist_names = res
-        # Rails.logger.info spotify_artist_names
-        # return
+
+        #
+        # Error Debug
+        #
+
+        # throw exception
+        # url = "https://api.foo.bar.com/v1/search?q=#{q}&type=artist&limit=5"
+
+        # 404
+        # url = "https://api.spotify.com/v1/searchss?q=#{q}&type=artist&limit=5"
+
+        # 401
+        # url = "https://api.spotify.com/v1/nonexistence?q=#{q}&type=artist&limit=5"
+
+
+        # url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=5"
+        url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=50"
+
+        spotify_artist_names = get_artist_names(url)
 
         if spotify_artist_names.count == 0
           return
@@ -80,6 +64,11 @@ class FetchArtistsFromSpotify
         # bulk insert Artist
         Artist.import artists_models
 
+        # Disconnect DB because of error below
+        # #<ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5.000 seconds (waited 5.058 seconds)>
+        # http://h3poteto.hatenablog.com/entry/2015/03/31/013717
+        ActiveRecord::Base.connection.close
+
         # raise 'Debug'
       end
     rescue => e
@@ -88,8 +77,8 @@ class FetchArtistsFromSpotify
     end
   end
 
-  def self.fetch_artists_from_spotify(url, artist_names=[])
-    Rails.logger.info url
+  def self.get_artist_names(url, artist_names=[])
+    # Rails.logger.info url
 
     require "net/http"
     uri = URI.parse(url)
@@ -131,7 +120,7 @@ class FetchArtistsFromSpotify
         return artist_names
       end
 
-      fetch_artists_from_spotify(result['artists']['next'], artist_names)
+      get_artist_names(result['artists']['next'], artist_names)
     else
       message = "OMG!! #{res.code} #{res.message}"
       raise(message)
