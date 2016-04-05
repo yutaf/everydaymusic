@@ -12,13 +12,16 @@ class KickFetchArtistsFromSpotifyJob
 
     # Update by 5 queries each
     i = 1
-    h = 0
+    # h = 0
+    s = 0
     elements.each do |first_letter|
       elements.each do |second_letter|
         q = "#{first_letter}#{second_letter}"
 
         # Rails.logger.info "q: #{q}, will be executed: #{h}hour later"
-        FetchArtistsFromSpotifyJob.set(wait: h.hour).perform_later(q)
+        # FetchArtistsFromSpotifyJob.set(wait: h.hour).perform_later(q)
+
+        FetchArtistsFromSpotifyJob.set(wait: s.second).perform_later(q)
 
         if i < 5
           # Increment i
@@ -27,7 +30,9 @@ class KickFetchArtistsFromSpotifyJob
           # Reset
           i = 1
           # Update h
-          h = h+2
+          # h = h+2
+
+          s = s+30
         end
       end
     end

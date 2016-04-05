@@ -3,7 +3,7 @@ class FetchArtistsFromSpotifyJob < ActiveJob::Base
 
   def perform(q)
     # Set next schedule
-    self.class.set(wait: 1.month).perform_later(q)
+    # self.class.set(wait: 1.month).perform_later(q)
 
     Spotify.fetch(q)
   end
