@@ -64,16 +64,16 @@ class Spotify
         # bulk insert Artist
         Artist.import artists_models
 
-        # Disconnect DB because of error below
-        # #<ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5.000 seconds (waited 5.058 seconds)>
-        # http://h3poteto.hatenablog.com/entry/2015/03/31/013717
-        ActiveRecord::Base.connection.close
-
         # raise 'Debug'
       end
     rescue => e
       Rails.logger.info e.inspect
       logger.error e.message
+    ensure
+      # Disconnect DB because of error below
+      # #<ActiveRecord::ConnectionTimeoutError: could not obtain a database connection within 5.000 seconds (waited 5.058 seconds)>
+      # http://h3poteto.hatenablog.com/entry/2015/03/31/013717
+      ActiveRecord::Base.connection.close
     end
   end
 
