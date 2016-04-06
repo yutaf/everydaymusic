@@ -57,7 +57,6 @@ class DeliveryJob < ActiveJob::Base
         # Fetch users who don't have a record which has deliveries.is_delivered = 0 and whose delivery_time comes within 3 hours
         active_users = User.where("is_active=? AND email != ''", true).select(:id, :delivery_time)
         if active_users.to_a.count == 0
-          logger.info 'No user needs to be cued'
           return
         end
         user_ids = []
@@ -75,7 +74,6 @@ class DeliveryJob < ActiveJob::Base
           delivery_dates_by_user_id[active_user.id] = dt_delivery_date.strftime("%F %T")
         end
         if user_ids.count == 0
-          logger.info 'No user needs to be cued'
           return
         end
 
@@ -83,7 +81,6 @@ class DeliveryJob < ActiveJob::Base
 
         target_user_ids = user_ids - delivery_scheduled_user_ids
         if target_user_ids.count == 0
-          logger.info 'No user needs to be cued'
           return
         end
 
