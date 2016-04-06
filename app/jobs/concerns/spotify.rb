@@ -1,7 +1,7 @@
 class Spotify
   def self.fetch(q)
     # log setting
-    file = File.open('log/app.log', File::WRONLY | File::APPEND | File::CREAT)
+    file = File.open('log/spotify.log', File::WRONLY | File::APPEND | File::CREAT)
     logger = Logger.new(file, 'daily')
     logger.formatter = proc do |severity, datetime, progname, msg|
       caller_location = caller_locations(5,1)[0]
