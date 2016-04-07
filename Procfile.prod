@@ -1,4 +1,4 @@
 web: bundle exec unicorn_rails -c config/unicorn.rb -E production
 sidekiq: bundle exec sidekiq -C config/sidekiq.yml -e production
-delivery_job: rails runner lib/batches/kick_delivery_job.rb && tail -f log/sidekiq.log
-#fetch_artists_from_spotify_job: rails runner lib/batches/kick_fetch_artists_from_spotify_job.rb && tail -f log/sidekiq.log
+delivery_job: rails runner lib/batches/kick_delivery_job.rb && touch log/dummy && tail -f log/dummy
+#fetch_artists_from_spotify_job: rails runner lib/batches/kick_fetch_artists_from_spotify_job.rb && touch log/dummy && tail -f log/dummy
