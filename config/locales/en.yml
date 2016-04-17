@@ -63,5 +63,5 @@ en:
   list:
     welcome_message: "Hello. We send recommended music by email once a day."
     inform_next_delivery_time: 'Next email is gonna be delivered at'
-    no_artist_registered: "No artist is registered. We're gonna add registering artist page. Please wait a moment."
+    no_artist_registered: "No artist is registered. Set artist from account page."
     no_email_message: 'Please set email address in account page.'
