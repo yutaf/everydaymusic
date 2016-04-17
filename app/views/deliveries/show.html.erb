@@ -12,5 +12,8 @@
       <%= label_tag :like_artist, 'like this artist', {class: 'checkbox like_artist'} %>
     </p>
     <% end %>
+    <div class="item buttons">
+      <%= link_to (t 'back'), list_path, class: :btn %>
+    </div>
   </li>
 </ul>
