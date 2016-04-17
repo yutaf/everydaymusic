@@ -1,7 +1,6 @@
 class LogoutController < ApplicationController
-  include MyString
   def index
-    newauthsecret = MyStringer.create_random_uniq_str
+    newauthsecret = MyString.create_random_uniq_str
     oldauthsecret = @redis.hget("user:#{@user_id}", 'auth')
     @redis.multi do |multi|
       multi.hset("user:#{@user_id}", 'auth', newauthsecret)

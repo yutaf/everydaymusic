@@ -13,11 +13,14 @@
 </div>
 <div>
   <h2><%= t 'artists' %></h2>
-  <ul class="rows artists">
+  <ul class="rows artist_show">
     <% @user.artists.each do |artist| %>
         <li><%= artist.name %></li>
     <% end %>
   </ul>
+  <div class="item buttons">
+    <%= link_to (t 'edit'), account_artists_path, class: :btn %>
+  </div>
 </div>
 <div class="item buttons">
   <%= link_to (t 'back'), list_path, class: :btn %>

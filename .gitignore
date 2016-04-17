@@ -17,4 +17,7 @@
 /tmp
 
 
-*.mwb.bak
+/docs/*
+!/docs/bin
+!/docs/er
+/public/

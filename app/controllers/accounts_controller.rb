@@ -38,11 +38,8 @@ class AccountsController < ApplicationController
         # Fetch artists
         artists = Artist.where(name: params[:artist_names])
 
-        # Insert into artists_users table
-        @user.artists << artists
-
-        # Error debug
-        # @user.artists << artists_models
+        # Update artists_users table
+        @user.artists = artists
 
         redirect_to '/list'
         return

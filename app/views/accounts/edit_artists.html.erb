@@ -1,4 +1,4 @@
-<%= form_tag({controller: :accounts, action: :edit_artists}, id: :form_artist_name, class: :form_artist_name) do %>
+<%= form_tag(request.env['PATH_INFO'], id: :form_artist_name, class: :form_artist_name) do %>
     <div class="item columns">
       <% if @errors.present? && @errors.count > 0 %>
           <% @errors.each do |msg| %>
@@ -17,10 +17,17 @@
     </div>
     <div>
       <h2><%= t 'artists' %></h2>
-      <ul class="rows artists"></ul>
+      <ul class="rows artists">
+        <% @user.artists.each do |artist| %>
+            <li><%= artist.name %><input type="hidden" name="artist_names[]" value="<%= artist.name %>"></li>
+        <% end %>
+      </ul>
     </div>
     <div class="item buttons">
       <%= submit_tag (t 'save'), class: :btn %>
+      <% if request.env['PATH_INFO'].scan(/account\/artists/).count > 0 %>
+          <%= link_to (t 'back'), account_path, class: :btn %>
+      <% end %>
     </div>
 <% end %>
 <% if @registered_artist_names.count > 0 %>

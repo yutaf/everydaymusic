@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
   skip_before_action :check_logged_in
   before_action :set_facebook_app_id
-  include MyString
   def index
     if is_logged_in?
       redirect_to '/list'
@@ -100,7 +99,7 @@ class WelcomeController < ApplicationController
 
   private
   def log_user_in(user_object)
-    authsecret = MyStringer.create_random_uniq_str
+    authsecret = MyString.create_random_uniq_str
     user_hash = user_object.attributes
     user = user_hash.merge({auth: authsecret})
 
