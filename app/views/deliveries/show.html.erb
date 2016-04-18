@@ -13,7 +13,11 @@
     </p>
     <% end %>
     <div class="item buttons">
-      <%= link_to (t 'back'), list_path, class: :btn %>
+      <% if request.env["HTTP_REFERER"].nil? %>
+          <%= link_to (t 'back'), list_path, class: :btn %>
+      <% else %>
+          <a href="javascript:history.back();" class="btn"><%= t 'back' %></a>
+      <% end %>
     </div>
   </li>
 </ul>
