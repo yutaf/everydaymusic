@@ -11,6 +11,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 }
 
 $iconColor: #00CC33;
+$grey: #666666;
 
 input[type=radio], input[type=checkbox] {
   display: none;
@@ -112,15 +113,6 @@ a {color: #444;}
   }
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 2.4rem;
-  @media (max-width: 800px) {
-    font-size: 1.6rem;
-  }
-}
-.logo:link, .logo:visited, .logo:active { color: #666666; }
-
 .item {
   margin-bottom: 10px;
 }
@@ -179,6 +171,56 @@ input.btn {
 
 .hide {
   display: none;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  h1{
+    margin-right: auto;
+  }
+
+  .logo {
+    font-weight: bold;
+
+    font-size: 2.4rem;
+    @media (max-width: 800px) {
+      font-size: 1.6rem;
+    }
+  }
+  .logo:link, .logo:visited, .logo:active { color: $grey; }
+}
+
+/////////////////////////
+// hamburger menu
+/////////////////////////
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all .4s;
+  box-sizing: border-box;
+}
+.menu-trigger {
+  position: relative;
+  width: 30px;
+  height: 26px;
+}
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: $grey;
+  border-radius: 4px;
+}
+.menu-trigger span:nth-of-type(1) {
+  top: 0;
+}
+.menu-trigger span:nth-of-type(2) {
+  top: 11px;
+}
+.menu-trigger span:nth-of-type(3) {
+  bottom: 0;
 }
 
 /////////////////////////
