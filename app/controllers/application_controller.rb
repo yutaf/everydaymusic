@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :check_logged_in, :set_locale, :set_meta_vars, :set_header
+  before_action :check_logged_in, :set_locale, :set_meta_vars
 
   private
   def check_logged_in
@@ -28,13 +28,6 @@ class ApplicationController < ActionController::Base
     end
 
     return true
-  end
-
-  def set_header
-    @header = 'header'
-    if params[:controller] == 'welcome'
-      @header = 'header_welcome'
-    end
   end
 
   def set_meta_vars

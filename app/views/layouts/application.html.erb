@@ -15,8 +15,13 @@
 </head>
 <body>
 
-<%= render @header %>
+<% if controller.controller_name == 'welcome' %>
+    <%= render 'header_welcome' %>
+<% end %>
 <div class="container">
+  <% if controller.controller_name != 'welcome' %>
+      <%= render 'header' %>
+  <% end %>
   <%= yield %>
 </div>
 
