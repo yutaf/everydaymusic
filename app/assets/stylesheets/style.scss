@@ -217,6 +217,15 @@ input.btn {
   color: #FFFFFF;
 }
 
+#loginBtn {
+  img {
+    width: 390px;
+    @media (max-width: 390px) {
+      width: 100%;
+    }
+  }
+}
+
 .or-parent{
   margin: 30px 0;
 }
