@@ -105,7 +105,7 @@ a {color: #444;}
 
 .layout-rule {
   margin: 0 auto;
-  padding: 5px 10px;
+  padding: 10px;
   width: 800px;
   @media (max-width: 800px) {
     width: 100%;
@@ -173,8 +173,9 @@ input.btn {
 }
 
 .header{
-  background-color: #666666;
+  background-color: #4169e1;
   .header_content{
+    padding: 5px 10px;
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
