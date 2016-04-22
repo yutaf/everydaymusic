@@ -12,36 +12,26 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 $iconColor: #00CC33;
 
-input[type=radio], input[type=checkbox] {
+input[type=checkbox] {
   display: none;
 }
 
-.radio, .checkbox {
+.checkbox {
   box-sizing: border-box;
   -webkit-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
   position: relative;
   display: inline-block;
-  margin: 0 20px 8px 0;
-  padding: 12px 12px 12px 42px;
-  border-radius: 8px;
-  background-color: #f6f7f8;
+  padding: 8px 0 8px 30px;
   vertical-align: middle;
   cursor: pointer;
-
-  &:hover {
-    background-color: #e2edd7;
-    &:after {
-      border-color: $iconColor;
-    }
-  }
 
   &:after {
     -webkit-transition: border-color 0.2s linear;
     transition: border-color 0.2s linear;
     position: absolute;
     top: 50%;
-    left: 15px;
+    left: 5px;
     display: block;
     margin-top: -8px;
     width: 16px;
@@ -52,34 +42,13 @@ input[type=radio], input[type=checkbox] {
   }
 }
 
-.radio {
-  &:before {
-    -webkit-transition: opacity 0.2s linear;
-    transition: opacity 0.2s linear;
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    display: block;
-    margin-top: -5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: $iconColor;
-    content: '';
-    opacity: 0;
-    input[type=radio]:checked + & {
-      opacity: 1;
-    }
-  }
-}
-
 .checkbox {
   &:before {
     -webkit-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear;
     position: absolute;
     top: 50%;
-    left: 21px;
+    left: 11px;
     display: block;
     margin-top: -7px;
     width: 5px;
@@ -123,10 +92,14 @@ a {color: #444;}
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   color: #111;
-  width: 100px;
   padding: 5px;
+  margin: 0 5px;
   text-align: center;
-  margin: 0 0 10px 10px;
+
+  width: 100px;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 }
 input.btn {
   cursor: pointer;
@@ -408,11 +381,4 @@ ul.delivery-list li {
   img{
     width: 100%;
   }
-}
-
-/////////////////////////
-// deliveries
-/////////////////////////
-.like_artist{
-  margin: 15px 0;
 }
