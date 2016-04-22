@@ -17,11 +17,10 @@
 
 <% if controller.controller_name == 'welcome' %>
     <%= render 'header_welcome' %>
+<% else %>
+    <%= render 'header' %>
 <% end %>
-<div class="container">
-  <% if controller.controller_name != 'welcome' %>
-      <%= render 'header' %>
-  <% end %>
+<div class="layout-rule">
   <%= yield %>
 </div>
 

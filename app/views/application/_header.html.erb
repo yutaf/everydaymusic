@@ -1,8 +1,16 @@
-<div class="header rows">
-  <h1><%= link_to 'everyday music', list_path, class: :logo %></h1>
-  <a class="menu-trigger" href="#">
-    <span></span>
-    <span></span>
-    <span></span>
-  </a>
+<div class="header">
+  <div class="header_content rows layout-rule">
+    <h1><%= link_to 'everyday music', list_path, class: :logo %></h1>
+    <a class="menu-trigger" href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+</div>
+<div class="menu_parent layout-rule">
+  <ul class="menu hide">
+    <li><%= link_to (t 'account.account'), account_path %></li>
+    <li><%= link_to (t 'logout'), logout_path %></li>
+  </ul>
 </div>
