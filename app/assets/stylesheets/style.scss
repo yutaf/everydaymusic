@@ -12,36 +12,26 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 $iconColor: #00CC33;
 
-input[type=radio], input[type=checkbox] {
+input[type=checkbox] {
   display: none;
 }
 
-.radio, .checkbox {
+.checkbox {
   box-sizing: border-box;
   -webkit-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
   position: relative;
   display: inline-block;
-  margin: 0 20px 8px 0;
-  padding: 12px 12px 12px 42px;
-  border-radius: 8px;
-  background-color: #f6f7f8;
+  padding: 8px 0 8px 30px;
   vertical-align: middle;
   cursor: pointer;
-
-  &:hover {
-    background-color: #e2edd7;
-    &:after {
-      border-color: $iconColor;
-    }
-  }
 
   &:after {
     -webkit-transition: border-color 0.2s linear;
     transition: border-color 0.2s linear;
     position: absolute;
     top: 50%;
-    left: 15px;
+    left: 5px;
     display: block;
     margin-top: -8px;
     width: 16px;
@@ -52,34 +42,13 @@ input[type=radio], input[type=checkbox] {
   }
 }
 
-.radio {
-  &:before {
-    -webkit-transition: opacity 0.2s linear;
-    transition: opacity 0.2s linear;
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    display: block;
-    margin-top: -5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: $iconColor;
-    content: '';
-    opacity: 0;
-    input[type=radio]:checked + & {
-      opacity: 1;
-    }
-  }
-}
-
 .checkbox {
   &:before {
     -webkit-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear;
     position: absolute;
     top: 50%;
-    left: 21px;
+    left: 11px;
     display: block;
     margin-top: -7px;
     width: 5px;
@@ -103,7 +72,7 @@ a {color: #444;}
   text-align: center;
 }
 
-.container {
+.layout-rule {
   margin: 0 auto;
   padding: 10px;
   width: 800px;
@@ -111,16 +80,6 @@ a {color: #444;}
     width: 100%;
   }
 }
-
-.header {
-  margin-top: 10px;
-}
-
-.logo {
-  font-size: 2.4rem;
-  font-weight: bold;
-}
-.logo:link, .logo:visited, .logo:active { color: #666666; }
 
 .item {
   margin-bottom: 10px;
@@ -133,10 +92,14 @@ a {color: #444;}
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   color: #111;
-  width: 100px;
   padding: 5px;
+  margin: 0 5px;
   text-align: center;
-  margin: 0 0 10px 10px;
+
+  width: 100px;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 }
 input.btn {
   cursor: pointer;
@@ -180,6 +143,104 @@ input.btn {
 
 .hide {
   display: none;
+}
+
+.header{
+  background-color: #4169e1;
+  .header_content{
+    padding: 5px 10px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    h1{
+      margin-right: auto;
+    }
+
+    .logo {
+      font-weight: bold;
+
+      font-size: 2.4rem;
+      @media (max-width: 800px) {
+        font-size: 1.6rem;
+      }
+    }
+    .logo:link, .logo:visited, .logo:active { color: #fff; }
+  }
+}
+
+
+/////////////////////////
+// hamburger menu
+/////////////////////////
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  -webkit-transition: all 0s;
+  transition: all 0s;
+  box-sizing: border-box;
+}
+.menu-trigger {
+  position: relative;
+  width: 30px;
+  height: 26px;
+}
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+$interval: 11px;
+
+.menu-trigger span:nth-of-type(1) {
+  top: 0;
+}
+.menu-trigger span:nth-of-type(2) {
+  top: $interval;
+}
+.menu-trigger span:nth-of-type(3) {
+  bottom: 0;
+}
+
+.menu-trigger.active span:nth-of-type(1) {
+  -webkit-transform: translateY($interval) rotate(-45deg);
+  transform: translateY($interval) rotate(-45deg);
+}
+.menu-trigger.active span:nth-of-type(2) {
+  opacity: 0;
+}
+.menu-trigger.active span:nth-of-type(3) {
+  -webkit-transform: translateY(-$interval) rotate(45deg);
+  transform: translateY(-$interval) rotate(45deg);
+}
+
+/////////////////////////
+// menu
+/////////////////////////
+
+.menu_parent {
+  position: relative;
+  padding: 0;
+}
+ul.menu {
+  z-index: 1;
+  width: 200px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  border: 1px solid #b8b8b8;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 16px;
+  li {
+    border: 1px solid #b8b8b8;
+    padding: 5px 8px;
+  }
 }
 
 /////////////////////////
@@ -256,18 +317,6 @@ input.btn {
   color: #999;
 }
 
-
-/////////////////////////
-// list
-/////////////////////////
-
-ul.delivery-list li {
-  margin-bottom: 20px;
-  img{
-    width: 100%;
-  }
-}
-
 /////////////////////////
 // account
 /////////////////////////
@@ -288,15 +337,12 @@ ul.candidates {
   }
 
   top: -1px;
-  //top: 49px;
   position: absolute;
   text-align: left;
   left: 0;
   border: 1px solid #b8b8b8;
 
   background: #fff;
-  //border: 1px solid #ccc;
-  //border-top-color: #d9d9d9;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 
@@ -327,8 +373,12 @@ ul.artists li {
 }
 
 /////////////////////////
-// deliveries
+// list
 /////////////////////////
-.like_artist{
-  margin: 15px 0;
+
+ul.delivery-list li {
+  margin-bottom: 20px;
+  img{
+    width: 100%;
+  }
 }
