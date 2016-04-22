@@ -34,7 +34,7 @@ ready = ->
           _html += '<li>'+registered_artist_names_starting_with_the[i]+'</li>'
 
       if _html.length > 0
-        $('.candidates') .html(_html).show()
+        $('.candidates').html(_html).show()
       else
         $('.candidates').hide()
     else
