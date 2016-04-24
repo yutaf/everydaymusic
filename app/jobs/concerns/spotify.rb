@@ -126,7 +126,7 @@ class Spotify
 
       get_artist_names(result['artists']['next'], artist_names)
     else
-      message = "OMG!! #{res.code} #{res.message}"
+      message = "OMG!! #{res.code} #{res.message} url: #{url}"
       raise(message)
     end
   end
