@@ -7,7 +7,6 @@ class Spotify
       caller_location = caller_locations(5,1)[0]
       "#{datetime} #{severity} #{caller_location} : #{msg}\n"
     end
-
     # Set log level
     Rails.logger.level = Logger::INFO
 
