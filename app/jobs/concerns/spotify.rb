@@ -10,56 +10,61 @@ class Spotify
     # Set log level
     Rails.logger.level = Logger::INFO
 
-    # Begin transaction
     begin
-      ActiveRecord::Base.transaction do
-        # q = "The%20Str"
-        # q = "The%20Strasdfasdfasfewtawewatwatsadfsdagsasageratkdjgaljgfagjapgjijdaspgjfpsaf"
-        # q = 'Muse'
+      spotify_artist_names = []
+      if q.is_a? Array
+        q.each do |query|
+          url = "https://api.spotify.com/v1/search?q=#{query}&type=artist&limit=50"
+          spotify_artist_names = get_artist_names(url, spotify_artist_names)
+        end
+      else
+        query = q
+        # query = "The%20Str"
+        # query = "The%20Strasdfasdfasfewtawewatwatsadfsdagsasageratkdjgaljgfagjapgjijdaspgjfpsaf"
+        # query = 'Muse'
+
+        url = "https://api.spotify.com/v1/search?q=#{query}&type=artist&limit=50"
 
         #
         # Error Debug
         #
 
         # throw exception
-        # url = "https://api.foo.bar.com/v1/search?q=#{q}&type=artist&limit=5"
-
-        # 404
-        # url = "https://api.spotify.com/v1/searchss?q=#{q}&type=artist&limit=5"
-
-        # 401
-        # url = "https://api.spotify.com/v1/nonexistence?q=#{q}&type=artist&limit=5"
-
-
-        # url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=5"
-        url = "https://api.spotify.com/v1/search?q=#{q}&type=artist&limit=50"
+        # url = "https://api.foo.bar.com/v1/search?q=#{query}&type=artist&limit=5"
+        # 404 error
+        # url = "https://api.spotify.com/v1/searchss?q=#{query}&type=artist&limit=5"
+        # 401 error
+        # url = "https://api.spotify.com/v1/nonexistence?q=#{query}&type=artist&limit=5"
 
         spotify_artist_names = get_artist_names(url)
+      end
 
-        if spotify_artist_names.count == 0
-          return
+      if spotify_artist_names.count == 0
+        return
+      end
+
+      dc_spotify_artist_names = spotify_artist_names.map{|item| item.downcase}
+
+      artist_names = Artist.pluck(:name)
+      dc_artist_names = artist_names.map{|item| item.downcase}
+
+      dc_insert_artist_names = dc_spotify_artist_names - dc_artist_names
+      if dc_insert_artist_names.count == 0
+        return
+      end
+
+      # insert する Artist の小文字が分かったので、小文字化していない状態に戻した model 配列を作成
+      artists_models = []
+      spotify_artist_names.each do |spotify_artist_name|
+        if ! dc_insert_artist_names.include?(spotify_artist_name.downcase)
+          next
         end
+        # Rails.logger.info spotify_artist_name
+        artists_models << Artist.new(name: spotify_artist_name)
+      end
 
-        dc_spotify_artist_names = spotify_artist_names.map{|item| item.downcase}
-
-        artist_names = Artist.pluck(:name)
-        dc_artist_names = artist_names.map{|item| item.downcase}
-
-        dc_insert_artist_names = dc_spotify_artist_names - dc_artist_names
-        if dc_insert_artist_names.count == 0
-          return
-        end
-
-        # insert する Artist の小文字が分かったので、小文字化していない状態に戻した model 配列を作成
-        artists_models = []
-        spotify_artist_names.each do |spotify_artist_name|
-          if ! dc_insert_artist_names.include?(spotify_artist_name.downcase)
-            next
-          end
-          # Rails.logger.info spotify_artist_name
-          artists_models << Artist.new(name: spotify_artist_name)
-        end
-
+      # Begin transaction
+      ActiveRecord::Base.transaction do
         # bulk insert Artist
         Artist.import artists_models
 
@@ -77,7 +82,7 @@ class Spotify
   end
 
   def self.get_artist_names(url, artist_names=[])
-    # Rails.logger.info url
+    Rails.logger.info url
 
     require "net/http"
     uri = URI.parse(url)
