@@ -11,7 +11,7 @@ class KickFetchArtistsFromSpotifyJob
     # elements = %w(a b 1) # Debug
 
     # Update by #{bulk_count} queries each
-    bulk_count = 20
+    bulk_count = 5
     i = 1
     # by #{m_unit} minutes
     m_unit = 5
