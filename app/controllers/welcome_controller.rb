@@ -99,11 +99,14 @@ class WelcomeController < ApplicationController
 
   private
   def log_user_in(user_object)
-    authsecret = MyString.create_random_uniq_str
+    redis = Redis.new(host: ENV['REDIS_HOST'])
+    authsecret = redis.hget("user:#{user_object.id}", 'auth')
+    if authsecret.nil?
+      authsecret = MyString.create_random_uniq_str
+    end
+
     user_hash = user_object.attributes
     user = user_hash.merge({auth: authsecret})
-
-    redis = Redis.new(host: ENV['REDIS_HOST'])
 
     redis.multi do |multi|
       multi.mapped_hmset("user:#{user_object.id}", user)
