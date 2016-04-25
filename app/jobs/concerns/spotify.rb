@@ -123,6 +123,10 @@ class Spotify
       if result['artists']['next'].blank?
         return artist_names
       end
+      # Stop searching when offset gets larger
+      if result['artists']['offset'] >= 300
+        return artist_names
+      end
 
       get_artist_names(result['artists']['next'], artist_names)
     else
