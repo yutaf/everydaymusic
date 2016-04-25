@@ -102,7 +102,7 @@ class Spotify
       # Sort by popularity
       result['artists']['items'].sort! { |a,b| b['popularity'] <=> a['popularity'] }
       # Remove low popularity artists
-      result['artists']['items'].select! { |item| item['popularity'] >= 40 }
+      result['artists']['items'].select! { |item| item['popularity'] >= 60 }
       # Remove duplicated values
       dc_artist_names = artist_names.map{|item| item.downcase}
       dc_result_artist_names = []
