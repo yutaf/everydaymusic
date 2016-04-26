@@ -75,5 +75,5 @@ ja:
   list:
     welcome_message: 'こんにちは。このサービスは一日一回おすすめ音楽のメールを送ります。'
     inform_next_delivery_time: '次のメールの配信時間'
-    no_artist_registered: アーティストが登録されていません。アカウント設定でアーティストを追加してください。
+    no_artist_registered: アーティストが登録されていません。アカウントページでアーティストを追加してください。
     no_email_message: 'アカウントページで email を設定してください。'
