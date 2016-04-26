@@ -46,6 +46,10 @@ ready = ->
       e.preventDefault()
       $('.add_artist').trigger('click')
 
+  $(document).on 'click', '.delete_artist', (e) ->
+    e.preventDefault()
+    $(this).parent('li').remove()
+
   $(document).on 'click', '.add_artist', (e) ->
     e.preventDefault()
     $input_form = $(':input[name="artist_name"]')
@@ -64,7 +68,7 @@ ready = ->
         return false
     if(is_already_added)
       return false
-    $('.artists').prepend('<li><span class="closeBtn"></span>'+artist_name+'<input type="hidden" name="artist_names[]" value="'+artist_name+'"></li>')
+    $('.artists').prepend('<li><a href="" class="delete_artist"><span class="closeBtn"></span></a>'+artist_name+'<input type="hidden" name="artist_names[]" value="'+artist_name+'"></li>')
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

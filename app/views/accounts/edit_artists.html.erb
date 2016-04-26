@@ -19,7 +19,7 @@
       <h2><%= t 'artists' %></h2>
       <ul class="rows artists">
         <% @user.artists.order(name: :asc).each do |artist| %>
-            <li><span class="closeBtn"></span><%= artist.name %><input type="hidden" name="artist_names[]" value="<%= artist.name %>"></li>
+            <li><a href="" class="delete_artist"><span class="closeBtn"></span></a><%= artist.name %><input type="hidden" name="artist_names[]" value="<%= artist.name %>"></li>
         <% end %>
       </ul>
     </div>
