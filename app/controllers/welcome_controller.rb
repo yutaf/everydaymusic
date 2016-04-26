@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   before_action :set_facebook_app_id
   def index
     if is_logged_in?
-      redirect_to '/list'
+      redirect_to list_path
       return
     end
 
@@ -47,7 +47,7 @@ class WelcomeController < ApplicationController
     # login
     log_user_in(@user)
 
-    redirect_to '/list'
+    redirect_to list_path
     return
   end
 
@@ -79,7 +79,7 @@ class WelcomeController < ApplicationController
       # login
       log_user_in(@user)
 
-      redirect_to '/signup/artists'
+      redirect_to signup_artists_path
     else
       # Remove "is invalid" message by validates_associated of User model
       @user.errors.delete :password

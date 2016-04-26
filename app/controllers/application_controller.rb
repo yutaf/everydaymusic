@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
   def check_logged_in
     if ! is_logged_in?
-      redirect_to '/'
+      redirect_to root_path
       return
     end
   end

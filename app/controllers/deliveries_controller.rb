@@ -4,9 +4,9 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find_by(id: params[:id])
     if @delivery.blank?
       #TODO Render error page
-      location = '/'
+      location = root_path
       if is_logged_in?
-        location = '/list'
+        location = list_path
       end
       redirect_to location
       return

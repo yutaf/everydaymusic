@@ -8,6 +8,6 @@ class LogoutController < ApplicationController
       multi.hdel('auths', oldauthsecret)
     end
 
-    redirect_to '/'
+    redirect_to root_path
   end
 end
