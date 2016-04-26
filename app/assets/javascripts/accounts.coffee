@@ -64,7 +64,7 @@ ready = ->
         return false
     if(is_already_added)
       return false
-    $('.artists').append('<li>'+artist_name+'<input type="hidden" name="artist_names[]" value="'+artist_name+'"></li>')
+    $('.artists').append('<li><span class="closeBtn"></span>'+artist_name+'<input type="hidden" name="artist_names[]" value="'+artist_name+'"></li>')
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
