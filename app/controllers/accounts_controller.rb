@@ -41,7 +41,11 @@ class AccountsController < ApplicationController
         # Update artists_users table
         @user.artists = artists
 
-        redirect_to '/list'
+        if request.env['PATH_INFO'].scan(/account\/artists/).count > 0
+          redirect_to account_path
+        else
+          redirect_to list_path
+        end
         return
       end
     rescue => e
