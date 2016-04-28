@@ -14,7 +14,7 @@
 <div>
   <h2><%= t 'artists' %></h2>
   <ul class="rows artist_show">
-    <% @user.artists.order(name: :asc).each do |artist| %>
+    <% @user.artists.select(:name).order(name: :asc).each do |artist| %>
         <li><%= artist.name %></li>
     <% end %>
   </ul>
