@@ -99,6 +99,7 @@ class AccountsController < ApplicationController
 
   def show
     @artist_names = @user.artists.order(name: :asc).pluck(:name)
+    @facebook_app_id = ENV['FACEBOOK_APP_ID']
     @user_status = (t 'account.status_inactive')
     if @user.is_active
       @user_status = (t 'account.status_active')
