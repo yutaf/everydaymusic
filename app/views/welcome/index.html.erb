@@ -2,29 +2,11 @@
 <div class="item align-center" id="status"></div>
 <div class="item align-center or-parent"><span class="or"><%= t 'welcome.or' %></span></div>
 <ul class="item rows-center switch_content_parent">
-  <li class="switch_content switch_content_signup <%= @switch_content_signup_selected %>"><%= t 'signup' %></li>
+  <li class="switch_content switch_content_first <%= @switch_content_signup_selected %>"><%= t 'signup' %></li>
   <li class="switch_content_separator">|</li>
   <li class="switch_content <%= @switch_content_login_selected %>"><%= t 'login' %></li>
 </ul>
-<%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login} switch_content_first"}) do |f| %>
-    <% if @login_error_messages.present? && @login_error_messages.count > 0 %>
-        <div class="item">
-          <% @login_error_messages.each do |msg| %>
-              <p class="notice"><%= msg %></p>
-          <% end %>
-        </div>
-    <% end %>
-    <ul>
-      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
-      <%= fields_for @user.password do |pf| %>
-          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
-      <% end %>
-    </ul>
-    <div class="item buttons">
-      <%= f.submit (t 'login'), class: :btn %>
-    </div>
-<% end %>
-<%= form_for(@user, url: welcome_signup_path, html: {name: :signup, class: "item #{@hide_signup} switch_content_second"}) do |f| %>
+<%= form_for(@user, url: welcome_signup_path, html: {name: :signup, class: "item #{@hide_signup} content_first"}) do |f| %>
     <% if @signup_error_messages.present? && @signup_error_messages.count > 0 %>
         <div class="item">
           <% @signup_error_messages.each do |msg| %>
@@ -41,6 +23,24 @@
     </ul>
     <div class="item buttons">
       <%= f.submit (t 'signup'), class: :btn %>
+    </div>
+<% end %>
+<%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login} content_second"}) do |f| %>
+    <% if @login_error_messages.present? && @login_error_messages.count > 0 %>
+        <div class="item">
+          <% @login_error_messages.each do |msg| %>
+              <p class="notice"><%= msg %></p>
+          <% end %>
+        </div>
+    <% end %>
+    <ul>
+      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
+      <%= fields_for @user.password do |pf| %>
+          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
+      <% end %>
+    </ul>
+    <div class="item buttons">
+      <%= f.submit (t 'login'), class: :btn %>
     </div>
 <% end %>
 

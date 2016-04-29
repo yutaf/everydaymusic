@@ -13,9 +13,9 @@ $(document).on 'click', '.switch_content', (e) ->
 
   $('.switch_content').toggleClass('switch_content_selected')
 
-  if ($(this).hasClass('switch_content_signup'))
-    $('form[name="login"]').hide()
-    $('form[name="signup"]').show()
+  if ($(this).hasClass('switch_content_first'))
+    $('.content_first').show()
+    $('.content_second').hide()
   else
-    $('form[name="login"]').show()
-    $('form[name="signup"]').hide()
+    $('.content_first').hide()
+    $('.content_second').show()
