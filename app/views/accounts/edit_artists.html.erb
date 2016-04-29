@@ -25,9 +25,11 @@
     </div>
     <div class="item buttons">
       <%= submit_tag (t 'save'), class: :btn %>
-      <% if request.env['PATH_INFO'].scan(/account\/artists/).count > 0 %>
-          <%= link_to (t 'back'), account_path, class: :btn %>
-      <% end %>
+    </div>
+<% end %>
+<% if request.env['PATH_INFO'].scan(/account\/artists/).count > 0 %>
+    <div class="item buttons">
+      <%= link_to (t 'back'), account_path, class: :btn %>
     </div>
 <% end %>
 <% if @registered_artist_names.count > 0 %>
