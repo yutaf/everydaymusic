@@ -126,7 +126,6 @@
       FB.login(function(response) {
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
-          var redirect_url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/fb-login-callback.php';
           window.location.replace(redirect_url);
         } else if (response.status === 'not_authorized') {
           // The person is logged into Facebook, but not your app.
