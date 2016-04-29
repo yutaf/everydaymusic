@@ -6,16 +6,3 @@ $(document).on 'submit', 'form[name="signup"]', (e) ->
   offset = new Date().getTimezoneOffset()
   timezone = Math.floor(-(offset / 60))
   $(this).append('<input type="hidden" name="user[timezone]" value="'+timezone+'">')
-
-$(document).on 'click', '.switch_content', (e) ->
-  if ($(this).hasClass('switch_content_selected'))
-    return false
-
-  $('.switch_content').toggleClass('switch_content_selected')
-
-  if ($(this).hasClass('switch_content_first'))
-    $('.content_first').show()
-    $('.content_second').hide()
-  else
-    $('.content_first').hide()
-    $('.content_second').show()
