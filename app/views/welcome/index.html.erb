@@ -47,15 +47,11 @@
 <script>
   var ua = navigator.userAgent.toLowerCase();
   var isIOS = /ip(hone|od|ad)/.test(ua);
-  //  var isAndroid = /android/.test(ua);
-  //  var isMobile = isIOS || isAndroid;
   var isSafari = /safari/.test(ua);
   var isIOSChrome = /crios/.test(ua);
   var isOpera = /opera/.test(ua);
   var isFacebookIOS = /fbav/.test(ua);
   var isLineIOS = /safari line/.test(ua);
-  //TODO Investigate Android Facebook/Line
-  //  alert(ua);
 
   var fb_popup_login = true;
   if(isIOS) {
@@ -153,20 +149,5 @@
         window.location.replace(encodeURI("https://m.facebook.com/dialog/oauth?client_id=<%= @facebook_app_id %>&redirect_uri="+window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/?rdrct=1' + "&response_type=token&scope=public_profile,email,user_likes"));
       }
     }
-
-//      FB.login(function(response) {
-//        if (response.status === 'connected') {
-//          // Logged into your app and Facebook.
-//          var redirect_url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/fb-login-callback.php';
-//          window.location.replace(redirect_url);
-//        } else if (response.status === 'not_authorized') {
-//          // The person is logged into Facebook, but not your app.
-//          document.getElementById('status').innerHTML = 'Please log into this app.';
-//        } else {
-//          // The person is not logged into Facebook, so we're not sure if
-//          // they are logged into this app or not.
-//          document.getElementById('status').innerHTML = 'Please log into Facebook.';
-//        }
-//      }, {scope: 'public_profile,email,user_likes', return_scopes: true});
   }, false);
 </script>
