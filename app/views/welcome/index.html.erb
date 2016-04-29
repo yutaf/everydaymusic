@@ -1,12 +1,12 @@
 <div class="item align-center"><a href="" id="loginBtn"><%= image_tag 'facebook-login.png' %></a></div>
 <div class="item align-center" id="status"></div>
 <div class="item align-center or-parent"><span class="or"><%= t 'welcome.or' %></span></div>
-<ul class="item rows-center switch-form-parent">
-  <li class="switch-form switch-form-signup <%= @switch_form_signup_selected %>"><%= t 'signup' %></li>
-  <li class="switch-form-separator">|</li>
-  <li class="switch-form switch-form-login <%= @switch_form_login_selected %>"><%= t 'login' %></li>
+<ul class="item rows-center switch_content_parent">
+  <li class="switch_content switch_content_signup <%= @switch_content_signup_selected %>"><%= t 'signup' %></li>
+  <li class="switch_content_separator">|</li>
+  <li class="switch_content <%= @switch_content_login_selected %>"><%= t 'login' %></li>
 </ul>
-<%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login}"}) do |f| %>
+<%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login} switch_content_first"}) do |f| %>
     <% if @login_error_messages.present? && @login_error_messages.count > 0 %>
         <div class="item">
           <% @login_error_messages.each do |msg| %>
@@ -24,7 +24,7 @@
       <%= f.submit (t 'login'), class: :btn %>
     </div>
 <% end %>
-<%= form_for(@user, url: welcome_signup_path, html: {name: :signup, class: "item #{@hide_signup}"}) do |f| %>
+<%= form_for(@user, url: welcome_signup_path, html: {name: :signup, class: "item #{@hide_signup} switch_content_second"}) do |f| %>
     <% if @signup_error_messages.present? && @signup_error_messages.count > 0 %>
         <div class="item">
           <% @signup_error_messages.each do |msg| %>

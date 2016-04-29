@@ -7,15 +7,15 @@ $(document).on 'submit', 'form[name="signup"]', (e) ->
   timezone = Math.floor(-(offset / 60))
   $(this).append('<input type="hidden" name="user[timezone]" value="'+timezone+'">')
 
-$(document).on 'click', '.switch-form', (e) ->
-  if ($(this).hasClass('switch-form-selected'))
+$(document).on 'click', '.switch_content', (e) ->
+  if ($(this).hasClass('switch_content_selected'))
     return false
 
-  $('.switch-form').toggleClass('switch-form-selected')
+  $('.switch_content').toggleClass('switch_content_selected')
 
-  if ($(this).hasClass('switch-form-login'))
-    $('form[name="login"]').show()
-    $('form[name="signup"]').hide()
-  else
+  if ($(this).hasClass('switch_content_signup'))
     $('form[name="login"]').hide()
     $('form[name="signup"]').show()
+  else
+    $('form[name="login"]').show()
+    $('form[name="signup"]').hide()
