@@ -94,11 +94,7 @@ a {color: #444;}
   padding: 5px;
   margin: 0 5px;
   text-align: center;
-
-  width: 100px;
-  @media (max-width: 800px) {
-    width: 100%;
-  }
+  width: 100%;
 }
 input.btn {
   cursor: pointer;
@@ -197,6 +193,10 @@ input.btn {
     }
     .logo:link, .logo:visited, .logo:active { color: #fff; }
   }
+}
+
+.subject {
+  padding: 10px 0;
 }
 
 /////////////////////////
@@ -384,7 +384,7 @@ ul.candidates {
   }
 }
 
-ul.artist_show li {
+.artist_name {
   margin: 0 10px 10px 0;
   text-decoration: underline;
 }

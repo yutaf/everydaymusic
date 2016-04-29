@@ -1,5 +1,5 @@
-<div>
-  <h2><%= t 'account.account' %></h2>
+<div class="item">
+  <h2 class="subject"><%= t 'account.account' %></h2>
   <% if notice.present? %>
   <p class="notice"><%= notice %></p>
   <% end %>
@@ -11,15 +11,21 @@
     <%= link_to (t 'edit'), edit_account_path, class: :btn %>
   </div>
 </div>
-<div>
-  <h2><%= t 'artists' %></h2>
-  <ul class="rows artist_show">
-    <% @user.artists.select(:name).order(name: :asc).each do |artist| %>
-        <li><%= artist.name %></li>
+<div class="item">
+  <h2 class="subject"><%= t 'artists' %></h2>
+  <ul class="rows">
+    <% @artist_names[0..4].each do |artist_name| %>
+        <li class="artist_name"><%= artist_name %></li>
+    <% end %>
+    <% if @artist_names.count > 5 %>
+        <li>and more...</li>
     <% end %>
   </ul>
   <div class="item buttons">
     <%= link_to (t 'edit'), account_artists_path, class: :btn %>
+  </div>
+  <div class="item buttons">
+    <%= link_to 'Facebook からお気に入りのアーティストを取得する', '', class: :btn %>
   </div>
 </div>
 <div class="item buttons">
