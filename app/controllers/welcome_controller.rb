@@ -13,14 +13,14 @@ class WelcomeController < ApplicationController
     # css class
     @hide_login = 'hide'
     @hide_signup = ''
-    @switch_form_login_selected = ''
-    @switch_form_signup_selected = 'switch-form-selected'
+    @switch_content_login_selected = ''
+    @switch_content_signup_selected = 'switch_content_selected'
 
     if request.env['PATH_INFO'].scan(/\/login/).count > 0
       @hide_login = ''
       @hide_signup = 'hide'
-      @switch_form_login_selected = 'switch-form-selected'
-      @switch_form_signup_selected = ''
+      @switch_content_login_selected = 'switch_content_selected'
+      @switch_content_signup_selected = ''
     end
   end
 
@@ -38,8 +38,8 @@ class WelcomeController < ApplicationController
       # css class
       @hide_login = ''
       @hide_signup = 'hide'
-      @switch_form_login_selected = 'switch-form-selected'
-      @switch_form_signup_selected = ''
+      @switch_content_login_selected = 'switch_content_selected'
+      @switch_content_signup_selected = ''
       render :index
       return
     end
@@ -89,8 +89,8 @@ class WelcomeController < ApplicationController
       # css class
       @hide_login = 'hide'
       @hide_signup = ''
-      @switch_form_login_selected = ''
-      @switch_form_signup_selected = 'switch-form-selected'
+      @switch_content_login_selected = ''
+      @switch_content_signup_selected = 'switch_content_selected'
 
       render :index
       return

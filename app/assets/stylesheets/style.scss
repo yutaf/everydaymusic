@@ -94,11 +94,7 @@ a {color: #444;}
   padding: 5px;
   margin: 0 5px;
   text-align: center;
-
-  width: 100px;
-  @media (max-width: 800px) {
-    width: 100%;
-  }
+  width: 100%;
 }
 input.btn {
   cursor: pointer;
@@ -197,6 +193,10 @@ input.btn {
     }
     .logo:link, .logo:visited, .logo:active { color: #fff; }
   }
+}
+
+.subject {
+  padding: 10px 0;
 }
 
 /////////////////////////
@@ -329,18 +329,18 @@ ul.menu {
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-.switch-form-parent {
+.switch_content_parent {
   margin-bottom: 20px;
   font-size: 1.175rem;
 }
-.switch-form-separator {
+.switch_content_separator {
   margin: 0 20px;
 }
-.switch-form{
+.switch_content{
   cursor: pointer;
   color: #000;
 }
-.switch-form-selected {
+.switch_content_selected {
   cursor: default;
   color: #999;
 }
@@ -384,7 +384,7 @@ ul.candidates {
   }
 }
 
-ul.artist_show li {
+.artist_name {
   margin: 0 10px 10px 0;
   text-decoration: underline;
 }

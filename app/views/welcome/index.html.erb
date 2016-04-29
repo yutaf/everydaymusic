@@ -1,30 +1,12 @@
 <div class="item align-center"><a href="" id="loginBtn"><%= image_tag 'facebook-login.png' %></a></div>
 <div class="item align-center" id="status"></div>
 <div class="item align-center or-parent"><span class="or"><%= t 'welcome.or' %></span></div>
-<ul class="item rows-center switch-form-parent">
-  <li class="switch-form switch-form-signup <%= @switch_form_signup_selected %>"><%= t 'signup' %></li>
-  <li class="switch-form-separator">|</li>
-  <li class="switch-form switch-form-login <%= @switch_form_login_selected %>"><%= t 'login' %></li>
+<ul class="item rows-center switch_content_parent">
+  <li class="switch_content switch_content_first <%= @switch_content_signup_selected %>"><%= t 'signup' %></li>
+  <li class="switch_content_separator">|</li>
+  <li class="switch_content <%= @switch_content_login_selected %>"><%= t 'login' %></li>
 </ul>
-<%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login}"}) do |f| %>
-    <% if @login_error_messages.present? && @login_error_messages.count > 0 %>
-        <div class="item">
-          <% @login_error_messages.each do |msg| %>
-              <p class="notice"><%= msg %></p>
-          <% end %>
-        </div>
-    <% end %>
-    <ul>
-      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
-      <%= fields_for @user.password do |pf| %>
-          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
-      <% end %>
-    </ul>
-    <div class="item buttons">
-      <%= f.submit (t 'login'), class: :btn %>
-    </div>
-<% end %>
-<%= form_for(@user, url: welcome_signup_path, html: {name: :signup, class: "item #{@hide_signup}"}) do |f| %>
+<%= form_for(@user, url: welcome_signup_path, html: {name: :signup, class: "item #{@hide_signup} content_first"}) do |f| %>
     <% if @signup_error_messages.present? && @signup_error_messages.count > 0 %>
         <div class="item">
           <% @signup_error_messages.each do |msg| %>
@@ -43,19 +25,33 @@
       <%= f.submit (t 'signup'), class: :btn %>
     </div>
 <% end %>
+<%= form_for(@user, url: welcome_login_path, html: {name: :login, class: "item #{@hide_login} content_second"}) do |f| %>
+    <% if @login_error_messages.present? && @login_error_messages.count > 0 %>
+        <div class="item">
+          <% @login_error_messages.each do |msg| %>
+              <p class="notice"><%= msg %></p>
+          <% end %>
+        </div>
+    <% end %>
+    <ul>
+      <li class="columns"><%= f.label :email %><%= f.email_field :email %></li>
+      <%= fields_for @user.password do |pf| %>
+          <li class="columns"><%= pf.label :password %><%= pf.password_field :password %></li>
+      <% end %>
+    </ul>
+    <div class="item buttons">
+      <%= f.submit (t 'login'), class: :btn %>
+    </div>
+<% end %>
 
 <script>
   var ua = navigator.userAgent.toLowerCase();
   var isIOS = /ip(hone|od|ad)/.test(ua);
-  //  var isAndroid = /android/.test(ua);
-  //  var isMobile = isIOS || isAndroid;
   var isSafari = /safari/.test(ua);
   var isIOSChrome = /crios/.test(ua);
   var isOpera = /opera/.test(ua);
   var isFacebookIOS = /fbav/.test(ua);
   var isLineIOS = /safari line/.test(ua);
-  //TODO Investigate Android Facebook/Line
-  //  alert(ua);
 
   var fb_popup_login = true;
   if(isIOS) {
@@ -130,7 +126,6 @@
       FB.login(function(response) {
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
-          var redirect_url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/fb-login-callback.php';
           window.location.replace(redirect_url);
         } else if (response.status === 'not_authorized') {
           // The person is logged into Facebook, but not your app.
@@ -153,20 +148,5 @@
         window.location.replace(encodeURI("https://m.facebook.com/dialog/oauth?client_id=<%= @facebook_app_id %>&redirect_uri="+window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/?rdrct=1' + "&response_type=token&scope=public_profile,email,user_likes"));
       }
     }
-
-//      FB.login(function(response) {
-//        if (response.status === 'connected') {
-//          // Logged into your app and Facebook.
-//          var redirect_url = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + '/fb-login-callback.php';
-//          window.location.replace(redirect_url);
-//        } else if (response.status === 'not_authorized') {
-//          // The person is logged into Facebook, but not your app.
-//          document.getElementById('status').innerHTML = 'Please log into this app.';
-//        } else {
-//          // The person is not logged into Facebook, so we're not sure if
-//          // they are logged into this app or not.
-//          document.getElementById('status').innerHTML = 'Please log into Facebook.';
-//        }
-//      }, {scope: 'public_profile,email,user_likes', return_scopes: true});
   }, false);
 </script>

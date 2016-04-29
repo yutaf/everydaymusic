@@ -58,6 +58,7 @@ ja:
     status_inactive: '停止中'
     stop_service: 'サービスの利用を停止する'
     enter_artist_name: 'お気に入りのアーティスト名を入力してください'
+    fetch_artists_from_fb: Facebook からお気に入りのアーティストを取得する
     errors:
       messages:
         blank_artist: アーティストを追加して下さい
