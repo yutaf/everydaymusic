@@ -6,7 +6,7 @@
       <li>
         <p><%= delivery.date.strftime('%F') %></p>
         <p><%= link_to delivery.title, "deliveries/#{delivery.id}" %></p>
-        <p><%= link_to image_tag("https://i.ytimg.com/vi/#{delivery.video_id}/hqdefault.jpg"), "deliveries/#{delivery.id}" %></p>
+        <p><a href="<%= "/deliveries/#{delivery.id}" %>"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://i.ytimg.com/vi/<%="#{delivery.video_id}"%>/hqdefault.jpg" alt="<%= "/deliveries/#{delivery.id}" %>"></a></p>
       </li>
   <% end %>
 </ul>
