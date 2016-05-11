@@ -135,7 +135,7 @@ class DeliveryCore
                     q: search_query,
                     videoEmbeddable: 'true',
                     # relatedToVideoId: '1234beatyourheart', # for error debug
-                    maxResults: 5
+                    maxResults: 50
                 }
             )
             if ! search_response.data.items.instance_of?(Array) || search_response.data.items.size == 0
