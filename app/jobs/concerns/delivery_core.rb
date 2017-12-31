@@ -45,6 +45,7 @@ class DeliveryCore
         # Fetch users who don't have a record which has deliveries.is_delivered = 0 and whose delivery_time comes within 3 hours
         active_users = User.where("is_active=? AND email != ''", true).select(:id, :delivery_time)
         if active_users.to_a.count == 0
+          logger.info "No active_users"
           return
         end
         user_ids = []
@@ -62,6 +63,7 @@ class DeliveryCore
           delivery_dates_by_user_id[active_user.id] = dt_delivery_date.strftime("%F %T")
         end
         if user_ids.count == 0
+          logger.info "No candidate users"
           return
         end
 
@@ -69,6 +71,7 @@ class DeliveryCore
 
         target_user_ids = user_ids - delivery_scheduled_user_ids
         if target_user_ids.count == 0
+          logger.info "No target users"
           return
         end
 
@@ -79,6 +82,7 @@ class DeliveryCore
         selected_artist_names = []
         users.each do |user|
           if user.artists.size == 0
+            logger.info "No artist is related to user; id: #{user.id}, email: #{user.email}"
             next
           end
 
@@ -147,16 +151,18 @@ class DeliveryCore
             video_id = ''
             title = ''
             search_response.data.items.shuffle!.each do |item|
-              if ! delivered_video_ids_by_user_id[user.id].blank? && delivered_video_ids_by_user_id[user.id].include?(item.id.videoId)
+              video_id = item.id.videoId
+              if ! delivered_video_ids_by_user_id[user.id].blank? && delivered_video_ids_by_user_id[user.id].include?(video_id)
                 # Exclude already delivered videoId
+                logger.info "Already delivered videoId; videoId: #{video_id}, user id: #{user.id}, email: #{user.email}"
                 next
               end
-              video_id = item.id.videoId
               title = item.snippet.title
             end
 
             # TODO video_id が決定されなかった場合の処理
             if video_id.length == 0
+              logger.info "video_id was not decided; id: #{user.id}, email: #{user.email}"
               next
             end
 
