@@ -182,6 +182,8 @@ class DeliveryCore
               next
             end
 
+            logger.info "video id is decided; video id: #{video_id}, user id: #{user.id}, email: #{user.email}"
+
             # Add delivery model to inserting values
             date = delivery_dates_by_user_id[user.id]
             deliveries_model_values << {user_id: user.id, video_id: video_id, title: title, date: date, is_delivered: false}
