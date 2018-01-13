@@ -162,7 +162,9 @@ class DeliveryCore
               video_id = item.id.videoId
               if ! delivered_video_ids_by_user_id[user.id].blank? && delivered_video_ids_by_user_id[user.id].include?(video_id)
                 # Exclude already delivered videoId
-                logger.info "Already delivered videoId; videoId: #{video_id}, user id: #{user.id}, email: #{user.email}"
+
+                # Stop logging because too noisy
+                # logger.info "Already delivered videoId; videoId: #{video_id}, user id: #{user.id}, email: #{user.email}"
                 next
               end
               title = item.snippet.title
