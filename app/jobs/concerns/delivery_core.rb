@@ -186,7 +186,7 @@ class DeliveryCore
             selected_artist_names.push(artist_name)
 
           rescue Google::APIClient::TransmissionError => e
-            Rails.logger.info e.inspect
+            Rails.logger.info e.backtrace
             logger.error e.result.body
           end
         end
@@ -255,8 +255,9 @@ class DeliveryCore
 
       end
     rescue => e
-      Rails.logger.info e.inspect
+      Rails.logger.info e.backtrace
       logger.error e.message
+      logger.error e.backtrace
     end
   end
 end
