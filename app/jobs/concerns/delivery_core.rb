@@ -98,6 +98,7 @@ class DeliveryCore
           #TODO It is time consuming to fetch related artists by api requests every time, so fetch all related artists before this and save them in a table.
           if 1 == rand(5)
             # Search new artist instead of the artist already related to the user
+            logger.info "Search artist from Spotify; user id: #{user.id}, email: #{user.email}"
             if ! is_sporify_authenticated
               RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
               logger.info "Spotify authentication succeeded"
@@ -120,6 +121,7 @@ class DeliveryCore
 
                   if ! artist_names.include? a.name
                     # Add new artist to inserting values
+                    logger.info "Add artist retrieved from Spotify; artist name: #{artist_name}, user id: #{user.id}, email: #{user.email}"
                     artists_models << Artist.new(name: artist_name)
                   end
 
