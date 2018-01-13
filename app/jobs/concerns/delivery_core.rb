@@ -119,7 +119,7 @@ class DeliveryCore
                   # Update artist_name
                   artist_name = a.name
 
-                  if ! artist_names.include? a.name
+                  if ! artist_names.include? artist_name
                     # Add new artist to inserting values
                     logger.info "Add artist retrieved from Spotify; artist name: #{artist_name}, user id: #{user.id}, email: #{user.email}"
                     artists_models << Artist.new(name: artist_name)
