@@ -99,12 +99,18 @@ class DeliveryCore
           if 1 == rand(5)
             # Search new artist instead of the artist already related to the user
             logger.info "Search artist from Spotify; user id: #{user.id}, email: #{user.email}"
-            if ! is_sporify_authenticated
-              RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
-              logger.info "Spotify authentication succeeded"
-              is_sporify_authenticated = true
+            begin
+              if ! is_sporify_authenticated
+                RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
+                logger.info "Spotify authentication succeeded"
+                is_sporify_authenticated = true
+              end
+              spotify_artists = RSpotify::Artist.search(artist_name)
+            rescue => e
+              Rails.logger.info e.backtrace
+              logger.error e.message
+              logger.error e.backtrace
             end
-            spotify_artists = RSpotify::Artist.search(artist_name)
             if spotify_artists.instance_of?(Array) && spotify_artists.count > 0
               spotify_related_artists = spotify_artists.first.related_artists
               if spotify_related_artists.instance_of?(Array) && spotify_related_artists.count > 0
