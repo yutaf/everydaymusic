@@ -87,8 +87,8 @@ class DeliveryCore
           end
 
           artist_names_by_user = []
-          user.artists.each do |aritist|
-            artist_names_by_user.push(aritist.name)
+          user.artists.each do |artist|
+            artist_names_by_user.push(artist.name)
           end
 
           # Define artist_name being used as a search keyword
