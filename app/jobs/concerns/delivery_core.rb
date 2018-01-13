@@ -94,7 +94,7 @@ class DeliveryCore
           # Define artist_name being used as a search keyword
           artist_name = user.artists.to_a.sample(1)[0][:name]
 
-          #TODO It is time consuming to fetch related artists by api requests everytime, so fetch all related artists before this and save them in a table.
+          #TODO It is time consuming to fetch related artists by api requests every time, so fetch all related artists before this and save them in a table.
           if 1 == rand(5)
             # Search new artist instead of the artist already related to the user
             spotify_artists = RSpotify::Artist.search(artist_name)
