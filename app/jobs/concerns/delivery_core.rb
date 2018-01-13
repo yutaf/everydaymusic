@@ -80,6 +80,7 @@ class DeliveryCore
         titles_by_user_id = {}
         artist_names_by_user_id = {}
         selected_artist_names = []
+        is_sporify_authenticated = false
         users.each do |user|
           if user.artists.size == 0
             logger.info "No artist is related to user; id: #{user.id}, email: #{user.email}"
@@ -97,6 +98,11 @@ class DeliveryCore
           #TODO It is time consuming to fetch related artists by api requests every time, so fetch all related artists before this and save them in a table.
           if 1 == rand(5)
             # Search new artist instead of the artist already related to the user
+            if ! is_sporify_authenticated
+              RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
+              logger.info "Spotify authentication succeeded"
+              is_sporify_authenticated = true
+            end
             spotify_artists = RSpotify::Artist.search(artist_name)
             if spotify_artists.instance_of?(Array) && spotify_artists.count > 0
               spotify_related_artists = spotify_artists.first.related_artists
