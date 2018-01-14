@@ -105,6 +105,7 @@ class DeliveryCore
                 logger.info "Spotify authentication succeeded"
                 is_sporify_authenticated = true
               end
+              logger.info "Search related artists of #{artist_name} from Spotify; user id: #{user.id}, email: #{user.email}"
               spotify_artists = RSpotify::Artist.search(artist_name)
             rescue => e
               Rails.logger.info e.backtrace
