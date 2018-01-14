@@ -83,7 +83,7 @@ class DeliveryCore
         is_sporify_authenticated = false
         users.each do |user|
           if user.artists.size == 0
-            logger.info "No artist is related to user; id: #{user.id}, email: #{user.email}"
+            logger.info "No artist is registered to user; id: #{user.id}, email: #{user.email}"
             next
           end
 
